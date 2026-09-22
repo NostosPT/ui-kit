@@ -73,41 +73,55 @@
     listEl?.children[next]?.scrollIntoView({ block: "nearest" });
   }
 
-  function onTriggerKeydown(event, toggle, show) {
-    if (event.key === "ArrowDown" || event.key === "ArrowUp" || event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      if (!open) {
+  /**
+   * One handler for every key, bound to whichever element actually holds
+   * focus: the trigger button when the list is plain, the search field when
+   * it isn't. An earlier version put this on the popover surface, where it
+   * never fired at all — focus stays on the combobox, so the panel receives
+   * no key events.
+   */
+  function handleKeys(event, show, close) {
+    if (!open) {
+      if (["ArrowDown", "ArrowUp", "Enter", " "].includes(event.key)) {
+        event.preventDefault();
         show();
-        // Land on the current selection rather than the top of the list.
+        // Open onto the current selection rather than the top of the list.
         queueMicrotask(() => moveTo(Math.max(0, visible.findIndex((o) => o.value === value))));
-      } else {
-        moveTo(activeIndex + (event.key === "ArrowUp" ? -1 : 1));
+        return;
+      }
+      // Closed-state type-ahead cycles the value without opening, matching a
+      // native <select>.
+      if (event.key.length === 1 && /\S/.test(event.key)) {
+        clearTimeout(typeahead.timer);
+        typeahead.buffer += event.key.toLowerCase();
+        typeahead.timer = setTimeout(() => (typeahead.buffer = ""), 500);
+        const match = items.find((o) => !o.disabled && o.label.toLowerCase().startsWith(typeahead.buffer));
+        if (match) {
+          value = match.value;
+          onchange?.(match.value);
+        }
       }
       return;
     }
-    if (!open && event.key.length === 1 && /\S/.test(event.key)) {
-      clearTimeout(typeahead.timer);
-      typeahead.buffer += event.key.toLowerCase();
-      typeahead.timer = setTimeout(() => (typeahead.buffer = ""), 500);
-      const match = items.find((o) => o.label.toLowerCase().startsWith(typeahead.buffer));
-      if (match) {
-        value = match.value;
-        onchange?.(match.value);
-      }
-    }
-  }
 
-  function onListKeydown(event, close) {
     switch (event.key) {
       case "ArrowDown": event.preventDefault(); moveTo(activeIndex + 1); break;
       case "ArrowUp": event.preventDefault(); moveTo(activeIndex - 1); break;
       case "Home": event.preventDefault(); moveTo(0); break;
       case "End": event.preventDefault(); moveTo(visible.length - 1); break;
       case "Enter":
-      case " ":
-        if (searchable && event.key === " ") return; // space belongs to the query
         event.preventDefault();
         if (visible[activeIndex]) choose(visible[activeIndex], close);
+        break;
+      case " ":
+        // In a searchable list, space is part of the query.
+        if (searchable) return;
+        event.preventDefault();
+        if (visible[activeIndex]) choose(visible[activeIndex], close);
+        break;
+      case "Escape":
+        event.preventDefault();
+        close();
         break;
       case "Tab":
         close();
@@ -121,7 +135,7 @@
 {/snippet}
 
 <Popover bind:open placement="bottom-start" offset={4} {matchWidth} padded={false} ariaLabel={ariaLabel}>
-  {#snippet trigger({ toggle, show })}
+  {#snippet trigger({ toggle, show, close })}
     <button
       type="button"
       class="ui-listbox__trigger"
@@ -135,7 +149,7 @@
       aria-invalid={invalid || undefined}
       aria-label={ariaLabel}
       onclick={toggle}
-      onkeydown={(e) => onTriggerKeydown(e, toggle, show)}
+      onkeydown={(e) => handleKeys(e, show, close)}
       {...rest}
     >
       <InputFrame {size} {invalid} {disabled} class="ui-listbox__frame {klass}" end={frameEnd}>
@@ -158,7 +172,7 @@
   {/snippet}
 
   {#snippet children({ close })}
-    <div class="ui-listbox__panel" onkeydown={(e) => onListKeydown(e, close)}>
+    <div class="ui-listbox__panel">
       {#if searchable}
         <div class="ui-listbox__search">
           <Icon name="search" size={14} />
@@ -169,6 +183,7 @@
             bind:value={query}
             autofocus
             oninput={() => moveTo(0)}
+            onkeydown={(e) => handleKeys(e, () => {}, close)}
             aria-controls={listId}
           />
         </div>
@@ -176,6 +191,7 @@
 
       <ul class="ui-listbox__list" bind:this={listEl} id={listId} role="listbox" aria-label={ariaLabel}>
         {#each visible as option, i (option.value)}
+          <!-- svelte-ignore a11y_click_events_have_key_events -->
           <li
             id={`${listId}-${i}`}
             class="ui-listbox__option"

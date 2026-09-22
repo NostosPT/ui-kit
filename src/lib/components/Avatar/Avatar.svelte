@@ -137,7 +137,7 @@
     background: var(--ui-neutral-dot);
   }
 
-  [data-ui-theme="dark"] .ui-avatar {
+  :global([data-ui-theme="dark"]) .ui-avatar {
     background: oklch(32% 0.05 var(--avatar-h));
     color: oklch(86% 0.07 var(--avatar-h));
   }

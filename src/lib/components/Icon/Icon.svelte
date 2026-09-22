@@ -44,10 +44,9 @@
 
 <style>
   .ui-icon {
+    /* Block, not inline: an inline SVG sits on the text baseline and pushes
+       the line box taller than the control it lives in. */
     display: block;
     flex: none;
-    /* Icons sit next to text constantly; without this they ride the baseline
-       and knock the line box taller than the control height. */
-    vertical-align: middle;
   }
 </style>

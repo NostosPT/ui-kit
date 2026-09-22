@@ -46,6 +46,9 @@
   .ui-frame {
     display: flex;
     align-items: stretch;
+    /* Separates a start/end slot from the control. Empty slots are never
+       rendered, so this never adds phantom space to a plain input. */
+    gap: var(--frame-gap);
     width: 100%;
     min-width: 0;
     background: var(--ui-bg-surface);

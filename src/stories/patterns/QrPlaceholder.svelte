@@ -1,6 +1,4 @@
 <script>
-  import { hashIndex } from "../../lib/internal/utils.js";
-
   /**
    * Decorative stand-in for a QR code, so the share pattern can be shown
    * without pulling in an encoder. Deterministic from `seed` so it doesn't
@@ -8,14 +6,34 @@
    */
   let { seed = "nostos", size = 68 } = $props();
 
-  const CELLS = 11;
+  const CELLS = 13;
+
+  /**
+   * A plain string hash correlates across neighbouring cells and comes out as
+   * diagonal banding rather than noise. Mixing the index through an integer
+   * hash (xorshift + a large odd multiplier) decorrelates adjacent cells,
+   * which is what makes it read as a QR code at a glance.
+   */
+  function noise(n) {
+    let x = n | 0;
+    x ^= x << 13;
+    x ^= x >>> 17;
+    x ^= x << 5;
+    return ((x >>> 0) % 1000) / 1000;
+  }
+
+  const seedNum = $derived(
+    [...seed].reduce((h, ch) => (Math.imul(h, 2654435761) + ch.charCodeAt(0)) | 0, 7)
+  );
+
   const grid = $derived(
     Array.from({ length: CELLS * CELLS }, (_, i) => {
       const r = Math.floor(i / CELLS);
       const c = i % CELLS;
-      // Keep the three finder squares clear so it reads as a QR at a glance.
-      const finder = (r < 3 && c < 3) || (r < 3 && c > CELLS - 4) || (r > CELLS - 4 && c < 3);
-      return finder ? 0 : hashIndex(`${seed}-${r}-${c}`, 5) > 1 ? 1 : 0;
+      // Leave the three finder corners clear; they're drawn as rings on top.
+      const finder =
+        (r < 4 && c < 4) || (r < 4 && c > CELLS - 5) || (r > CELLS - 5 && c < 4);
+      return finder ? 0 : noise(seedNum + Math.imul(r + 1, 73856093) + Math.imul(c + 1, 19349663)) > 0.48 ? 1 : 0;
     })
   );
 </script>
@@ -49,12 +67,14 @@
   }
   .qr__finder {
     position: absolute;
-    width: 26%;
-    height: 26%;
-    border: 2.5px solid var(--ui-fg-default);
+    width: 23%;
+    height: 23%;
+    border: 2px solid var(--ui-fg-default);
     border-radius: 2px;
+    background:
+      radial-gradient(var(--ui-fg-default) 0 44%, transparent 45%) center / 100% 100% no-repeat;
   }
-  .qr__finder--tl { top: 6%; left: 6%; }
-  .qr__finder--tr { top: 6%; right: 6%; }
-  .qr__finder--bl { bottom: 6%; left: 6%; }
+  .qr__finder--tl { top: 5%; left: 5%; }
+  .qr__finder--tr { top: 5%; right: 5%; }
+  .qr__finder--bl { bottom: 5%; left: 5%; }
 </style>

@@ -150,6 +150,7 @@
     align-items: center;
     gap: var(--pin-gap);
   }
+  .ui-pin[data-size="xs"] { --pin-size: var(--ui-control-h-xs); --pin-fs: var(--ui-text-sm); --pin-gap: var(--ui-space-2); --pin-radius: var(--ui-control-radius-xs); }
   .ui-pin[data-size="sm"] { --pin-size: var(--ui-control-h-sm); --pin-fs: var(--ui-text-md); --pin-gap: var(--ui-space-3); --pin-radius: var(--ui-control-radius-sm); }
   .ui-pin[data-size="md"] { --pin-size: var(--ui-control-h-md); --pin-fs: var(--ui-text-lg); --pin-gap: var(--ui-space-4); --pin-radius: var(--ui-control-radius-md); }
   .ui-pin[data-size="lg"] { --pin-size: var(--ui-control-h-lg); --pin-fs: var(--ui-text-xl); --pin-gap: var(--ui-space-4); --pin-radius: var(--ui-control-radius-lg); }
@@ -162,7 +163,7 @@
     border: 1px solid var(--ui-border-default);
     border-radius: var(--pin-radius);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     color: var(--ui-fg-default);
     font-size: var(--pin-fs);
     font-weight: var(--ui-numeric-weight);
@@ -177,7 +178,7 @@
   }
   .ui-pin__cell:focus {
     border-color: var(--ui-accent-solid);
-    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring);
+    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring), var(--ui-shadow-xs);
   }
   .ui-pin__cell:disabled {
     background: var(--ui-bg-muted);

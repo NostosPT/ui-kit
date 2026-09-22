@@ -144,7 +144,7 @@
     border-radius: var(--ui-control-radius-md);
     background: var(--ui-bg-surface);
     border: 1px solid var(--ui-border-default);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     color: var(--ui-fg-muted);
   }
   .ui-dropzone__title {
@@ -161,8 +161,8 @@
   .ui-dropzone[data-variant="inline"] {
     border: 1px solid var(--ui-border-default);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
-    border-radius: var(--ui-radius-md);
+    box-shadow: var(--ui-shadow-sm);
+    border-radius: var(--ui-control-radius-md);
   }
   .ui-dropzone__inline {
     display: flex;

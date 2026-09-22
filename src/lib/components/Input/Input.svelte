@@ -43,7 +43,7 @@
   const isPassword = $derived(type === "password");
   const canReveal = $derived(revealable ?? isPassword);
 
-  const iconSize = $derived({ sm: 16, md: 18, lg: 20 }[size] ?? 18);
+  const iconSize = $derived({ xs: 14, sm: 16, md: 18, lg: 20 }[size] ?? 18);
   const showClear = $derived(
     clearable && !disabled && !readonly && String(value ?? "").length > 0
   );

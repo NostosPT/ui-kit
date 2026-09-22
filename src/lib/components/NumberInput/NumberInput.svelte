@@ -270,12 +270,12 @@
     border: 1px solid var(--ui-border-default);
     border-radius: var(--frame-radius);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
   }
   :global(.ui-number[data-layout="separated"]) .ui-number__input {
     border: 1px solid var(--ui-border-default);
     border-radius: var(--frame-radius);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
   }
 </style>

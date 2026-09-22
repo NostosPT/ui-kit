@@ -139,19 +139,19 @@
     --otp-size: 34px;
     --otp-fs: var(--ui-text-md);
     --otp-gap: 6px;
-    --otp-radius: 10px;
+    --otp-radius: var(--ui-control-radius-sm);
   }
   .ui-otp[data-size="md"] {
     --otp-size: 42px;
     --otp-fs: var(--ui-text-lg);
     --otp-gap: 8px;
-    --otp-radius: 12px;
+    --otp-radius: var(--ui-control-radius-md);
   }
   .ui-otp[data-size="lg"] {
     --otp-size: 48px;
     --otp-fs: var(--ui-text-xl);
     --otp-gap: 10px;
-    --otp-radius: 14px;
+    --otp-radius: var(--ui-control-radius-lg);
   }
 
   .ui-otp__cell {
@@ -162,7 +162,7 @@
     border: 1px solid var(--ui-border-default);
     border-radius: var(--otp-radius);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     color: var(--ui-fg-default);
     font-size: var(--otp-fs);
     font-weight: var(--ui-weight-medium);
@@ -178,7 +178,7 @@
   }
   .ui-otp__cell:focus {
     border-color: var(--ui-accent-solid);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.22);
+    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring), var(--ui-shadow-xs);
   }
   .ui-otp__cell:disabled {
     background: var(--ui-bg-muted);
@@ -190,7 +190,7 @@
     border-color: var(--ui-danger-solid);
   }
   .ui-otp[data-invalid] .ui-otp__cell:focus {
-    box-shadow: 0 0 0 4px oklch(from var(--ui-danger-solid) l c h / 0.22);
+    box-shadow: 0 0 0 var(--ui-ring-width) oklch(from var(--ui-danger-solid) l c h / 0.28), var(--ui-shadow-xs);
   }
 
   .ui-otp__separator {

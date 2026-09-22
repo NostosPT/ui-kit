@@ -54,7 +54,7 @@
     background: var(--ui-bg-surface);
     border: 1px solid var(--ui-border-default);
     border-radius: var(--frame-radius);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     color: var(--ui-fg-default);
     transition:
       border-color var(--ui-duration-fast) var(--ui-ease-out),
@@ -64,6 +64,13 @@
 
   /* Same four numbers a Button of the same size resolves, from the same
      tokens — a field and the button next to it are the same object. */
+  .ui-frame[data-size="xs"] {
+    --frame-h: var(--ui-control-h-xs);
+    --frame-px: var(--ui-control-px-xs);
+    --frame-fs: var(--ui-text-xs);
+    --frame-radius: var(--ui-control-radius-xs);
+    --frame-gap: var(--ui-control-gap-xs);
+  }
   .ui-frame[data-size="sm"] {
     --frame-h: var(--ui-control-h-sm);
     --frame-px: var(--ui-control-px-sm);
@@ -92,7 +99,7 @@
 
   .ui-frame:focus-within {
     border-color: var(--ui-accent-solid);
-    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring);
+    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring), var(--ui-shadow-xs);
   }
 
   .ui-frame[data-invalid] {
@@ -100,7 +107,7 @@
   }
   .ui-frame[data-invalid]:focus-within {
     box-shadow: 0 0 0 var(--ui-ring-width)
-      oklch(from var(--ui-danger-solid) l c h / 0.28);
+      oklch(from var(--ui-danger-solid) l c h / 0.28), var(--ui-shadow-xs);
   }
 
   .ui-frame[data-disabled] {

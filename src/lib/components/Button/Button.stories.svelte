@@ -179,9 +179,7 @@
       <Button variant="outline" tone="neutral">Cancel</Button>
       <Button>Done</Button>
       <Button variant="outline" iconOnly icon="pencil" label="Edit" />
-      <Button variant="outline" icon="heart">
-        Like <Badge size="sm" variant="outline" pill>2</Badge>
-      </Button>
+      <Button variant="outline" icon="heart" badge={2}>Like</Button>
     </Row>
 
     <Row gap={12}>

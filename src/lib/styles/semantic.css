@@ -12,10 +12,14 @@
   color-scheme: light;
 
   /* --- surfaces ---------------------------------------------------------- */
-  --ui-bg-canvas: var(--ui-neutral-100);
+  /* Canvas sits one step below surface so a white card lifts off the page,
+     and muted sits one step above canvas so a segmented track or toolbar is
+     visible against both. Collapsing any two of these makes controls vanish
+     depending on what they happen to be sitting on. */
+  --ui-bg-canvas: var(--ui-neutral-50);
   --ui-bg-surface: var(--ui-neutral-0);
   --ui-bg-raised: var(--ui-neutral-0);
-  --ui-bg-sunken: var(--ui-neutral-50);
+  --ui-bg-sunken: var(--ui-neutral-100);
   --ui-bg-subtle: var(--ui-neutral-50);
   --ui-bg-muted: var(--ui-neutral-100);
   --ui-bg-emphasis: var(--ui-neutral-200);

@@ -157,35 +157,35 @@
   asChild
 >
   <div class="sheet">
-    <Row gap={12}>
-      <Button variant="outline" icon="link">Copy link</Button>
-      <Button variant="outline" icon="user">Login</Button>
-      <Button icon="user-plus">Sign Up</Button>
+    <Row gap={14}>
+      <Button size="lg" variant="outline" icon="link">Copy link</Button>
+      <Button size="lg" variant="outline" icon="user">Login</Button>
+      <Button size="lg" icon="user-plus">Sign Up</Button>
     </Row>
 
-    <Row gap={20}>
-      <ButtonGroup ariaLabel="Document actions">
-        <Button variant="outline" icon="folder">Documents</Button>
-        <Button variant="outline" icon="upload">Export</Button>
-        <Button variant="outline" iconOnly icon="more-horizontal" label="More" />
+    <Row gap={24}>
+      <ButtonGroup size="lg" ariaLabel="Document actions">
+        <Button size="lg" variant="outline" icon="folder">Documents</Button>
+        <Button size="lg" variant="outline" icon="export">Export</Button>
+        <Button size="lg" variant="outline" iconOnly icon="more-horizontal" label="More" />
       </ButtonGroup>
-      <ButtonGroup ariaLabel="Pagination">
-        <Button variant="outline" iconOnly icon="chevron-left" label="Previous" />
-        <Button variant="outline" iconOnly icon="chevron-right" label="Next" />
+      <ButtonGroup size="lg" ariaLabel="Pagination">
+        <Button size="lg" variant="outline" iconOnly icon="chevron-left" label="Previous" />
+        <Button size="lg" variant="outline" iconOnly icon="chevron-right" label="Next" />
       </ButtonGroup>
     </Row>
 
-    <Row gap={12}>
-      <Button variant="outline" tone="neutral">Cancel</Button>
-      <Button>Done</Button>
-      <Button variant="outline" iconOnly icon="pencil" label="Edit" />
-      <Button variant="outline" icon="heart" badge={2}>Like</Button>
+    <Row gap={14}>
+      <Button size="lg" variant="outline" tone="neutral">Cancel</Button>
+      <Button size="lg">Done</Button>
+      <Button size="lg" variant="outline" iconOnly icon="pencil" label="Edit" />
+      <Button size="lg" variant="outline" icon="heart" badge={2}>Like</Button>
     </Row>
 
-    <Row gap={12}>
-      <Button variant="outline" iconOnly icon="chevron-left" label="Previous" />
-      <Button variant="outline" iconOnly icon="chevron-right" label="Next" />
-      <Button variant="outline" trailingIcon="arrow-up-right">Forward</Button>
+    <Row gap={14}>
+      <Button size="lg" variant="outline" iconOnly icon="chevron-left" label="Previous" />
+      <Button size="lg" variant="outline" iconOnly icon="chevron-right" label="Next" />
+      <Button size="lg" variant="outline" trailingIcon="arrow-up-right">Forward</Button>
     </Row>
   </div>
 </Story>
@@ -195,8 +195,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 32px;
+    gap: 22px;
+    padding: 48px 32px;
+    background: #fafafa;
+    border-radius: var(--ui-radius-2xl);
   }
 
   .footer {

@@ -97,24 +97,27 @@
   }
 
   .ui-badge[data-size="sm"] {
-    --badge-h: 20px;
-    --badge-px: var(--ui-space-4);
+    --badge-h: 22px;
+    --badge-px: var(--ui-space-3);
     --badge-fs: var(--ui-text-2xs);
     --badge-gap: var(--ui-space-2);
   }
   .ui-badge[data-size="md"] {
-    --badge-h: 26px;
-    --badge-px: var(--ui-space-5);
+    --badge-h: 28px;
+    --badge-px: var(--ui-space-4);
     --badge-fs: var(--ui-text-xs);
     --badge-gap: var(--ui-space-3);
   }
   .ui-badge[data-size="lg"] {
-    --badge-h: 30px;
-    --badge-px: var(--ui-space-6);
+    --badge-h: 34px;
+    --badge-px: var(--ui-space-5);
     --badge-fs: var(--ui-text-sm);
     --badge-gap: var(--ui-space-3);
   }
 
+  .ui-badge[data-tone="neutral"] {
+    --badge-solid: var(--ui-neutral-500);
+  }
   .ui-badge[data-tone="accent"] {
     --badge-soft: var(--ui-accent-soft);
     --badge-text: var(--ui-accent-text);
@@ -135,6 +138,13 @@
     --badge-border: var(--ui-warning-border);
     --badge-solid: var(--ui-warning-solid);
     --badge-dot: var(--ui-warning-dot);
+  }
+  .ui-badge[data-tone="orange"] {
+    --badge-soft: oklch(95% 0.05 45);
+    --badge-text: oklch(45% 0.18 45);
+    --badge-border: oklch(88% 0.08 45);
+    --badge-solid: oklch(62% 0.20 45);
+    --badge-dot: oklch(65% 0.20 45);
   }
   .ui-badge[data-tone="danger"] {
     --badge-soft: var(--ui-danger-soft);
@@ -160,12 +170,8 @@
 
   .ui-badge[data-variant="soft"] {
     background: var(--badge-soft);
+    border-color: var(--badge-border);
     color: var(--badge-text);
-  }
-  .ui-badge[data-variant="soft"][data-tone="accent"] {
-    background: var(--ui-accent-soft);
-    border-color: var(--ui-accent-border);
-    color: var(--ui-accent-text);
   }
   .ui-badge[data-variant="outline"] {
     background: var(--ui-bg-surface);
@@ -180,10 +186,6 @@
   }
   .ui-badge[data-variant="solid"] {
     background: var(--badge-solid);
-    color: oklch(from var(--badge-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
-  }
-  .ui-badge[data-variant="solid"][data-tone="accent"] {
-    background: var(--ui-accent-solid);
     color: #ffffff;
   }
   /* The dot variant carries no chrome at all — it is a coloured marker plus

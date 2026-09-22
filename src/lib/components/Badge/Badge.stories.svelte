@@ -88,3 +88,94 @@
     <Spec label="lg"><Badge size="lg" icon="check-circle">Paid</Badge></Spec>
   </Showcase>
 </Story>
+
+<Story
+  name="Reference sheet"
+  parameters={{
+    layout: "padded",
+    docs: {
+      description: {
+        story:
+          "A one-to-one rebuild of the badges and tags reference sheet from the source design."
+      }
+    }
+  }}
+  asChild
+>
+  <div class="sheet">
+    <!-- Row 1: Avatars with Dismiss -->
+    <div class="row">
+      <Badge size="lg" variant="surface" avatar="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80" pill removable>Alex</Badge>
+      <Badge size="lg" variant="surface" avatar="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" pill removable>Anna</Badge>
+      <Badge size="lg" variant="surface" avatar="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&auto=format&fit=crop&q=80" pill removable>Pixsellz</Badge>
+    </div>
+
+    <!-- Row 2: Status Pills (Paid, Declined, Pending, Refunded) -->
+    <div class="row">
+      <Badge size="lg" variant="solid" tone="success" icon="check">Paid</Badge>
+      <Badge size="lg" variant="solid" tone="danger" icon="x">Declined</Badge>
+      <Badge size="lg" variant="solid" tone="neutral" icon="clock">Pending</Badge>
+      <Badge size="lg" variant="solid" tone="orange" icon="arrow-left">Refunded</Badge>
+    </div>
+
+    <!-- Row 3: Country Flag Chips -->
+    <div class="row">
+      <Badge size="lg" variant="surface" pill removable>
+        {#snippet imageSnippet()}
+          <span style="font-size: 16px; line-height: 1; margin-inline-start: -2px;">🇺🇸</span>
+        {/snippet}
+        United States
+      </Badge>
+      <Badge size="lg" variant="surface" pill removable>
+        {#snippet imageSnippet()}
+          <span style="font-size: 16px; line-height: 1; margin-inline-start: -2px;">🇨🇳</span>
+        {/snippet}
+        China
+      </Badge>
+      <Badge size="lg" variant="surface" pill removable>
+        {#snippet imageSnippet()}
+          <span style="font-size: 16px; line-height: 1; margin-inline-start: -2px;">🇫🇷</span>
+        {/snippet}
+        France
+      </Badge>
+      <Badge size="lg" variant="surface" pill removable>
+        {#snippet imageSnippet()}
+          <span style="font-size: 16px; line-height: 1; margin-inline-start: -2px;">🇵🇹</span>
+        {/snippet}
+        Portugal
+      </Badge>
+    </div>
+
+    <!-- Row 4: Category Tags -->
+    <div class="row">
+      <Badge size="lg" variant="soft" tone="accent" icon="monitor">Web Design</Badge>
+      <Badge size="lg" variant="soft" tone="accent" icon="mobile">Mobile</Badge>
+      <Badge size="lg" variant="soft" tone="accent" icon="typography">Typography</Badge>
+    </div>
+
+    <!-- Row 5: Dot Statuses -->
+    <div class="row">
+      <Badge size="lg" variant="soft" tone="danger" dot>Offline</Badge>
+      <Badge size="lg" variant="soft" tone="success" dot>Online</Badge>
+    </div>
+  </div>
+</Story>
+
+<style>
+  .sheet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 48px 32px;
+    background: #fafafa;
+    border-radius: var(--ui-radius-2xl);
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>

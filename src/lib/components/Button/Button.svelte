@@ -24,6 +24,7 @@
     iconOnly = false,
     icon = undefined,
     trailingIcon = undefined,
+    badge = undefined,
     label = undefined,
     class: klass = "",
     children,
@@ -32,7 +33,7 @@
   } = $props();
 
   const iconSize = $derived(
-    { xs: 12, sm: 14, md: 16, lg: 18 }[size] ?? 16
+    { xs: 14, sm: 16, md: 18, lg: 20 }[size] ?? 18
   );
   const inert = $derived(disabled || loading);
   const tag = $derived(href && !inert ? "a" : "button");
@@ -65,6 +66,15 @@
       <span class="ui-btn__label">{@render children?.()}</span>
     {/if}
     {#if trailingIcon}<Icon name={trailingIcon} size={iconSize} />{/if}
+    {#if badge != null}
+      <span class="ui-btn__badge">
+        {#if typeof badge === "function"}
+          {@render badge()}
+        {:else}
+          {badge}
+        {/if}
+      </span>
+    {/if}
   </span>
 </svelte:element>
 
@@ -79,6 +89,13 @@
     --btn-text: var(--ui-accent-text);
     --btn-border: var(--ui-accent-border);
 
+    /* Icons sit a step below the label in contrast. This is measured, not a
+       preference: in the reference a leading icon reads around neutral-600
+       while its label is effectively black, and matching them makes the whole
+       row look heavier and flatter than the source. Solid and link buttons
+       opt out — there the icon and label are the same ink. */
+    --btn-icon: var(--ui-fg-muted);
+
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -89,7 +106,7 @@
     border: 1px solid transparent;
     border-radius: var(--btn-radius);
     font-size: var(--btn-fs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-control-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: 1;
     white-space: nowrap;
@@ -104,38 +121,45 @@
       transform var(--ui-duration-instant) var(--ui-ease-out);
   }
 
-  /* --- sizes ------------------------------------------------------------ */
+  /* --- sizes ------------------------------------------------------------
+     Height, padding, gap and radius all come from the shared control scale
+     rather than from spacing steps picked per component. That is what keeps a
+     Button, an Input and a Select the same object at the same size — and it
+     is the thing the reference gets right and a hand-tuned kit gets wrong the
+     moment one of the three is edited on its own. */
   .ui-btn[data-size="xs"] {
     --btn-h: var(--ui-control-h-xs);
-    --btn-px: var(--ui-space-4);
+    --btn-px: var(--ui-control-px-xs);
     --btn-fs: var(--ui-text-xs);
-    --btn-gap: var(--ui-space-2);
-    --btn-radius: var(--ui-radius-sm);
+    --btn-gap: var(--ui-control-gap-xs);
+    --btn-radius: var(--ui-control-radius-xs);
   }
   .ui-btn[data-size="sm"] {
     --btn-h: var(--ui-control-h-sm);
-    --btn-px: var(--ui-space-5);
+    --btn-px: var(--ui-control-px-sm);
     --btn-fs: var(--ui-text-sm);
-    --btn-gap: var(--ui-space-3);
-    --btn-radius: var(--ui-radius-md);
+    --btn-gap: var(--ui-control-gap-sm);
+    --btn-radius: var(--ui-control-radius-sm);
   }
   .ui-btn[data-size="md"] {
     --btn-h: var(--ui-control-h-md);
-    --btn-px: var(--ui-space-7);
+    --btn-px: var(--ui-control-px-md);
     --btn-fs: var(--ui-text-md);
-    --btn-gap: var(--ui-space-3);
-    --btn-radius: var(--ui-radius-md);
+    --btn-gap: var(--ui-control-gap-md);
+    --btn-radius: var(--ui-control-radius-md);
   }
   .ui-btn[data-size="lg"] {
     --btn-h: var(--ui-control-h-lg);
-    --btn-px: var(--ui-space-10);
+    --btn-px: var(--ui-control-px-lg);
     --btn-fs: var(--ui-text-base);
-    --btn-gap: var(--ui-space-4);
-    --btn-radius: var(--ui-radius-lg);
+    --btn-gap: var(--ui-control-gap-lg);
+    --btn-radius: var(--ui-control-radius-lg);
   }
 
   .ui-btn[data-icon-only] {
     width: var(--btn-h);
+    min-width: var(--btn-h);
+    flex-shrink: 0;
     padding-inline: 0;
   }
   .ui-btn[data-block] {
@@ -182,20 +206,43 @@
   }
 
   /* --- variants --------------------------------------------------------- */
+  .ui-btn[data-variant="solid"],
+  .ui-btn[data-variant="soft"],
+  .ui-btn[data-variant="link"] {
+    --btn-icon: currentColor;
+  }
+
   .ui-btn[data-variant="solid"] {
-    background: var(--btn-solid);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--btn-solid) calc(l + 0.035) c h) 0%,
+      var(--btn-solid) 100%
+    );
     /* Derived from the fill itself, so an amber or lime accent flips to a
        dark label automatically instead of shipping white-on-yellow. */
     color: oklch(from var(--btn-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
-    /* A one-pixel inner highlight is what stops a flat fill from looking
-       like a coloured rectangle. It only reads on the solid variant. */
-    box-shadow: var(--ui-shadow-xs), var(--ui-shadow-inset);
+    /* Inset 1px highlight along the top edge + radiant tinted drop shadow */
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--btn-solid) l c h / 0.2),
+      0 4px 14px -1px oklch(from var(--btn-solid) l c h / 0.38);
   }
   .ui-btn[data-variant="solid"]:hover:not([aria-disabled="true"]) {
-    background: var(--btn-solid-hover);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--btn-solid-hover) calc(l + 0.03) c h) 0%,
+      var(--btn-solid-hover) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.26),
+      0 2px 4px oklch(from var(--btn-solid-hover) l c h / 0.24),
+      0 6px 18px -1px oklch(from var(--btn-solid-hover) l c h / 0.42);
   }
   .ui-btn[data-variant="solid"]:active:not([aria-disabled="true"]) {
     background: var(--btn-solid-active);
+    box-shadow:
+      inset 0 1px 2px hsl(0 0% 0% / 0.15),
+      0 1px 2px oklch(from var(--btn-solid-active) l c h / 0.2);
   }
 
   .ui-btn[data-variant="soft"] {
@@ -206,29 +253,37 @@
     background: var(--btn-soft-hover);
   }
 
-  .ui-btn[data-variant="outline"] {
+  .ui-btn[data-variant="outline"],
+  .ui-btn[data-variant="secondary"] {
     background: var(--ui-bg-surface);
     border-color: var(--ui-border-default);
     color: var(--ui-fg-default);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow:
+      0 1px 2px hsl(var(--ui-shadow-color) / 0.05),
+      0 1px 3px hsl(var(--ui-shadow-color) / 0.06);
   }
-  .ui-btn[data-variant="outline"]:hover:not([aria-disabled="true"]) {
+  .ui-btn[data-variant="outline"]:hover:not([aria-disabled="true"]),
+  .ui-btn[data-variant="secondary"]:hover:not([aria-disabled="true"]) {
     background: var(--ui-bg-hover);
     border-color: var(--ui-border-strong);
+    box-shadow:
+      0 1px 2px hsl(var(--ui-shadow-color) / 0.06),
+      0 2px 5px hsl(var(--ui-shadow-color) / 0.08);
   }
-  .ui-btn[data-variant="outline"]:active:not([aria-disabled="true"]) {
+  .ui-btn[data-variant="outline"]:active:not([aria-disabled="true"]),
+  .ui-btn[data-variant="secondary"]:active:not([aria-disabled="true"]) {
     background: var(--ui-bg-active);
+    box-shadow: 0 1px 2px hsl(var(--ui-shadow-color) / 0.04);
   }
-  /* A toned outline button keeps the white surface but borrows the tone for
-     its text and border — the "Following" / destructive-secondary pattern. */
-  .ui-btn[data-variant="outline"]:not([data-tone="neutral"]) {
+  .ui-btn[data-variant="outline"]:not([data-tone="neutral"]):not([data-tone="accent"]),
+  .ui-btn[data-variant="secondary"]:not([data-tone="neutral"]):not([data-tone="accent"]) {
     color: var(--btn-text);
     border-color: var(--btn-border);
   }
 
   .ui-btn[data-variant="ghost"] {
     background: transparent;
-    color: var(--ui-fg-muted);
+    color: var(--ui-fg-default);
   }
   .ui-btn[data-variant="ghost"]:not([data-tone="neutral"]) {
     color: var(--btn-text);
@@ -268,6 +323,44 @@
     display: inline-flex;
     align-items: center;
     gap: inherit;
+  }
+  .ui-btn__body :global(.ui-icon) {
+    color: var(--btn-icon);
+  }
+  .ui-btn__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding-inline: var(--ui-space-2);
+    border-radius: var(--ui-radius-full);
+    font-size: var(--ui-text-2xs);
+    font-weight: var(--ui-label-weight);
+    line-height: 1;
+    background: var(--ui-bg-muted);
+    color: var(--ui-fg-default);
+    margin-inline-start: var(--ui-space-1);
+    vertical-align: middle;
+  }
+  .ui-btn[data-variant="solid"] .ui-btn__badge {
+    background: oklch(from var(--btn-solid) l c h / 0.25);
+    color: currentColor;
+  }
+  .ui-btn[data-variant="outline"] .ui-btn__badge,
+  .ui-btn[data-variant="secondary"] .ui-btn__badge {
+    background: transparent;
+    border: 1px solid var(--ui-border-default);
+    color: var(--ui-fg-default);
+    min-width: 22px;
+    height: 22px;
+    padding-inline: var(--ui-space-2);
+    font-weight: var(--ui-weight-medium);
+  }
+  /* An icon-only button has no label to contrast against, so the icon carries
+     the full weight of the control. */
+  .ui-btn[data-icon-only] {
+    --btn-icon: currentColor;
   }
   .ui-btn[data-loading] .ui-btn__body {
     /* Hidden rather than removed so the button keeps its width mid-request. */

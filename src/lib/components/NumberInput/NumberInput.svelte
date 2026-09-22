@@ -16,8 +16,9 @@
     step = 1,
     precision = undefined,
     size = "md",
-    align = "center",
+    align = undefined,
     layout = "attached",
+    variant = undefined,
     invalid = false,
     disabled = false,
     readonly = false,
@@ -29,6 +30,11 @@
 
   let draft = $state(String(value ?? ""));
   let editing = $state(false);
+
+  const effectiveLayout = $derived(variant ?? layout);
+  const effectiveAlign = $derived(
+    align ?? (effectiveLayout === "controls-end" || effectiveLayout === "vertical" ? "start" : "center")
+  );
 
   // While the user is typing, the field owns the text; otherwise the value
   // owns it. Without this guard, formatting fights the caret.
@@ -89,7 +95,7 @@
     onclick={() => nudge(direction)}
     tabindex="-1"
   >
-    <Icon name={icon} size={size === "sm" ? 13 : 15} />
+    <Icon name={icon} size={size === "lg" ? 18 : 16} />
   </button>
 {/snippet}
 
@@ -101,22 +107,55 @@
   {@render stepButton(1, "plus", "Increase", atMax)}
 {/snippet}
 
+{#snippet controlsEnd()}
+  <div class="ui-number__actions">
+    {@render stepButton(-1, "minus", "Decrease", atMin)}
+    {@render stepButton(1, "plus", "Increase", atMax)}
+  </div>
+{/snippet}
+
+{#snippet verticalControls()}
+  <div class="ui-number__vertical">
+    <button
+      type="button"
+      class="ui-number__vert-btn"
+      aria-label="Increase"
+      disabled={disabled || readonly || atMax}
+      onclick={() => nudge(1)}
+      tabindex="-1"
+    >
+      <Icon name="chevron-up" size={11} />
+    </button>
+    <button
+      type="button"
+      class="ui-number__vert-btn"
+      aria-label="Decrease"
+      disabled={disabled || readonly || atMin}
+      onclick={() => nudge(-1)}
+      tabindex="-1"
+    >
+      <Icon name="chevron-down" size={11} />
+    </button>
+  </div>
+{/snippet}
+
 <InputFrame
   {size}
   {invalid}
   {disabled}
   {readonly}
   class="ui-number {klass}"
-  data-layout={layout}
-  start={frameStart}
-  end={frameEnd}
+  data-layout={effectiveLayout}
+  start={effectiveLayout === "attached" || effectiveLayout === "separated" ? frameStart : undefined}
+  end={effectiveLayout === "vertical" ? verticalControls : effectiveLayout === "controls-end" ? controlsEnd : frameEnd}
 >
   <input
     class="ui-number__input"
+    data-layout={effectiveLayout}
     type="text"
     inputmode="decimal"
     role="spinbutton"
-    style:text-align={align}
+    style:text-align={effectiveAlign}
     {id}
     {disabled}
     {readonly}
@@ -151,7 +190,7 @@
   }
 
   .ui-number__input {
-    width: var(--number-w, 56px);
+    width: var(--number-w, 60px);
     height: var(--frame-h);
     min-width: 0;
     border: none;
@@ -159,9 +198,52 @@
     outline: none;
     font-size: var(--frame-fs);
     font-variant-numeric: tabular-nums;
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     color: inherit;
     padding-inline: var(--ui-space-2);
+  }
+  .ui-number__input[data-layout="controls-end"],
+  .ui-number__input[data-layout="vertical"] {
+    padding-inline-start: var(--ui-space-4);
+    width: var(--number-w, 48px);
+  }
+
+  .ui-number__actions {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .ui-number__vertical {
+    display: flex;
+    flex-direction: column;
+    height: var(--frame-h);
+    width: 26px;
+    border-inline-start: 1px solid var(--ui-border-default);
+  }
+  .ui-number__vert-btn {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    border: none;
+    background: transparent;
+    color: var(--ui-fg-muted);
+    cursor: pointer;
+    padding: 0;
+    transition:
+      background-color var(--ui-duration-fast) var(--ui-ease-out),
+      color var(--ui-duration-fast) var(--ui-ease-out);
+  }
+  .ui-number__vert-btn:first-child {
+    border-bottom: 1px solid var(--ui-border-default);
+  }
+  .ui-number__vert-btn:hover:not(:disabled) {
+    background: var(--ui-bg-hover);
+    color: var(--ui-fg-default);
+  }
+  .ui-number__vert-btn:disabled {
+    color: var(--ui-fg-faint);
+    cursor: not-allowed;
   }
 
   .ui-number__step {
@@ -186,14 +268,14 @@
 
   :global(.ui-number[data-layout="separated"]) .ui-number__step {
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-md);
+    border-radius: var(--frame-radius);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
   }
   :global(.ui-number[data-layout="separated"]) .ui-number__input {
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-md);
+    border-radius: var(--frame-radius);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
   }
 </style>

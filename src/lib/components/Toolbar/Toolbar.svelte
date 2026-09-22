@@ -43,7 +43,7 @@
     padding: var(--tb-pad);
     background: var(--ui-bg-surface);
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     box-shadow: var(--ui-shadow-sm);
   }
   /* A floating toolbar is the overlay treatment — heavier shadow, no border,

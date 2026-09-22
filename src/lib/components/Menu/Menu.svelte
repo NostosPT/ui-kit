@@ -16,14 +16,35 @@
     offset = 6,
     matchWidth = false,
     ariaLabel = "Menu",
+    anchor = $bindable(undefined),
     class: klass = "",
     trigger,
     children,
     ...rest
   } = $props();
 
+  let popoverComp = $state(null);
   let surfaceEl = $state(null);
   let typeahead = { buffer: "", timer: 0 };
+
+  export function close() {
+    popoverComp?.close();
+  }
+  export function show() {
+    popoverComp?.show();
+  }
+  export function toggle() {
+    popoverComp?.toggle();
+  }
+  export function openAt(coordsOrEvent) {
+    if (coordsOrEvent && typeof coordsOrEvent.clientX === "number") {
+      coordsOrEvent.preventDefault?.();
+      anchor = { x: coordsOrEvent.clientX, y: coordsOrEvent.clientY };
+    } else if (coordsOrEvent && typeof coordsOrEvent.x === "number") {
+      anchor = { x: coordsOrEvent.x, y: coordsOrEvent.y };
+    }
+    open = true;
+  }
 
   const enabledItems = () =>
     Array.from(surfaceEl?.querySelectorAll("[role='menuitem']:not([aria-disabled='true'])") ?? []);
@@ -93,7 +114,9 @@
 </script>
 
 <Popover
+  bind:this={popoverComp}
   bind:open
+  {anchor}
   {placement}
   {offset}
   {matchWidth}

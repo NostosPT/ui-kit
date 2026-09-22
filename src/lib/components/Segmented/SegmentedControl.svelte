@@ -104,7 +104,7 @@
       tabindex={active ? 0 : -1}
       onclick={() => select(option)}
     >
-      {#if option.icon}<Icon name={option.icon} size={size === "sm" ? 13 : 14} />{/if}
+      {#if option.icon}<Icon name={option.icon} size={size === "lg" ? 18 : 16} />{/if}
       <span>{option.label ?? option.value}</span>
     </button>
   {/each}
@@ -129,29 +129,41 @@
     flex: 1;
   }
 
-  .ui-segmented[data-size="sm"] {
-    --seg-h: 24px;
-    --seg-px: var(--ui-space-5);
+  /* The track, not the segment, is the control: a segment sits one step down
+     the height scale and the track's padding makes up the difference, so an
+     md segmented control is exactly as tall as an md Button beside it
+     (34 + 3 + 3 = 40) instead of being a third shorter. */
+  .ui-segmented[data-size="xs"] {
+    --seg-h: 22px;
+    --seg-px: var(--ui-control-px-xs);
     --seg-fs: var(--ui-text-xs);
-    --seg-pad: 2px;
-    --seg-gap: 1px;
-    --seg-radius: var(--ui-radius-md);
+    --seg-pad: 3px;
+    --seg-gap: 2px;
+    --seg-radius: var(--ui-control-radius-xs);
   }
-  .ui-segmented[data-size="md"] {
-    --seg-h: 28px;
-    --seg-px: var(--ui-space-6);
+  .ui-segmented[data-size="sm"] {
+    --seg-h: var(--ui-control-h-xs);
+    --seg-px: var(--ui-control-px-xs);
     --seg-fs: var(--ui-text-sm);
     --seg-pad: 3px;
     --seg-gap: 2px;
-    --seg-radius: var(--ui-radius-lg);
+    --seg-radius: var(--ui-control-radius-sm);
+  }
+  .ui-segmented[data-size="md"] {
+    --seg-h: var(--ui-control-h-sm);
+    --seg-px: var(--ui-control-px-sm);
+    --seg-fs: var(--ui-text-md);
+    --seg-pad: 3px;
+    --seg-gap: 2px;
+    --seg-radius: var(--ui-control-radius-md);
   }
   .ui-segmented[data-size="lg"] {
-    --seg-h: 34px;
-    --seg-px: var(--ui-space-8);
-    --seg-fs: var(--ui-text-md);
+    --seg-h: var(--ui-control-h-md);
+    --seg-px: var(--ui-control-px-md);
+    --seg-fs: var(--ui-text-base);
     --seg-pad: 4px;
     --seg-gap: 2px;
-    --seg-radius: var(--ui-radius-lg);
+    --seg-radius: var(--ui-control-radius-lg);
   }
 
   .ui-segmented__item {
@@ -160,12 +172,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--ui-space-3);
+    gap: var(--ui-control-gap-sm);
     height: var(--seg-h);
     padding-inline: var(--seg-px);
     border-radius: calc(var(--seg-radius) - var(--seg-pad));
     font-size: var(--seg-fs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-control-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: 1;
     color: var(--ui-fg-muted);
@@ -197,7 +209,7 @@
     transform: translateX(var(--seg-x));
     border-radius: calc(var(--seg-radius) - var(--seg-pad));
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     /* No transition until the first measurement lands, or the indicator
        visibly slides in from the left edge on mount. */
     opacity: 0;

@@ -1,5 +1,5 @@
 <script>
-  import { anchorPosition, trackAnchor } from "../../internal/position.js";
+  import { anchorPosition, trackAnchor, getContainingBlock } from "../../internal/position.js";
 
   /**
    * Anchored floating surface. Menu, Listbox, Tooltip and DatePicker are all
@@ -19,6 +19,7 @@
     role = "dialog",
     ariaLabel = undefined,
     padded = true,
+    anchor = undefined,
     class: klass = "",
     trigger,
     children,
@@ -45,16 +46,29 @@
   }
 
   $effect(() => {
-    if (!open || !anchorEl || !floatEl) return;
+    if (!open || !floatEl) return;
+
+    // Anchor resolution:
+    // 1. Explicit anchor prop (can be Element, {x, y} mouse coords, or DOMRect)
+    // 2. Element inside trigger snippet
+    // 3. Fallback to anchorEl wrapper
+    const anchorTarget = anchor ?? anchorEl?.firstElementChild ?? anchorEl;
+    if (!anchorTarget) return;
+
+    const cb = getContainingBlock(floatEl);
 
     const update = () => {
-      const rect = anchorEl.getBoundingClientRect();
       const box = floatEl.getBoundingClientRect();
-      const next = anchorPosition(rect, box, { placement, offset, matchWidth });
+      const next = anchorPosition(anchorTarget, box, {
+        placement,
+        offset,
+        matchWidth,
+        containingBlock: cb
+      });
       pos = { ...next, ready: true };
     };
 
-    return trackAnchor(anchorEl, floatEl, update);
+    return trackAnchor(anchorTarget, floatEl, update);
   });
 
   $effect(() => {
@@ -67,14 +81,16 @@
       if (!closeOnOutside) return;
       // Clicks on the trigger are the trigger's business — letting them fall
       // through here would close and immediately reopen the surface.
-      if (floatEl?.contains(event.target) || anchorEl?.contains(event.target)) return;
+      const anchorNode = anchor instanceof Element ? anchor : (anchorEl?.contains(event.target) ? anchorEl : null);
+      if (floatEl?.contains(event.target) || anchorNode?.contains(event.target)) return;
       close();
     };
     const onKeyDown = (event) => {
       if (closeOnEscape && event.key === "Escape") {
         event.stopPropagation();
         close();
-        anchorEl?.querySelector("button, [tabindex]")?.focus?.() ?? anchorEl?.focus?.();
+        const focusTarget = anchor instanceof Element ? anchor : anchorEl;
+        focusTarget?.querySelector?.("button, [tabindex]")?.focus?.() ?? focusTarget?.focus?.();
       }
     };
 
@@ -87,9 +103,11 @@
   });
 </script>
 
-<div bind:this={anchorEl} class="ui-popover__anchor">
-  {@render trigger?.({ toggle, show, close, open })}
-</div>
+{#if trigger}
+  <div bind:this={anchorEl} class="ui-popover__anchor">
+    {@render trigger?.({ toggle, show, close, open })}
+  </div>
+{/if}
 
 {#if open}
   <div
@@ -121,7 +139,7 @@
     max-width: min(92vw, 420px);
     background: var(--ui-bg-raised);
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     box-shadow: var(--ui-shadow-lg);
     color: var(--ui-fg-default);
     /* Hidden until the first measurement lands, otherwise the surface paints

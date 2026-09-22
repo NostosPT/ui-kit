@@ -6,6 +6,7 @@
     truncate = false,
     width = undefined,
     muted = false,
+    depth = 0,
     class: klass = "",
     children,
     ...rest
@@ -17,8 +18,10 @@
   data-numeric={numeric || undefined}
   data-truncate={truncate || undefined}
   data-muted={muted || undefined}
+  data-depth={depth > 0 ? depth : undefined}
   style:text-align={align ?? (numeric ? "end" : undefined)}
   style:width
+  style:padding-inline-start={depth > 0 ? `calc(var(--row-px) + ${depth * 20}px)` : undefined}
   {...rest}
 >
   {#if truncate}

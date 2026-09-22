@@ -1,20 +1,16 @@
 <script>
+  import Icon from "../Icon/Icon.svelte";
   import { uid } from "../../internal/utils.js";
 
   /**
    * Label / hint / error scaffolding. It owns the id wiring so consumers never
    * have to hand-roll aria-describedby: the `control` snippet receives the ids
    * it needs as arguments.
-   *
-   *   <Field label="Email" error={msg}>
-   *     {#snippet control({ id, describedBy, invalid })}
-   *       <Input {id} aria-describedby={describedBy} {invalid} />
-   *     {/snippet}
-   *   </Field>
    */
   let {
     label = undefined,
     hint = undefined,
+    info = undefined,
     error = undefined,
     required = false,
     optional = false,
@@ -41,12 +37,26 @@
 </script>
 
 <div class="ui-field {klass}" data-orientation={orientation} {...rest}>
-  {#if label}
-    <label class="ui-field__label" for={labelFor ?? fieldId}>
-      {label}
-      {#if required}<span class="ui-field__required" aria-hidden="true">*</span>{/if}
-      {#if optional}<span class="ui-field__optional">optional</span>{/if}
-    </label>
+  {#if label || info}
+    <div class="ui-field__header">
+      {#if label}
+        <label class="ui-field__label" for={labelFor ?? fieldId}>
+          {label}
+          {#if required}<span class="ui-field__required" aria-hidden="true">*</span>{/if}
+          {#if optional}<span class="ui-field__optional">optional</span>{/if}
+        </label>
+      {/if}
+      {#if info}
+        <button
+          type="button"
+          class="ui-field__info"
+          aria-label={typeof info === "string" ? info : "Info"}
+          title={typeof info === "string" ? info : undefined}
+        >
+          <Icon name="info" size={14} />
+        </button>
+      {/if}
+    </div>
   {/if}
 
   <div class="ui-field__control">
@@ -65,7 +75,7 @@
   .ui-field {
     display: flex;
     flex-direction: column;
-    gap: var(--ui-space-3);
+    gap: var(--ui-space-4);
     min-width: 0;
   }
   .ui-field[data-orientation="horizontal"] {
@@ -78,12 +88,38 @@
     padding-top: calc((var(--ui-control-h-md) - 1lh) / 2);
   }
 
+  .ui-field__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ui-space-2);
+    width: 100%;
+  }
+  .ui-field__info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ui-fg-subtle);
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: var(--ui-radius-full);
+    transition: color var(--ui-duration-fast) var(--ui-ease-out);
+  }
+  .ui-field__info:hover {
+    color: var(--ui-fg-default);
+  }
+
   .ui-field__label {
     display: inline-flex;
     align-items: baseline;
     gap: var(--ui-space-2);
     font-size: var(--ui-text-md);
-    font-weight: var(--ui-weight-medium);
+    /* Semibold. In the reference the label is the anchor of the field, set a
+       clear step above the value and the hint; a 500 label at the same size
+       as the input text makes the two read as one run of prose. */
+    font-weight: var(--ui-label-weight);
     color: var(--ui-fg-default);
     letter-spacing: var(--ui-tracking-snug);
   }
@@ -99,7 +135,7 @@
   .ui-field__control {
     display: flex;
     flex-direction: column;
-    gap: var(--ui-space-3);
+    gap: var(--ui-space-4);
     min-width: 0;
     flex: 1;
   }

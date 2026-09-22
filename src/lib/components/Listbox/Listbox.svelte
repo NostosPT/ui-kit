@@ -232,7 +232,7 @@
     display: block;
     width: 100%;
     text-align: start;
-    border-radius: var(--ui-radius-md);
+    border-radius: var(--ui-control-radius-xs);
   }
   .ui-listbox__trigger:focus-visible {
     outline: none;
@@ -301,7 +301,7 @@
     align-items: center;
     gap: var(--ui-space-5);
     padding: var(--ui-space-4) var(--ui-space-5);
-    border-radius: var(--ui-radius-md);
+    border-radius: var(--ui-control-radius-xs);
     font-size: var(--ui-text-md);
     cursor: pointer;
     min-width: 0;

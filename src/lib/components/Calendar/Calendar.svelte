@@ -177,9 +177,9 @@
     width: fit-content;
     user-select: none;
   }
-  .ui-calendar[data-size="sm"] { --cal-cell: 28px; --cal-fs: var(--ui-text-sm); }
-  .ui-calendar[data-size="md"] { --cal-cell: 34px; --cal-fs: var(--ui-text-md); }
-  .ui-calendar[data-size="lg"] { --cal-cell: 40px; --cal-fs: var(--ui-text-base); }
+  .ui-calendar[data-size="sm"] { --cal-cell: 32px; --cal-fs: var(--ui-text-sm); }
+  .ui-calendar[data-size="md"] { --cal-cell: 38px; --cal-fs: var(--ui-text-md); }
+  .ui-calendar[data-size="lg"] { --cal-cell: 44px; --cal-fs: var(--ui-text-base); }
 
   .ui-calendar__header {
     display: flex;
@@ -189,37 +189,48 @@
     padding-inline: var(--ui-space-2);
   }
   .ui-calendar__month {
-    font-size: var(--ui-text-md);
-    font-weight: var(--ui-weight-semibold);
+    font-size: var(--ui-text-base);
+    font-weight: var(--ui-heading-weight);
     letter-spacing: var(--ui-tracking-snug);
   }
+  /* Bordered, like every other month-stepper in the reference — a bare glyph
+     in the header reads as decoration rather than as something to press. */
   .ui-calendar__nav {
     display: grid;
     place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: var(--ui-radius-md);
+    width: var(--ui-control-h-xs);
+    height: var(--ui-control-h-xs);
+    border: 1px solid var(--ui-border-default);
+    border-radius: var(--ui-control-radius-xs);
+    background: var(--ui-bg-surface);
+    box-shadow: var(--ui-shadow-xs);
     color: var(--ui-fg-muted);
-    transition: background-color var(--ui-duration-fast) var(--ui-ease-out);
+    transition:
+      background-color var(--ui-duration-fast) var(--ui-ease-out),
+      border-color var(--ui-duration-fast) var(--ui-ease-out),
+      color var(--ui-duration-fast) var(--ui-ease-out);
   }
   .ui-calendar__nav:hover {
     background: var(--ui-bg-hover);
+    border-color: var(--ui-border-strong);
     color: var(--ui-fg-default);
   }
 
+  /* No gap: a range is drawn as one continuous band across the days it
+     covers, and a 2px gutter cuts it into stripes. */
   .ui-calendar__weekdays,
   .ui-calendar__week {
     display: grid;
     grid-template-columns: repeat(7, var(--cal-cell));
-    gap: 2px;
+    gap: 0;
   }
   .ui-calendar__weekday {
     display: grid;
     place-items: center;
-    height: 26px;
-    font-size: var(--ui-text-xs);
-    font-weight: var(--ui-weight-medium);
-    color: var(--ui-fg-faint);
+    height: 30px;
+    font-size: var(--ui-text-sm);
+    font-weight: var(--ui-label-weight);
+    color: var(--ui-fg-subtle);
   }
 
   .ui-calendar__day {
@@ -228,8 +239,9 @@
     width: var(--cal-cell);
     height: var(--cal-cell);
     border: 1px solid transparent;
-    border-radius: var(--ui-radius-md);
+    border-radius: var(--ui-control-radius-sm);
     font-size: var(--cal-fs);
+    font-weight: var(--ui-label-weight);
     font-variant-numeric: tabular-nums;
     color: var(--ui-fg-default);
     transition:
@@ -252,7 +264,7 @@
      selected rather than as two competing markers. */
   .ui-calendar__day[data-today]:not([data-selected]) {
     border-color: var(--ui-border-strong);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-numeric-weight);
   }
   .ui-calendar__day[data-in-range] {
     background: var(--ui-accent-soft);
@@ -261,7 +273,7 @@
   .ui-calendar__day[data-selected] {
     background: var(--ui-accent-solid);
     color: oklch(from var(--ui-accent-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-numeric-weight);
   }
   .ui-calendar__day:focus-visible {
     outline: 2px solid var(--ui-accent-solid);

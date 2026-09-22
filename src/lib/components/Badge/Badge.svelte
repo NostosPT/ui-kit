@@ -17,15 +17,23 @@
     variant = "soft",
     size = "md",
     icon = undefined,
+    image = undefined,
+    avatar = undefined,
+    removable = false,
     dot = false,
     pill = true,
+    toneText = undefined,
     class: klass = "",
+    imageSnippet,
     children,
+    onremove,
     ...rest
   } = $props();
 
-  const iconSize = $derived(size === "sm" ? 11 : 13);
+  const iconSize = $derived(size === "sm" ? 11 : size === "lg" ? 15 : 13);
   const showDot = $derived(dot || variant === "dot");
+  const isTonedText = $derived(toneText ?? (variant === "dot" && tone !== "neutral"));
+  const avatarSrc = $derived(typeof avatar === "string" ? avatar : avatar?.src ?? (typeof image === "string" ? image : undefined));
 </script>
 
 <span
@@ -34,11 +42,32 @@
   data-variant={variant}
   data-size={size}
   data-pill={pill || undefined}
+  data-tone-text={isTonedText || undefined}
+  data-removable={removable || undefined}
   {...rest}
 >
   {#if showDot}<span class="ui-badge__dot"></span>{/if}
-  {#if icon}<Icon name={icon} size={iconSize} />{/if}
+  {#if avatarSrc}
+    <img class="ui-badge__avatar" src={avatarSrc} alt="" />
+  {:else if imageSnippet}
+    {@render imageSnippet()}
+  {:else if icon}
+    <Icon name={icon} size={iconSize} />
+  {/if}
   <span class="ui-badge__label">{@render children?.()}</span>
+  {#if removable}
+    <button
+      type="button"
+      class="ui-badge__remove"
+      aria-label="Remove"
+      onclick={(e) => {
+        e.stopPropagation();
+        onremove?.();
+      }}
+    >
+      <Icon name="x" size={Math.max(10, iconSize - 2)} strokeWidth={2.5} />
+    </button>
+  {/if}
 </span>
 
 <style>
@@ -55,9 +84,9 @@
     height: var(--badge-h);
     padding-inline: var(--badge-px);
     border: 1px solid transparent;
-    border-radius: var(--ui-radius-sm);
+    border-radius: var(--ui-radius-md);
     font-size: var(--badge-fs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: 1;
     white-space: nowrap;
@@ -68,24 +97,27 @@
   }
 
   .ui-badge[data-size="sm"] {
-    --badge-h: 18px;
-    --badge-px: var(--ui-space-4);
+    --badge-h: 22px;
+    --badge-px: var(--ui-space-3);
     --badge-fs: var(--ui-text-2xs);
     --badge-gap: var(--ui-space-2);
   }
   .ui-badge[data-size="md"] {
-    --badge-h: 22px;
-    --badge-px: var(--ui-space-5);
+    --badge-h: 28px;
+    --badge-px: var(--ui-space-4);
     --badge-fs: var(--ui-text-xs);
     --badge-gap: var(--ui-space-3);
   }
   .ui-badge[data-size="lg"] {
-    --badge-h: 26px;
-    --badge-px: var(--ui-space-6);
+    --badge-h: 34px;
+    --badge-px: var(--ui-space-5);
     --badge-fs: var(--ui-text-sm);
     --badge-gap: var(--ui-space-3);
   }
 
+  .ui-badge[data-tone="neutral"] {
+    --badge-solid: var(--ui-neutral-500);
+  }
   .ui-badge[data-tone="accent"] {
     --badge-soft: var(--ui-accent-soft);
     --badge-text: var(--ui-accent-text);
@@ -107,6 +139,13 @@
     --badge-solid: var(--ui-warning-solid);
     --badge-dot: var(--ui-warning-dot);
   }
+  .ui-badge[data-tone="orange"] {
+    --badge-soft: oklch(95% 0.05 45);
+    --badge-text: oklch(45% 0.18 45);
+    --badge-border: oklch(88% 0.08 45);
+    --badge-solid: oklch(62% 0.20 45);
+    --badge-dot: oklch(65% 0.20 45);
+  }
   .ui-badge[data-tone="danger"] {
     --badge-soft: var(--ui-danger-soft);
     --badge-text: var(--ui-danger-text);
@@ -121,9 +160,17 @@
     --badge-solid: var(--ui-info-solid);
     --badge-dot: var(--ui-info-dot);
   }
+  .ui-badge[data-tone="purple"] {
+    --badge-soft: var(--ui-purple-soft);
+    --badge-text: var(--ui-purple-text);
+    --badge-border: var(--ui-purple-border);
+    --badge-solid: var(--ui-purple-solid);
+    --badge-dot: var(--ui-purple-dot);
+  }
 
   .ui-badge[data-variant="soft"] {
     background: var(--badge-soft);
+    border-color: var(--badge-border);
     color: var(--badge-text);
   }
   .ui-badge[data-variant="outline"] {
@@ -131,9 +178,15 @@
     border-color: var(--badge-border);
     color: var(--badge-text);
   }
+  .ui-badge[data-variant="surface"] {
+    background: var(--ui-bg-surface);
+    border-color: var(--ui-border-default);
+    color: var(--ui-fg-default);
+    box-shadow: var(--ui-shadow-xs);
+  }
   .ui-badge[data-variant="solid"] {
     background: var(--badge-solid);
-    color: oklch(from var(--badge-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
+    color: #ffffff;
   }
   /* The dot variant carries no chrome at all — it is a coloured marker plus
      ordinary body text, for use inside table cells and dense lists. */
@@ -141,15 +194,44 @@
     background: transparent;
     color: var(--ui-fg-muted);
     padding-inline: 0;
-    font-weight: var(--ui-weight-normal);
+    font-weight: var(--ui-weight-medium);
+  }
+  .ui-badge[data-variant="dot"][data-tone-text] {
+    color: var(--badge-text);
+    font-weight: var(--ui-label-weight);
   }
 
   .ui-badge__dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: var(--ui-radius-full);
     background: var(--badge-dot);
     flex: none;
+  }
+  .ui-badge__avatar {
+    width: calc(var(--badge-h) - 6px);
+    height: calc(var(--badge-h) - 6px);
+    border-radius: var(--ui-radius-full);
+    object-fit: cover;
+    margin-inline-start: -3px;
+  }
+  .ui-badge__remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-inline-end: -2px;
+    margin-inline-start: 2px;
+    color: currentColor;
+    opacity: 0.75;
+    cursor: pointer;
+    border-radius: var(--ui-radius-full);
+    transition: opacity var(--ui-duration-fast) var(--ui-ease-out);
+  }
+  .ui-badge__remove:hover {
+    opacity: 1;
   }
   .ui-badge__label {
     /* Nudges the cap-height back onto the optical centre of the pill. */

@@ -114,7 +114,7 @@
   }
   .ui-list-item__title {
     font-size: var(--ui-text-md);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     color: var(--ui-fg-default);
     letter-spacing: var(--ui-tracking-snug);
     /* Filenames and emails are the common content here and both are long and

@@ -92,6 +92,12 @@
   --ui-info-text: var(--ui-info-700);
   --ui-info-dot: var(--ui-info-500);
 
+  --ui-purple-solid: var(--ui-purple-600);
+  --ui-purple-soft: var(--ui-purple-50);
+  --ui-purple-border: var(--ui-purple-200);
+  --ui-purple-text: var(--ui-purple-700);
+  --ui-purple-dot: var(--ui-purple-500);
+
   --ui-neutral-soft: var(--ui-neutral-100);
   --ui-neutral-text: var(--ui-neutral-700);
   --ui-neutral-dot: var(--ui-neutral-400);
@@ -162,6 +168,10 @@
   --ui-info-soft: oklch(28% calc(var(--ui-info-c) * 0.3) var(--ui-info-h));
   --ui-info-border: oklch(40% calc(var(--ui-info-c) * 0.45) var(--ui-info-h));
   --ui-info-text: oklch(83% calc(var(--ui-info-c) * 0.5) var(--ui-info-h));
+
+  --ui-purple-soft: oklch(28% calc(var(--ui-purple-c) * 0.3) var(--ui-purple-h));
+  --ui-purple-border: oklch(40% calc(var(--ui-purple-c) * 0.45) var(--ui-purple-h));
+  --ui-purple-text: oklch(83% calc(var(--ui-purple-c) * 0.5) var(--ui-purple-h));
 
   --ui-neutral-soft: oklch(30% calc(var(--ui-neutral-c) * 0.9) var(--ui-neutral-h));
   --ui-neutral-text: oklch(80% calc(var(--ui-neutral-c) * 0.7) var(--ui-neutral-h));

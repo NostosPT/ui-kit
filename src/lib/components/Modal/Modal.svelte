@@ -143,7 +143,7 @@
   .ui-modal__title {
     margin: 0;
     font-size: var(--ui-text-lg);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-heading-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: var(--ui-leading-snug);
   }
@@ -156,11 +156,11 @@
   .ui-modal__close {
     display: grid;
     place-items: center;
-    width: 30px;
-    height: 30px;
+    width: var(--ui-control-h-xs);
+    height: var(--ui-control-h-xs);
     flex: none;
     margin: -4px -6px 0 0;
-    border-radius: var(--ui-radius-md);
+    border-radius: var(--ui-control-radius-xs);
     color: var(--ui-fg-subtle);
     transition: background-color var(--ui-duration-fast) var(--ui-ease-out);
   }

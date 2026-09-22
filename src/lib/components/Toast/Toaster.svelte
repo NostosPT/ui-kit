@@ -97,7 +97,7 @@
     padding: var(--ui-space-6) var(--ui-space-6);
     background: var(--ui-bg-raised);
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     box-shadow: var(--ui-shadow-lg);
     font-size: var(--ui-text-md);
   }
@@ -122,7 +122,7 @@
   }
   .ui-toast__title {
     margin: 0;
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: var(--ui-leading-snug);
   }

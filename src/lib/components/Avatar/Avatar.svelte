@@ -103,7 +103,7 @@
 
   .ui-avatar__initials {
     font-size: calc(var(--avatar-size) * 0.38);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-tight);
     line-height: 1;
   }

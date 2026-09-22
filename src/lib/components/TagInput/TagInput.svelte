@@ -134,7 +134,7 @@
     /* Small enough to sit on the tail of a row of chips, but still grows to
        fill a line of its own. */
     min-width: 80px;
-    height: 24px;
+    height: 28px;
     border: none;
     background: none;
     outline: none;

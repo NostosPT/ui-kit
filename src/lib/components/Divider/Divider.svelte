@@ -68,7 +68,7 @@
 
   .ui-divider__label {
     font-size: var(--ui-text-xs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     color: var(--ui-fg-subtle);
     white-space: nowrap;
   }

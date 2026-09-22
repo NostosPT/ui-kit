@@ -20,6 +20,8 @@ export { default as Kbd } from "./components/Kbd/Kbd.svelte";
 export { default as Spinner } from "./components/Spinner/Spinner.svelte";
 export { default as Divider } from "./components/Divider/Divider.svelte";
 export { default as Skeleton } from "./components/Skeleton/Skeleton.svelte";
+export { default as Trend } from "./components/Trend/Trend.svelte";
+export { default as Price } from "./components/Price/Price.svelte";
 
 // --- surfaces ---------------------------------------------------------------
 export { default as Card } from "./components/Card/Card.svelte";
@@ -36,7 +38,10 @@ export { default as Field } from "./components/Field/Field.svelte";
 export { default as InputFrame } from "./components/Field/InputFrame.svelte";
 export { default as Input } from "./components/Input/Input.svelte";
 export { default as Textarea } from "./components/Input/Textarea.svelte";
+export { default as TextBox } from "./components/Input/TextBox.svelte";
 export { default as Select } from "./components/Select/Select.svelte";
+export { default as Dropdown } from "./components/Select/Dropdown.svelte";
+export { default as MultiSelect } from "./components/Select/MultiSelect.svelte";
 export { default as Listbox } from "./components/Listbox/Listbox.svelte";
 export { default as Checkbox } from "./components/Toggle/Checkbox.svelte";
 export { default as Radio } from "./components/Toggle/Radio.svelte";
@@ -48,6 +53,10 @@ export { default as TagInput } from "./components/TagInput/TagInput.svelte";
 export { default as PhoneInput } from "./components/PhoneInput/PhoneInput.svelte";
 export { default as CurrencyInput } from "./components/CurrencyInput/CurrencyInput.svelte";
 export { default as Dropzone } from "./components/Dropzone/Dropzone.svelte";
+export { default as FileUpload } from "./components/Dropzone/FileUpload.svelte";
+export { default as PinInput } from "./components/PinInput/PinInput.svelte";
+export { default as OtpInput } from "./components/PinInput/OtpInput.svelte";
+export { default as OptionCard } from "./components/OptionCard/OptionCard.svelte";
 export { default as Calendar } from "./components/Calendar/Calendar.svelte";
 export { default as DatePicker } from "./components/Calendar/DatePicker.svelte";
 
@@ -60,12 +69,24 @@ export { default as TableRow } from "./components/Table/TableRow.svelte";
 export { default as TableCell } from "./components/Table/TableCell.svelte";
 export { default as TableHeaderCell } from "./components/Table/TableHeaderCell.svelte";
 export { default as Progress } from "./components/Progress/Progress.svelte";
+export { default as DataList } from "./components/DataList/DataList.svelte";
+export { default as DataListRow } from "./components/DataList/DataListRow.svelte";
+export { default as Stat } from "./components/Stat/Stat.svelte";
+export { default as Sparkline } from "./components/Sparkline/Sparkline.svelte";
 export { default as EmptyState } from "./components/EmptyState/EmptyState.svelte";
 
 // --- navigation -------------------------------------------------------------
+export { default as Sidebar } from "./components/Sidebar/Sidebar.svelte";
+export { default as SidebarHeader } from "./components/Sidebar/SidebarHeader.svelte";
+export { default as SidebarSearch } from "./components/Sidebar/SidebarSearch.svelte";
+export { default as SidebarNav } from "./components/Sidebar/SidebarNav.svelte";
+export { default as SidebarSection } from "./components/Sidebar/SidebarSection.svelte";
+export { default as SidebarItem } from "./components/Sidebar/SidebarItem.svelte";
+export { default as SidebarFooter } from "./components/Sidebar/SidebarFooter.svelte";
 export { default as Tabs } from "./components/Tabs/Tabs.svelte";
 export { default as TabPanel } from "./components/Tabs/TabPanel.svelte";
 export { default as Menu } from "./components/Menu/Menu.svelte";
+export { default as ContextMenu } from "./components/Menu/ContextMenu.svelte";
 export { default as MenuItem } from "./components/Menu/MenuItem.svelte";
 export { default as MenuSeparator } from "./components/Menu/MenuSeparator.svelte";
 export { default as MenuLabel } from "./components/Menu/MenuLabel.svelte";
@@ -83,5 +104,5 @@ export { toast, dismiss as dismissToast, dismissAll as dismissAllToasts } from "
 export { icons, iconNames } from "./icons.js";
 export { COUNTRIES, flagOf } from "./components/PhoneInput/countries.js";
 export { cx, uid, clamp, initials, hashIndex } from "./internal/utils.js";
-export { anchorPosition, trackAnchor } from "./internal/position.js";
+export { anchorPosition, trackAnchor, getContainingBlock } from "./internal/position.js";
 export * as dateUtils from "./internal/date.js";

@@ -62,7 +62,7 @@
   .ui-progress__value {
     color: var(--ui-fg-default);
     font-variant-numeric: tabular-nums;
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-numeric-weight);
   }
 
   .ui-progress__track {

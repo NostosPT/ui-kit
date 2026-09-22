@@ -16,6 +16,7 @@
     layout = "auto",
     class: klass = "",
     children,
+    footer,
     ...rest
   } = $props();
 </script>
@@ -34,6 +35,11 @@
   >
     {@render children?.()}
   </table>
+  {#if footer}
+    <div class="ui-table-footer">
+      {@render footer()}
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -46,7 +52,7 @@
   }
   .ui-table-scroll[data-bordered] {
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     background: var(--ui-bg-surface);
   }
 
@@ -67,7 +73,7 @@
     padding: var(--ui-space-5) var(--row-px);
     background: var(--ui-bg-sunken);
     font-size: var(--ui-text-sm);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     color: var(--ui-fg-subtle);
     text-align: start;
     letter-spacing: var(--ui-tracking-snug);
@@ -87,5 +93,13 @@
   }
   :global(.ui-table tbody tr:last-child td) {
     border-bottom: none;
+  }
+
+  .ui-table-footer {
+    display: flex;
+    align-items: center;
+    padding: var(--ui-space-3) var(--ui-space-6);
+    border-top: 1px solid var(--ui-border-subtle);
+    background: var(--ui-bg-surface);
   }
 </style>

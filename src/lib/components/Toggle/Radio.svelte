@@ -58,9 +58,9 @@
     gap: var(--radio-gap);
     position: relative;
   }
-  .ui-radio[data-size="sm"] { --radio-size: 14px; --radio-gap: var(--ui-space-4); --radio-fs: var(--ui-text-sm); }
-  .ui-radio[data-size="md"] { --radio-size: 16px; --radio-gap: var(--ui-space-5); --radio-fs: var(--ui-text-md); }
-  .ui-radio[data-size="lg"] { --radio-size: 20px; --radio-gap: var(--ui-space-5); --radio-fs: var(--ui-text-base); }
+  .ui-radio[data-size="sm"] { --radio-size: 16px; --radio-gap: var(--ui-space-4); --radio-fs: var(--ui-text-sm); }
+  .ui-radio[data-size="md"] { --radio-size: 20px; --radio-gap: var(--ui-space-5); --radio-fs: var(--ui-text-md); }
+  .ui-radio[data-size="lg"] { --radio-size: 22px; --radio-gap: var(--ui-space-5); --radio-fs: var(--ui-text-base); }
 
   .ui-radio__input {
     position: absolute;
@@ -78,24 +78,23 @@
     place-items: center;
     width: var(--radio-size);
     height: var(--radio-size);
-    border: 1.5px solid var(--ui-border-strong);
+    border: 1.5px solid var(--ui-border-default);
     border-radius: var(--ui-radius-full);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     margin-top: calc((1lh - var(--radio-size)) / 2);
     transition:
       border-color var(--ui-duration-fast) var(--ui-ease-out),
       background-color var(--ui-duration-fast) var(--ui-ease-out),
       box-shadow var(--ui-duration-fast) var(--ui-ease-out);
   }
-  /* The mark is an inner dot that scales in — a filled circle with a white
-     centre would shift by a pixel as the border width changes. */
+  /* The mark is an inner dot that scales in — white dot inside solid accent circle */
   .ui-radio__dot::after {
     content: "";
-    width: calc(var(--radio-size) * 0.4);
-    height: calc(var(--radio-size) * 0.4);
+    width: calc(var(--radio-size) * 0.38);
+    height: calc(var(--radio-size) * 0.38);
     border-radius: var(--ui-radius-full);
-    background: var(--ui-bg-surface);
+    background: var(--ui-fg-on-solid);
     transform: scale(0);
     transition: transform var(--ui-duration-fast) var(--ui-ease-spring);
   }
@@ -104,15 +103,30 @@
     border-color: var(--ui-accent-solid);
   }
   .ui-radio__input:checked + .ui-radio__dot {
-    background: var(--ui-accent-solid);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--ui-accent-solid) calc(l + 0.035) c h) 0%,
+      var(--ui-accent-solid) 100%
+    );
     border-color: var(--ui-accent-solid);
+    border-width: 1.5px;
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--ui-accent-solid) calc(l - 0.2) c h / 0.25),
+      0 2px 4px -1px oklch(from var(--ui-accent-solid) calc(l - 0.25) c h / 0.3);
   }
   .ui-radio__input:checked + .ui-radio__dot::after {
     transform: scale(1);
   }
   .ui-radio__input:focus-visible + .ui-radio__dot {
     border-color: var(--ui-accent-solid);
-    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring);
+    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring), var(--ui-shadow-xs);
+  }
+  .ui-radio__input:focus-visible:checked + .ui-radio__dot {
+    box-shadow:
+      0 0 0 var(--ui-ring-width) var(--ui-accent-ring),
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--ui-accent-solid) calc(l - 0.2) c h / 0.25);
   }
   .ui-radio[data-invalid] .ui-radio__dot { border-color: var(--ui-danger-solid); }
   .ui-radio__input:disabled + .ui-radio__dot {
@@ -132,7 +146,9 @@
   .ui-radio[data-disabled] .ui-radio__text { cursor: not-allowed; opacity: 0.6; }
   .ui-radio__label {
     font-size: var(--radio-fs);
+    font-weight: var(--ui-weight-medium);
     line-height: var(--ui-leading-snug);
+    color: var(--ui-fg-default);
   }
   .ui-radio__desc {
     font-size: var(--ui-text-sm);

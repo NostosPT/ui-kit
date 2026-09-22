@@ -71,8 +71,8 @@
     display: inline-flex;
     align-items: center;
     gap: var(--ui-space-3);
-    padding: var(--ui-space-1) var(--ui-space-3);
-    border-radius: var(--ui-radius-sm);
+    padding: var(--ui-space-2) var(--ui-space-4);
+    border-radius: var(--ui-radius-md);
     letter-spacing: var(--ui-tracking-snug);
   }
   .ui-breadcrumb__link {
@@ -88,7 +88,7 @@
   }
   .ui-breadcrumb__current {
     color: var(--ui-fg-default);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
   }
   .ui-breadcrumb__gap {
     color: var(--ui-fg-faint);

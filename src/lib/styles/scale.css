@@ -33,17 +33,20 @@
   --ui-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
 
-  --ui-text-2xs: 10px;
-  --ui-text-xs: 11px;
-  --ui-text-sm: 12px;
-  --ui-text-md: 13px;
-  --ui-text-base: 14px;
+  /* Product-UI sizing, not dashboard-dense sizing. The reference sets its
+     button and input labels at 14px and its field labels at 14–15px; a 13px
+     control label inside a 40px control reads as a typo, not as density. */
+  --ui-text-2xs: 11px;
+  --ui-text-xs: 12px;
+  --ui-text-sm: 13px;
+  --ui-text-md: 14px;
+  --ui-text-base: 15px;
   --ui-text-lg: 16px;
   --ui-text-xl: 18px;
   --ui-text-2xl: 22px;
   --ui-text-3xl: 28px;
-  --ui-text-4xl: 34px;
-  --ui-text-5xl: 44px;
+  --ui-text-4xl: 36px;
+  --ui-text-5xl: 48px;
 
   --ui-leading-tight: 1.2;
   --ui-leading-snug: 1.35;
@@ -55,6 +58,22 @@
   --ui-weight-semibold: 600;
   --ui-weight-bold: 700;
 
+  /* --- weight by role ----------------------------------------------------
+     The reference speaks a heavy UI language: anything that is an action, a
+     label, a heading or a number is set well above body weight, and only
+     running prose stays at 400. Publishing that as four role tokens rather
+     than letting each component pick off the ladder is what stops a Tab from
+     drifting away from a Button, and gives a consumer one place to soften the
+     whole kit for a heavier typeface.
+
+     The control weight is measured, not guessed: a button label's stem in the
+     reference is 0.154 of its cap height, which is the Bold cut — Medium sits
+     at 0.118 and SemiBold at 0.135. */
+  --ui-control-weight: var(--ui-weight-semibold); /* buttons, tabs, segments   */
+  --ui-label-weight: var(--ui-weight-semibold); /* field + column + row keys */
+  --ui-heading-weight: var(--ui-weight-bold);   /* card, modal, section      */
+  --ui-numeric-weight: var(--ui-weight-bold);   /* prices, metrics, totals   */
+
   /* Optical tightening — larger text needs negative tracking to match the
      density of the small UI text around it. */
   --ui-tracking-tight: -0.02em;
@@ -62,11 +81,31 @@
   --ui-tracking-normal: 0;
   --ui-tracking-wide: 0.01em;
 
-  /* --- control sizing ---------------------------------------------------- */
-  --ui-control-h-xs: 24px;
-  --ui-control-h-sm: 30px;
-  --ui-control-h-md: 36px;
-  --ui-control-h-lg: 42px;
+  /* --- control sizing ----------------------------------------------------
+     Heights come off the reference, where a default action sits at 40px and a
+     primary CTA or a form field at 48px. Padding and radius are published
+     alongside them so a button, an input and a select cannot disagree about
+     what "md" means — and so the radius stays a constant ~0.25 of the height,
+     which is the ratio that makes the reference read as one family. */
+  --ui-control-h-xs: 28px;
+  --ui-control-h-sm: 34px;
+  --ui-control-h-md: 40px;
+  --ui-control-h-lg: 48px;
+
+  --ui-control-px-xs: 10px;
+  --ui-control-px-sm: 12px;
+  --ui-control-px-md: 16px;
+  --ui-control-px-lg: 20px;
+
+  --ui-control-gap-xs: 6px;
+  --ui-control-gap-sm: 8px;
+  --ui-control-gap-md: 10px;
+  --ui-control-gap-lg: 12px;
+
+  --ui-control-icon-xs: 14px;
+  --ui-control-icon-sm: 16px;
+  --ui-control-icon-md: 18px;
+  --ui-control-icon-lg: 20px;
 
   /* --- elevation (input only; the ladder is derived below) ---------------- */
   --ui-shadow-color: 250 28% 14%;
@@ -119,6 +158,22 @@
   --ui-radius-2xl: calc(16px * var(--ui-radius-scale));
   --ui-radius-3xl: calc(20px * var(--ui-radius-scale));
   --ui-radius-full: 9999px;
+
+  /* Control corners, measured off the reference by integrating the area each
+     corner cuts out of its bounding box — the one method that survives
+     antialiasing. The answer was the same for every button sampled, across
+     three source images and four heights:
+
+         h30 -> r12     h37 -> r14     h40 -> r14     h46 -> r14
+
+     So the corner is very nearly a CONSTANT, not a ratio of the height. That
+     is the single number this kit had most wrong: a proportional corner makes
+     small controls look square and large ones look like pills, and neither
+     matches. Only xs steps down, because 14 on a 28px control is a pill. */
+  --ui-control-radius-xs: calc(8px * var(--ui-radius-scale));
+  --ui-control-radius-sm: calc(10px * var(--ui-radius-scale));
+  --ui-control-radius-md: calc(12px * var(--ui-radius-scale));
+  --ui-control-radius-lg: calc(14px * var(--ui-radius-scale));
 
   --ui-shadow-xs: 0 1px 2px hsl(var(--ui-shadow-color) / 0.05);
   --ui-shadow-sm: 0 1px 2px hsl(var(--ui-shadow-color) / 0.06),

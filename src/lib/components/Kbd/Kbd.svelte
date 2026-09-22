@@ -36,12 +36,12 @@
     /* The bottom border reads as the key's edge — one pixel of skeuomorphism
        that makes a kbd unmistakable at 11px. */
     border-bottom-width: 1.5px;
-    border-radius: var(--ui-radius-xs);
+    border-radius: var(--ui-radius-sm);
     background: var(--ui-bg-surface);
     color: var(--ui-fg-muted);
     font-family: var(--ui-font-sans);
     font-size: var(--kbd-fs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     line-height: 1;
   }
   .ui-kbd-set[data-size="sm"] { --kbd-size: 16px; --kbd-fs: var(--ui-text-2xs); }

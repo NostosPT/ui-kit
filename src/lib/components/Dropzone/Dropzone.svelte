@@ -109,7 +109,7 @@
 <style>
   .ui-dropzone {
     position: relative;
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     transition:
       border-color var(--ui-duration-fast) var(--ui-ease-out),
       background-color var(--ui-duration-fast) var(--ui-ease-out);
@@ -138,18 +138,18 @@
   .ui-dropzone__icon {
     display: grid;
     place-items: center;
-    width: 36px;
-    height: 36px;
+    width: var(--ui-control-h-md);
+    height: var(--ui-control-h-md);
     margin-bottom: var(--ui-space-2);
-    border-radius: var(--ui-radius-lg);
+    border-radius: var(--ui-control-radius-md);
     background: var(--ui-bg-surface);
     border: 1px solid var(--ui-border-default);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     color: var(--ui-fg-muted);
   }
   .ui-dropzone__title {
     font-size: var(--ui-text-md);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     color: var(--ui-fg-default);
   }
   .ui-dropzone__hint {
@@ -161,8 +161,8 @@
   .ui-dropzone[data-variant="inline"] {
     border: 1px solid var(--ui-border-default);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
-    border-radius: var(--ui-radius-md);
+    box-shadow: var(--ui-shadow-sm);
+    border-radius: var(--ui-control-radius-md);
   }
   .ui-dropzone__inline {
     display: flex;

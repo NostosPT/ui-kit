@@ -1,0 +1,25 @@
+.sb-theme-host {
+  display: grid;
+  gap: 0;
+  width: 100%;
+}
+.sb-theme-host[data-split="true"] {
+  grid-template-columns: 1fr 1fr;
+}
+.sb-theme-pane {
+  background: var(--ui-bg-canvas);
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+}
+.sb-theme-host[data-split="true"] .sb-theme-pane + .sb-theme-pane {
+  border-left: 1px solid var(--ui-border-default);
+}
+/* Docs blocks render many stories on one page; drop the centring there so
+   long-form examples read top-down like documentation instead of floating. */
+.sbdocs .sb-theme-pane {
+  display: block;
+  padding: 20px;
+}

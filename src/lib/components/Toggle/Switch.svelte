@@ -92,33 +92,55 @@
     width: var(--track-w);
     height: var(--track-h);
     border-radius: var(--ui-radius-full);
-    background: var(--ui-neutral-200);
+    background: var(--ui-bg-muted);
+    border: 1px solid var(--ui-border-default);
     margin-top: calc((1lh - var(--track-h)) / 2);
-    transition: background-color var(--ui-duration-normal) var(--ui-ease-out);
+    box-sizing: border-box;
+    transition:
+      background-color var(--ui-duration-normal) var(--ui-ease-out),
+      border-color var(--ui-duration-normal) var(--ui-ease-out),
+      box-shadow var(--ui-duration-normal) var(--ui-ease-out);
   }
 
   .ui-switch__knob {
     position: absolute;
     top: 2px;
     left: 2px;
-    width: calc(var(--track-h) - 4px);
-    height: calc(var(--track-h) - 4px);
+    width: calc(var(--track-h) - 6px);
+    height: calc(var(--track-h) - 6px);
     border-radius: var(--ui-radius-full);
-    background: var(--ui-neutral-0);
-    box-shadow: var(--ui-shadow-sm);
+    background: var(--ui-bg-surface);
+    box-shadow:
+      0 1px 2px hsl(var(--ui-shadow-color) / 0.16),
+      0 1px 3px hsl(var(--ui-shadow-color) / 0.12);
     /* Translating by the track's own dimensions means the knob stays inset by
        exactly 2px at both ends regardless of which size is in play. */
     transition: transform var(--ui-duration-normal) var(--ui-ease-spring);
   }
 
   .ui-switch__input:checked + .ui-switch__track {
-    background: var(--ui-accent-solid);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--ui-accent-solid) calc(l + 0.035) c h) 0%,
+      var(--ui-accent-solid) 100%
+    );
+    border-color: var(--ui-accent-solid);
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--ui-accent-solid) calc(l - 0.2) c h / 0.25),
+      0 2px 5px -1px oklch(from var(--ui-accent-solid) calc(l - 0.25) c h / 0.35);
   }
   .ui-switch__input:checked + .ui-switch__track .ui-switch__knob {
     transform: translateX(calc(var(--track-w) - var(--track-h)));
   }
   .ui-switch__input:focus-visible + .ui-switch__track {
-    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring);
+    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring), var(--ui-shadow-xs);
+  }
+  .ui-switch__input:focus-visible:checked + .ui-switch__track {
+    box-shadow:
+      0 0 0 var(--ui-ring-width) var(--ui-accent-ring),
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--ui-accent-solid) calc(l - 0.2) c h / 0.25);
   }
   .ui-switch__input:disabled + .ui-switch__track {
     opacity: 0.5;

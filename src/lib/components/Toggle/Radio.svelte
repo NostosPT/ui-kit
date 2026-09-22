@@ -81,7 +81,7 @@
     border: 1.5px solid var(--ui-border-default);
     border-radius: var(--ui-radius-full);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     margin-top: calc((1lh - var(--radio-size)) / 2);
     transition:
       border-color var(--ui-duration-fast) var(--ui-ease-out),
@@ -94,7 +94,7 @@
     width: calc(var(--radio-size) * 0.38);
     height: calc(var(--radio-size) * 0.38);
     border-radius: var(--ui-radius-full);
-    background: var(--ui-neutral-0);
+    background: var(--ui-fg-on-solid);
     transform: scale(0);
     transition: transform var(--ui-duration-fast) var(--ui-ease-spring);
   }
@@ -103,16 +103,30 @@
     border-color: var(--ui-accent-solid);
   }
   .ui-radio__input:checked + .ui-radio__dot {
-    background: var(--ui-accent-solid);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--ui-accent-solid) calc(l + 0.035) c h) 0%,
+      var(--ui-accent-solid) 100%
+    );
     border-color: var(--ui-accent-solid);
     border-width: 1.5px;
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--ui-accent-solid) calc(l - 0.2) c h / 0.25),
+      0 2px 4px -1px oklch(from var(--ui-accent-solid) calc(l - 0.25) c h / 0.3);
   }
   .ui-radio__input:checked + .ui-radio__dot::after {
     transform: scale(1);
   }
   .ui-radio__input:focus-visible + .ui-radio__dot {
     border-color: var(--ui-accent-solid);
-    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring);
+    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring), var(--ui-shadow-xs);
+  }
+  .ui-radio__input:focus-visible:checked + .ui-radio__dot {
+    box-shadow:
+      0 0 0 var(--ui-ring-width) var(--ui-accent-ring),
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--ui-accent-solid) calc(l - 0.2) c h / 0.25);
   }
   .ui-radio[data-invalid] .ui-radio__dot { border-color: var(--ui-danger-solid); }
   .ui-radio__input:disabled + .ui-radio__dot {

@@ -98,10 +98,10 @@
     width: var(--check-size);
     height: var(--check-size);
     border: 1.5px solid var(--ui-border-default);
-    border-radius: 5px;
+    border-radius: var(--ui-control-radius-xs);
     background: var(--ui-bg-surface);
     color: transparent;
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     transition:
       background-color var(--ui-duration-fast) var(--ui-ease-out),
       border-color var(--ui-duration-fast) var(--ui-ease-out),
@@ -116,13 +116,28 @@
   }
   .ui-check__input:checked + .ui-check__box,
   .ui-check__input:indeterminate + .ui-check__box {
-    background: var(--ui-accent-solid);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--ui-accent-solid) calc(l + 0.035) c h) 0%,
+      var(--ui-accent-solid) 100%
+    );
     border-color: var(--ui-accent-solid);
-    color: #ffffff;
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--ui-accent-solid) calc(l - 0.2) c h / 0.25),
+      0 2px 4px -1px oklch(from var(--ui-accent-solid) calc(l - 0.25) c h / 0.3);
+    color: var(--ui-fg-on-solid);
   }
   .ui-check__input:focus-visible + .ui-check__box {
     border-color: var(--ui-accent-solid);
-    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring);
+    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring), var(--ui-shadow-xs);
+  }
+  .ui-check__input:focus-visible:checked + .ui-check__box,
+  .ui-check__input:focus-visible:indeterminate + .ui-check__box {
+    box-shadow:
+      0 0 0 var(--ui-ring-width) var(--ui-accent-ring),
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--ui-accent-solid) calc(l - 0.2) c h / 0.25);
   }
   .ui-check[data-invalid] .ui-check__box {
     border-color: var(--ui-danger-solid);

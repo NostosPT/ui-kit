@@ -211,7 +211,11 @@
     background: var(--ui-bg-muted);
     border: 1px solid var(--ui-border-default);
   }
-  .tile--lg { width: 104px; }
+  /* Reads whatever --ui-radius-scale its enclosing scope sets. */
+  .tile--lg {
+    width: 104px;
+    border-radius: var(--ui-radius-xl);
+  }
   .tile--card {
     background: var(--ui-bg-surface);
     border-radius: var(--ui-radius-xl);

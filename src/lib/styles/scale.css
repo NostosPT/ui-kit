@@ -58,6 +58,14 @@
   --ui-weight-semibold: 600;
   --ui-weight-bold: 700;
 
+  /* The weight every pressable label carries. Measured, not guessed: in the
+     reference a button label's stem is 0.154 of its cap height, which is the
+     Bold cut — Medium sits at 0.118 and SemiBold at 0.135. It is published as
+     its own token because a Button, a Tab, a segment and a pagination page all
+     have to agree, and because a consumer who switches to a heavier typeface
+     needs exactly one number to turn down. */
+  --ui-control-weight: var(--ui-weight-bold);
+
   /* Optical tightening — larger text needs negative tracking to match the
      density of the small UI text around it. */
   --ui-tracking-tight: -0.02em;
@@ -143,15 +151,20 @@
   --ui-radius-3xl: calc(20px * var(--ui-radius-scale));
   --ui-radius-full: 9999px;
 
-  /* One radius per control height. Measured off the reference, corner radius
-     there is a constant ~0.29 of the control's height — 12 on a 40px button,
-     14 on a 48px field — which is why a 40px button with an 8px corner reads
-     as a different product even when every other number matches. These are
-     their own calc()s rather than picks off the ladder above because no pair
-     of ladder steps lands on that ratio for all four heights. */
-  --ui-control-radius-xs: calc(8px * var(--ui-radius-scale));
-  --ui-control-radius-sm: calc(10px * var(--ui-radius-scale));
-  --ui-control-radius-md: calc(12px * var(--ui-radius-scale));
+  /* Control corners, measured off the reference by integrating the area each
+     corner cuts out of its bounding box — the one method that survives
+     antialiasing. The answer was the same for every button sampled, across
+     three source images and four heights:
+
+         h30 -> r12     h37 -> r14     h40 -> r14     h46 -> r14
+
+     So the corner is very nearly a CONSTANT, not a ratio of the height. That
+     is the single number this kit had most wrong: a proportional corner makes
+     small controls look square and large ones look like pills, and neither
+     matches. Only xs steps down, because 14 on a 28px control is a pill. */
+  --ui-control-radius-xs: calc(12px * var(--ui-radius-scale));
+  --ui-control-radius-sm: calc(14px * var(--ui-radius-scale));
+  --ui-control-radius-md: calc(14px * var(--ui-radius-scale));
   --ui-control-radius-lg: calc(14px * var(--ui-radius-scale));
 
   --ui-shadow-xs: 0 1px 2px hsl(var(--ui-shadow-color) / 0.05);

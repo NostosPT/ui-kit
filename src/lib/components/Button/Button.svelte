@@ -79,6 +79,13 @@
     --btn-text: var(--ui-accent-text);
     --btn-border: var(--ui-accent-border);
 
+    /* Icons sit a step below the label in contrast. This is measured, not a
+       preference: in the reference a leading icon reads around neutral-600
+       while its label is effectively black, and matching them makes the whole
+       row look heavier and flatter than the source. Solid and link buttons
+       opt out — there the icon and label are the same ink. */
+    --btn-icon: var(--ui-fg-muted);
+
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -89,10 +96,7 @@
     border: 1px solid transparent;
     border-radius: var(--btn-radius);
     font-size: var(--btn-fs);
-    /* Semibold, not medium. At 14px on a 40px fill a 500 label goes thin and
-       the button reads as a tinted rectangle with text lying on it rather
-       than as one object. */
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-control-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: 1;
     white-space: nowrap;
@@ -190,6 +194,12 @@
   }
 
   /* --- variants --------------------------------------------------------- */
+  .ui-btn[data-variant="solid"],
+  .ui-btn[data-variant="soft"],
+  .ui-btn[data-variant="link"] {
+    --btn-icon: currentColor;
+  }
+
   .ui-btn[data-variant="solid"] {
     background: var(--btn-solid);
     /* Derived from the fill itself, so an amber or lime accent flips to a
@@ -247,7 +257,7 @@
 
   .ui-btn[data-variant="ghost"] {
     background: transparent;
-    color: var(--ui-fg-muted);
+    color: var(--ui-fg-default);
   }
   .ui-btn[data-variant="ghost"]:not([data-tone="neutral"]) {
     color: var(--btn-text);
@@ -287,6 +297,14 @@
     display: inline-flex;
     align-items: center;
     gap: inherit;
+  }
+  .ui-btn__body :global(.ui-icon) {
+    color: var(--btn-icon);
+  }
+  /* An icon-only button has no label to contrast against, so the icon carries
+     the full weight of the control. */
+  .ui-btn[data-icon-only] {
+    --btn-icon: currentColor;
   }
   .ui-btn[data-loading] .ui-btn__body {
     /* Hidden rather than removed so the button keeps its width mid-request. */

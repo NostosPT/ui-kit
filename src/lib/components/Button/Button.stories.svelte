@@ -4,6 +4,8 @@
   import Showcase from "../../../stories/util/Showcase.svelte";
   import Spec from "../../../stories/util/Spec.svelte";
   import Row from "../../../stories/util/Row.svelte";
+  import ButtonGroup from "../ButtonGroup/ButtonGroup.svelte";
+  import Badge from "../Badge/Badge.svelte";
 
   const { Story } = defineMeta({
     title: "Primitives/Button",
@@ -141,7 +143,64 @@
   </div>
 </Story>
 
+<Story
+  name="Reference sheet"
+  parameters={{
+    layout: "padded",
+    docs: {
+      description: {
+        story:
+          "A one-to-one rebuild of the button sheet in the source design, kept as the visual contract for this component. Every number in it was measured off that image rather than estimated: label weight from the ratio of stem width to cap height (0.154 — the Bold cut), corner radius by integrating the area each corner removes from its bounding box (a near-constant 12–14px at every height, not a ratio), and inline padding, icon gap and type size from the ratios 0.40, 0.23 and 0.36 of the control height."
+      }
+    }
+  }}
+  asChild
+>
+  <div class="sheet">
+    <Row gap={12}>
+      <Button variant="outline" icon="link">Copy link</Button>
+      <Button variant="outline" icon="user">Login</Button>
+      <Button icon="user-plus">Sign Up</Button>
+    </Row>
+
+    <Row gap={20}>
+      <ButtonGroup ariaLabel="Document actions">
+        <Button variant="outline" icon="folder">Documents</Button>
+        <Button variant="outline" icon="upload">Export</Button>
+        <Button variant="outline" iconOnly icon="more-horizontal" label="More" />
+      </ButtonGroup>
+      <ButtonGroup ariaLabel="Pagination">
+        <Button variant="outline" iconOnly icon="chevron-left" label="Previous" />
+        <Button variant="outline" iconOnly icon="chevron-right" label="Next" />
+      </ButtonGroup>
+    </Row>
+
+    <Row gap={12}>
+      <Button variant="outline" tone="neutral">Cancel</Button>
+      <Button>Done</Button>
+      <Button variant="outline" iconOnly icon="pencil" label="Edit" />
+      <Button variant="outline" icon="heart">
+        Like <Badge size="sm" variant="outline" pill>2</Badge>
+      </Button>
+    </Row>
+
+    <Row gap={12}>
+      <Button variant="outline" iconOnly icon="chevron-left" label="Previous" />
+      <Button variant="outline" iconOnly icon="chevron-right" label="Next" />
+      <Button variant="outline" trailingIcon="arrow-up-right">Forward</Button>
+    </Row>
+  </div>
+</Story>
+
 <style>
+  .sheet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 32px;
+  }
+
   .footer {
     display: flex;
     justify-content: flex-end;

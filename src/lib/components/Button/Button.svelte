@@ -158,6 +158,8 @@
 
   .ui-btn[data-icon-only] {
     width: var(--btn-h);
+    min-width: var(--btn-h);
+    flex-shrink: 0;
     padding-inline: 0;
   }
   .ui-btn[data-block] {
@@ -211,20 +213,36 @@
   }
 
   .ui-btn[data-variant="solid"] {
-    background: var(--btn-solid);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--btn-solid) calc(l + 0.035) c h) 0%,
+      var(--btn-solid) 100%
+    );
     /* Derived from the fill itself, so an amber or lime accent flips to a
        dark label automatically instead of shipping white-on-yellow. */
     color: oklch(from var(--btn-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
-    /* Shadow tinted from the fill, not the neutral grey ladder */
+    /* Inset 1px highlight along the top edge + radiant tinted drop shadow */
     box-shadow:
-      0 1px 2px oklch(from var(--btn-solid) l c h / 0.24),
-      0 2px 6px -1px oklch(from var(--btn-solid) l c h / 0.28);
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--btn-solid) l c h / 0.2),
+      0 4px 14px -1px oklch(from var(--btn-solid) l c h / 0.38);
   }
   .ui-btn[data-variant="solid"]:hover:not([aria-disabled="true"]) {
-    background: var(--btn-solid-hover);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--btn-solid-hover) calc(l + 0.03) c h) 0%,
+      var(--btn-solid-hover) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.26),
+      0 2px 4px oklch(from var(--btn-solid-hover) l c h / 0.24),
+      0 6px 18px -1px oklch(from var(--btn-solid-hover) l c h / 0.42);
   }
   .ui-btn[data-variant="solid"]:active:not([aria-disabled="true"]) {
     background: var(--btn-solid-active);
+    box-shadow:
+      inset 0 1px 2px hsl(0 0% 0% / 0.15),
+      0 1px 2px oklch(from var(--btn-solid-active) l c h / 0.2);
   }
 
   .ui-btn[data-variant="soft"] {
@@ -240,16 +258,22 @@
     background: var(--ui-bg-surface);
     border-color: var(--ui-border-default);
     color: var(--ui-fg-default);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow:
+      0 1px 2px hsl(var(--ui-shadow-color) / 0.05),
+      0 1px 3px hsl(var(--ui-shadow-color) / 0.06);
   }
   .ui-btn[data-variant="outline"]:hover:not([aria-disabled="true"]),
   .ui-btn[data-variant="secondary"]:hover:not([aria-disabled="true"]) {
     background: var(--ui-bg-hover);
     border-color: var(--ui-border-strong);
+    box-shadow:
+      0 1px 2px hsl(var(--ui-shadow-color) / 0.06),
+      0 2px 5px hsl(var(--ui-shadow-color) / 0.08);
   }
   .ui-btn[data-variant="outline"]:active:not([aria-disabled="true"]),
   .ui-btn[data-variant="secondary"]:active:not([aria-disabled="true"]) {
     background: var(--ui-bg-active);
+    box-shadow: 0 1px 2px hsl(var(--ui-shadow-color) / 0.04);
   }
   .ui-btn[data-variant="outline"]:not([data-tone="neutral"]):not([data-tone="accent"]),
   .ui-btn[data-variant="secondary"]:not([data-tone="neutral"]):not([data-tone="accent"]) {
@@ -325,8 +349,13 @@
   }
   .ui-btn[data-variant="outline"] .ui-btn__badge,
   .ui-btn[data-variant="secondary"] .ui-btn__badge {
-    background: var(--ui-bg-sunken);
-    color: var(--ui-fg-muted);
+    background: transparent;
+    border: 1px solid var(--ui-border-default);
+    color: var(--ui-fg-default);
+    min-width: 22px;
+    height: 22px;
+    padding-inline: var(--ui-space-2);
+    font-weight: var(--ui-weight-medium);
   }
   /* An icon-only button has no label to contrast against, so the icon carries
      the full weight of the control. */

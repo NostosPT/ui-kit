@@ -69,7 +69,7 @@
      The control weight is measured, not guessed: a button label's stem in the
      reference is 0.154 of its cap height, which is the Bold cut — Medium sits
      at 0.118 and SemiBold at 0.135. */
-  --ui-control-weight: var(--ui-weight-bold);   /* buttons, tabs, segments   */
+  --ui-control-weight: var(--ui-weight-semibold); /* buttons, tabs, segments   */
   --ui-label-weight: var(--ui-weight-semibold); /* field + column + row keys */
   --ui-heading-weight: var(--ui-weight-bold);   /* card, modal, section      */
   --ui-numeric-weight: var(--ui-weight-bold);   /* prices, metrics, totals   */
@@ -173,7 +173,7 @@
   --ui-control-radius-xs: calc(8px * var(--ui-radius-scale));
   --ui-control-radius-sm: calc(10px * var(--ui-radius-scale));
   --ui-control-radius-md: calc(12px * var(--ui-radius-scale));
-  --ui-control-radius-lg: calc(12px * var(--ui-radius-scale));
+  --ui-control-radius-lg: calc(14px * var(--ui-radius-scale));
 
   --ui-shadow-xs: 0 1px 2px hsl(var(--ui-shadow-color) / 0.05);
   --ui-shadow-sm: 0 1px 2px hsl(var(--ui-shadow-color) / 0.06),

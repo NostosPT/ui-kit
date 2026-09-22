@@ -19,6 +19,7 @@
     icon = undefined,
     dot = false,
     pill = true,
+    toneText = undefined,
     class: klass = "",
     children,
     ...rest
@@ -26,6 +27,7 @@
 
   const iconSize = $derived(size === "sm" ? 11 : 13);
   const showDot = $derived(dot || variant === "dot");
+  const isTonedText = $derived(toneText ?? (variant === "dot" && tone !== "neutral"));
 </script>
 
 <span
@@ -34,6 +36,7 @@
   data-variant={variant}
   data-size={size}
   data-pill={pill || undefined}
+  data-tone-text={isTonedText || undefined}
   {...rest}
 >
   {#if showDot}<span class="ui-badge__dot"></span>{/if}
@@ -121,6 +124,13 @@
     --badge-solid: var(--ui-info-solid);
     --badge-dot: var(--ui-info-dot);
   }
+  .ui-badge[data-tone="purple"] {
+    --badge-soft: var(--ui-purple-soft);
+    --badge-text: var(--ui-purple-text);
+    --badge-border: var(--ui-purple-border);
+    --badge-solid: var(--ui-purple-solid);
+    --badge-dot: var(--ui-purple-dot);
+  }
 
   .ui-badge[data-variant="soft"] {
     background: var(--badge-soft);
@@ -141,7 +151,11 @@
     background: transparent;
     color: var(--ui-fg-muted);
     padding-inline: 0;
-    font-weight: var(--ui-weight-normal);
+    font-weight: var(--ui-weight-medium);
+  }
+  .ui-badge[data-variant="dot"][data-tone-text] {
+    color: var(--badge-text);
+    font-weight: var(--ui-label-weight);
   }
 
   .ui-badge__dot {

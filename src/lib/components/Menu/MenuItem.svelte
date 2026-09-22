@@ -8,6 +8,7 @@
    */
   let {
     icon = undefined,
+    trailingIcon = undefined,
     shortcut = undefined,
     tone = "neutral",
     disabled = false,
@@ -16,6 +17,7 @@
     closeOnSelect = true,
     close = undefined,
     class: klass = "",
+    trailing,
     children,
     onselect,
     ...rest
@@ -54,22 +56,24 @@
   {onkeydown}
   {...rest}
 >
-  {#if icon}<Icon name={icon} size={15} />{/if}
+  {#if icon}<span class="ui-menu-item__icon"><Icon name={icon} size={15} /></span>{/if}
   <span class="ui-menu-item__label">{@render children?.()}</span>
   {#if shortcut}<span class="ui-menu-item__shortcut">{shortcut}</span>{/if}
-  {#if selected}<Icon name="check" size={16} />{/if}
+  {#if trailingIcon}<span class="ui-menu-item__trailing"><Icon name={trailingIcon} size={14} /></span>{/if}
+  {#if trailing}{@render trailing()}{/if}
+  {#if selected}<span class="ui-menu-item__check"><Icon name="check" size={15} /></span>{/if}
 </svelte:element>
 
 <style>
   .ui-menu-item {
     display: flex;
     align-items: center;
-    gap: var(--ui-space-5);
+    gap: var(--ui-space-4);
     width: 100%;
-    min-height: var(--ui-control-h-md);
-    padding: var(--ui-space-3) var(--ui-space-6);
-    border-radius: var(--ui-control-radius-xs);
-    font-size: var(--ui-text-md);
+    min-height: var(--ui-control-h-sm);
+    padding: var(--ui-space-3) var(--ui-space-5);
+    border-radius: var(--ui-radius-lg);
+    font-size: var(--ui-text-sm);
     font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-snug);
     color: var(--ui-fg-default);
@@ -77,6 +81,19 @@
     text-decoration: none;
     cursor: pointer;
     transition: background-color var(--ui-duration-instant) var(--ui-ease-out);
+  }
+  .ui-menu-item__icon,
+  .ui-menu-item__trailing {
+    color: var(--ui-fg-muted);
+    display: flex;
+    align-items: center;
+    flex: none;
+  }
+  .ui-menu-item__check {
+    color: var(--ui-accent-solid);
+    display: flex;
+    align-items: center;
+    flex: none;
   }
   /* Hover and keyboard focus deliberately look identical — a menu has one
      "current item", however the user got there. */

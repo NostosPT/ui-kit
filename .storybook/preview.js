@@ -96,8 +96,9 @@ export const parameters = {
     storySort: {
       order: [
         "Foundations",
-        ["Introduction", "Theming", "Colour", "Typography", "Spacing", "Elevation", "Icons"],
+        ["Introduction", "Theming", "Colour", "Scale"],
         "Primitives",
+        "Surfaces",
         "Forms",
         "Data Display",
         "Navigation",

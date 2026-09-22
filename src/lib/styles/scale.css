@@ -1,0 +1,122 @@
+/* ============================================================================
+   NON-COLOUR PRIMITIVES
+   Spacing, radius, type, elevation, motion. Radius runs through a single
+   multiplier so a consumer can go fully square (--ui-radius-scale: 0) or
+   pill-soft (--ui-radius-scale: 1.6) without touching a component.
+   ========================================================================= */
+
+:root {
+  /* --- spacing: 4px base ------------------------------------------------- */
+  --ui-space-0: 0;
+  --ui-space-1: 2px;
+  --ui-space-2: 4px;
+  --ui-space-3: 6px;
+  --ui-space-4: 8px;
+  --ui-space-5: 10px;
+  --ui-space-6: 12px;
+  --ui-space-7: 14px;
+  --ui-space-8: 16px;
+  --ui-space-10: 20px;
+  --ui-space-12: 24px;
+  --ui-space-14: 28px;
+  --ui-space-16: 32px;
+  --ui-space-20: 40px;
+  --ui-space-24: 48px;
+  --ui-space-32: 64px;
+
+  /* --- radius ------------------------------------------------------------ */
+  --ui-radius-scale: 1;
+  --ui-radius-xs: calc(4px * var(--ui-radius-scale));
+  --ui-radius-sm: calc(6px * var(--ui-radius-scale));
+  --ui-radius-md: calc(8px * var(--ui-radius-scale));
+  --ui-radius-lg: calc(10px * var(--ui-radius-scale));
+  --ui-radius-xl: calc(12px * var(--ui-radius-scale));
+  --ui-radius-2xl: calc(16px * var(--ui-radius-scale));
+  --ui-radius-3xl: calc(20px * var(--ui-radius-scale));
+  --ui-radius-full: 9999px;
+
+  /* --- type -------------------------------------------------------------- */
+  --ui-font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ui-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  --ui-text-2xs: 10px;
+  --ui-text-xs: 11px;
+  --ui-text-sm: 12px;
+  --ui-text-md: 13px;
+  --ui-text-base: 14px;
+  --ui-text-lg: 16px;
+  --ui-text-xl: 18px;
+  --ui-text-2xl: 22px;
+  --ui-text-3xl: 28px;
+  --ui-text-4xl: 34px;
+  --ui-text-5xl: 44px;
+
+  --ui-leading-tight: 1.2;
+  --ui-leading-snug: 1.35;
+  --ui-leading-normal: 1.5;
+  --ui-leading-relaxed: 1.65;
+
+  --ui-weight-normal: 400;
+  --ui-weight-medium: 500;
+  --ui-weight-semibold: 600;
+  --ui-weight-bold: 700;
+
+  /* Optical tightening — larger text needs negative tracking to match the
+     density of the small UI text around it. */
+  --ui-tracking-tight: -0.02em;
+  --ui-tracking-snug: -0.011em;
+  --ui-tracking-normal: 0;
+  --ui-tracking-wide: 0.01em;
+
+  /* --- control sizing ---------------------------------------------------- */
+  --ui-control-h-xs: 24px;
+  --ui-control-h-sm: 30px;
+  --ui-control-h-md: 36px;
+  --ui-control-h-lg: 42px;
+
+  /* --- elevation --------------------------------------------------------- */
+  --ui-shadow-color: 250 28% 14%;
+  --ui-shadow-xs: 0 1px 2px hsl(var(--ui-shadow-color) / 0.05);
+  --ui-shadow-sm: 0 1px 2px hsl(var(--ui-shadow-color) / 0.06),
+    0 1px 3px hsl(var(--ui-shadow-color) / 0.08);
+  --ui-shadow-md: 0 2px 4px hsl(var(--ui-shadow-color) / 0.05),
+    0 4px 8px -2px hsl(var(--ui-shadow-color) / 0.1);
+  --ui-shadow-lg: 0 4px 6px -2px hsl(var(--ui-shadow-color) / 0.04),
+    0 12px 16px -4px hsl(var(--ui-shadow-color) / 0.1);
+  --ui-shadow-xl: 0 8px 8px -4px hsl(var(--ui-shadow-color) / 0.04),
+    0 20px 24px -4px hsl(var(--ui-shadow-color) / 0.1);
+  --ui-shadow-inset: inset 0 1px 0 hsl(0 0% 100% / 0.06);
+
+  /* --- motion ------------------------------------------------------------ */
+  --ui-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ui-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ui-ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ui-duration-instant: 80ms;
+  --ui-duration-fast: 130ms;
+  --ui-duration-normal: 200ms;
+  --ui-duration-slow: 320ms;
+
+  /* --- layering ---------------------------------------------------------- */
+  --ui-z-base: 0;
+  --ui-z-sticky: 100;
+  --ui-z-dropdown: 400;
+  --ui-z-overlay: 600;
+  --ui-z-modal: 700;
+  --ui-z-toast: 800;
+  --ui-z-tooltip: 900;
+
+  /* --- focus ring -------------------------------------------------------- */
+  --ui-ring-width: 3px;
+  --ui-ring-offset: 0px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ui-duration-instant: 0ms;
+    --ui-duration-fast: 0ms;
+    --ui-duration-normal: 0ms;
+    --ui-duration-slow: 0ms;
+  }
+}

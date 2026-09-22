@@ -24,6 +24,7 @@
     iconOnly = false,
     icon = undefined,
     trailingIcon = undefined,
+    badge = undefined,
     label = undefined,
     class: klass = "",
     children,
@@ -65,6 +66,15 @@
       <span class="ui-btn__label">{@render children?.()}</span>
     {/if}
     {#if trailingIcon}<Icon name={trailingIcon} size={iconSize} />{/if}
+    {#if badge != null}
+      <span class="ui-btn__badge">
+        {#if typeof badge === "function"}
+          {@render badge()}
+        {:else}
+          {badge}
+        {/if}
+      </span>
+    {/if}
   </span>
 </svelte:element>
 
@@ -300,6 +310,30 @@
   }
   .ui-btn__body :global(.ui-icon) {
     color: var(--btn-icon);
+  }
+  .ui-btn__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding-inline: var(--ui-space-2);
+    border-radius: var(--ui-radius-full);
+    font-size: var(--ui-text-2xs);
+    font-weight: var(--ui-label-weight);
+    line-height: 1;
+    background: var(--ui-bg-muted);
+    color: var(--ui-fg-default);
+    margin-inline-start: var(--ui-space-1);
+    vertical-align: middle;
+  }
+  .ui-btn[data-variant="solid"] .ui-btn__badge {
+    background: oklch(from var(--btn-solid) l c h / 0.25);
+    color: currentColor;
+  }
+  .ui-btn[data-variant="outline"] .ui-btn__badge {
+    background: var(--ui-bg-sunken);
+    color: var(--ui-fg-muted);
   }
   /* An icon-only button has no label to contrast against, so the icon carries
      the full weight of the control. */

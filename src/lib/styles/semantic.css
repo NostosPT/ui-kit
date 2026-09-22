@@ -37,6 +37,9 @@
   --ui-fg-on-accent: var(--ui-neutral-0);
   --ui-fg-on-solid: var(--ui-neutral-0);
 
+  /* Auto-derived label colour for any solid fill. See tokens.css. */
+  --ui-fg-on-fill: oklch(from var(--ui-fill, var(--ui-accent-solid)) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
+
   /* --- borders ----------------------------------------------------------- */
   --ui-border-subtle: var(--ui-neutral-100);
   --ui-border-default: var(--ui-neutral-200);

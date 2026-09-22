@@ -184,7 +184,9 @@
   /* --- variants --------------------------------------------------------- */
   .ui-btn[data-variant="solid"] {
     background: var(--btn-solid);
-    color: var(--ui-fg-on-solid);
+    /* Derived from the fill itself, so an amber or lime accent flips to a
+       dark label automatically instead of shipping white-on-yellow. */
+    color: oklch(from var(--btn-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
     /* A one-pixel inner highlight is what stops a flat fill from looking
        like a coloured rectangle. It only reads on the solid variant. */
     box-shadow: var(--ui-shadow-xs), var(--ui-shadow-inset);

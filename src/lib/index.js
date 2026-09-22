@@ -81,6 +81,7 @@ export { default as SidebarFooter } from "./components/Sidebar/SidebarFooter.sve
 export { default as Tabs } from "./components/Tabs/Tabs.svelte";
 export { default as TabPanel } from "./components/Tabs/TabPanel.svelte";
 export { default as Menu } from "./components/Menu/Menu.svelte";
+export { default as ContextMenu } from "./components/Menu/ContextMenu.svelte";
 export { default as MenuItem } from "./components/Menu/MenuItem.svelte";
 export { default as MenuSeparator } from "./components/Menu/MenuSeparator.svelte";
 export { default as MenuLabel } from "./components/Menu/MenuLabel.svelte";
@@ -98,5 +99,5 @@ export { toast, dismiss as dismissToast, dismissAll as dismissAllToasts } from "
 export { icons, iconNames } from "./icons.js";
 export { COUNTRIES, flagOf } from "./components/PhoneInput/countries.js";
 export { cx, uid, clamp, initials, hashIndex } from "./internal/utils.js";
-export { anchorPosition, trackAnchor } from "./internal/position.js";
+export { anchorPosition, trackAnchor, getContainingBlock } from "./internal/position.js";
 export * as dateUtils from "./internal/date.js";

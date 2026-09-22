@@ -1,6 +1,7 @@
 <script module>
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import Menu from "./Menu.svelte";
+  import ContextMenu from "./ContextMenu.svelte";
   import MenuItem from "./MenuItem.svelte";
   import MenuSeparator from "./MenuSeparator.svelte";
   import MenuLabel from "./MenuLabel.svelte";
@@ -114,5 +115,41 @@
         </ButtonGroup>
       </Spec>
     </Showcase>
+  </div>
+</Story>
+
+<Story name="ContextMenu" asChild>
+  <div style="padding: 40px 0; display: flex; justify-content: center">
+    <ContextMenu>
+      {#snippet trigger()}
+        <div
+          style="
+            width: 380px;
+            height: 180px;
+            border: 2px dashed var(--ui-border-strong);
+            border-radius: var(--ui-radius-xl);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            user-select: none;
+            background: var(--ui-bg-surface);
+            color: var(--ui-fg-muted);
+            cursor: context-menu;
+          "
+        >
+          <span style="font-weight: var(--ui-weight-medium); color: var(--ui-fg-default)">Right-click anywhere in this zone</span>
+          <span style="font-size: var(--ui-text-sm)">Opens the menu at the exact mouse cursor position</span>
+        </div>
+      {/snippet}
+      {#snippet children({ close })}
+        <MenuItem icon="pencil" {close}>Rename</MenuItem>
+        <MenuItem icon="copy" shortcut="⌘D" {close}>Duplicate</MenuItem>
+        <MenuItem icon="download" {close}>Download</MenuItem>
+        <MenuSeparator />
+        <MenuItem icon="trash" tone="danger" {close}>Delete</MenuItem>
+      {/snippet}
+    </ContextMenu>
   </div>
 </Story>

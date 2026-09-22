@@ -5,8 +5,6 @@
 </script>
 
 <script>
-  import { setContext } from "svelte";
-
   /**
    * Owns which items are expanded so `multiple={false}` can enforce one-at-a-
    * time. Items register themselves through context, which keeps the public

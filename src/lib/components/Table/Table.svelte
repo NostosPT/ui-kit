@@ -67,7 +67,7 @@
     padding: var(--ui-space-5) var(--row-px);
     background: var(--ui-bg-sunken);
     font-size: var(--ui-text-sm);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     color: var(--ui-fg-subtle);
     text-align: start;
     letter-spacing: var(--ui-tracking-snug);

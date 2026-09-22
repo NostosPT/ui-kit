@@ -190,7 +190,7 @@
   }
   .ui-calendar__month {
     font-size: var(--ui-text-base);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-heading-weight);
     letter-spacing: var(--ui-tracking-snug);
   }
   /* Bordered, like every other month-stepper in the reference — a bare glyph
@@ -229,7 +229,7 @@
     place-items: center;
     height: 30px;
     font-size: var(--ui-text-sm);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     color: var(--ui-fg-subtle);
   }
 
@@ -241,7 +241,7 @@
     border: 1px solid transparent;
     border-radius: var(--ui-control-radius-sm);
     font-size: var(--cal-fs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     font-variant-numeric: tabular-nums;
     color: var(--ui-fg-default);
     transition:
@@ -264,7 +264,7 @@
      selected rather than as two competing markers. */
   .ui-calendar__day[data-today]:not([data-selected]) {
     border-color: var(--ui-border-strong);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-numeric-weight);
   }
   .ui-calendar__day[data-in-range] {
     background: var(--ui-accent-soft);
@@ -273,7 +273,7 @@
   .ui-calendar__day[data-selected] {
     background: var(--ui-accent-solid);
     color: oklch(from var(--ui-accent-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-numeric-weight);
   }
   .ui-calendar__day:focus-visible {
     outline: 2px solid var(--ui-accent-solid);

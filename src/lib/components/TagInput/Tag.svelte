@@ -47,7 +47,7 @@
     background: var(--ui-bg-surface);
     color: var(--ui-fg-default);
     font-size: var(--tag-fs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: 1;
     max-width: 100%;

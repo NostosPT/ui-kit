@@ -86,7 +86,7 @@
     /* Semibold. In the reference the label is the anchor of the field, set a
        clear step above the value and the hint; a 500 label at the same size
        as the input text makes the two read as one run of prose. */
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-label-weight);
     color: var(--ui-fg-default);
     letter-spacing: var(--ui-tracking-snug);
   }

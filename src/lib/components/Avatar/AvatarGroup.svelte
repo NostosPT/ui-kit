@@ -57,7 +57,7 @@
     background: var(--ui-bg-muted);
     color: var(--ui-fg-muted);
     border: 2px solid var(--ui-bg-surface);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-tight);
     --avatar-size: 32px;
     width: var(--avatar-size);

@@ -24,16 +24,8 @@
   --ui-space-24: 48px;
   --ui-space-32: 64px;
 
-  /* --- radius ------------------------------------------------------------ */
+  /* --- radius (input only; the steps are derived below) ------------------ */
   --ui-radius-scale: 1;
-  --ui-radius-xs: calc(4px * var(--ui-radius-scale));
-  --ui-radius-sm: calc(6px * var(--ui-radius-scale));
-  --ui-radius-md: calc(8px * var(--ui-radius-scale));
-  --ui-radius-lg: calc(10px * var(--ui-radius-scale));
-  --ui-radius-xl: calc(12px * var(--ui-radius-scale));
-  --ui-radius-2xl: calc(16px * var(--ui-radius-scale));
-  --ui-radius-3xl: calc(20px * var(--ui-radius-scale));
-  --ui-radius-full: 9999px;
 
   /* --- type -------------------------------------------------------------- */
   --ui-font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
@@ -76,17 +68,8 @@
   --ui-control-h-md: 36px;
   --ui-control-h-lg: 42px;
 
-  /* --- elevation --------------------------------------------------------- */
+  /* --- elevation (input only; the ladder is derived below) ---------------- */
   --ui-shadow-color: 250 28% 14%;
-  --ui-shadow-xs: 0 1px 2px hsl(var(--ui-shadow-color) / 0.05);
-  --ui-shadow-sm: 0 1px 2px hsl(var(--ui-shadow-color) / 0.06),
-    0 1px 3px hsl(var(--ui-shadow-color) / 0.08);
-  --ui-shadow-md: 0 2px 4px hsl(var(--ui-shadow-color) / 0.05),
-    0 4px 8px -2px hsl(var(--ui-shadow-color) / 0.1);
-  --ui-shadow-lg: 0 4px 6px -2px hsl(var(--ui-shadow-color) / 0.04),
-    0 12px 16px -4px hsl(var(--ui-shadow-color) / 0.1);
-  --ui-shadow-xl: 0 8px 8px -4px hsl(var(--ui-shadow-color) / 0.04),
-    0 20px 24px -4px hsl(var(--ui-shadow-color) / 0.1);
   --ui-shadow-inset: inset 0 1px 0 hsl(0 0% 100% / 0.06);
 
   /* --- motion ------------------------------------------------------------ */
@@ -110,6 +93,42 @@
   /* --- focus ring -------------------------------------------------------- */
   --ui-ring-width: 3px;
   --ui-ring-offset: 0px;
+}
+
+/* ---------------------------------------------------------------------------
+   DERIVED SCALES
+   Same reason as the colour ramps in tokens.css: a custom property containing
+   var() resolves those references where it is DECLARED. Radius steps read
+   --ui-radius-scale and shadows read --ui-shadow-color, so both have to be
+   re-declared on every theme scope — otherwise
+
+       <div data-ui-scope style="--ui-radius-scale: 0">
+
+   would set the input and change nothing.
+   ------------------------------------------------------------------------ */
+
+:root,
+.ui-root,
+[data-ui-theme],
+[data-ui-scope] {
+  --ui-radius-xs: calc(4px * var(--ui-radius-scale));
+  --ui-radius-sm: calc(6px * var(--ui-radius-scale));
+  --ui-radius-md: calc(8px * var(--ui-radius-scale));
+  --ui-radius-lg: calc(10px * var(--ui-radius-scale));
+  --ui-radius-xl: calc(12px * var(--ui-radius-scale));
+  --ui-radius-2xl: calc(16px * var(--ui-radius-scale));
+  --ui-radius-3xl: calc(20px * var(--ui-radius-scale));
+  --ui-radius-full: 9999px;
+
+  --ui-shadow-xs: 0 1px 2px hsl(var(--ui-shadow-color) / 0.05);
+  --ui-shadow-sm: 0 1px 2px hsl(var(--ui-shadow-color) / 0.06),
+    0 1px 3px hsl(var(--ui-shadow-color) / 0.08);
+  --ui-shadow-md: 0 2px 4px hsl(var(--ui-shadow-color) / 0.05),
+    0 4px 8px -2px hsl(var(--ui-shadow-color) / 0.1);
+  --ui-shadow-lg: 0 4px 6px -2px hsl(var(--ui-shadow-color) / 0.04),
+    0 12px 16px -4px hsl(var(--ui-shadow-color) / 0.1);
+  --ui-shadow-xl: 0 8px 8px -4px hsl(var(--ui-shadow-color) / 0.04),
+    0 20px 24px -4px hsl(var(--ui-shadow-color) / 0.1);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -20,8 +20,8 @@
 
 :root {
   /* --- palette inputs ---------------------------------------------------- */
-  --ui-accent-h: 262;
-  --ui-accent-c: 0.19;
+  --ui-accent-h: 252;
+  --ui-accent-c: 0.20;
 
   --ui-neutral-h: 258;
   --ui-neutral-c: 0.012;
@@ -29,14 +29,17 @@
   --ui-success-h: 152;
   --ui-success-c: 0.15;
 
-  --ui-warning-h: 70;
-  --ui-warning-c: 0.16;
+  --ui-warning-h: 58;
+  --ui-warning-c: 0.18;
 
   --ui-danger-h: 25;
   --ui-danger-c: 0.19;
 
   --ui-info-h: 235;
   --ui-info-c: 0.16;
+
+  --ui-purple-h: 285;
+  --ui-purple-c: 0.18;
 
   /* --- chroma taper, shared by every ramp -------------------------------- */
   --ui-cm-50: 0.04;
@@ -132,6 +135,14 @@
   --ui-info-600: oklch(53.0% calc(var(--ui-info-c) * var(--ui-cm-600)) var(--ui-info-h));
   --ui-info-700: oklch(45.5% calc(var(--ui-info-c) * var(--ui-cm-700)) var(--ui-info-h));
   --ui-info-900: oklch(33.0% calc(var(--ui-info-c) * var(--ui-cm-900)) var(--ui-info-h));
+
+  --ui-purple-50:  oklch(97.6% calc(var(--ui-purple-c) * var(--ui-cm-50))  var(--ui-purple-h));
+  --ui-purple-100: oklch(94.6% calc(var(--ui-purple-c) * var(--ui-cm-100)) var(--ui-purple-h));
+  --ui-purple-200: oklch(90.0% calc(var(--ui-purple-c) * var(--ui-cm-200)) var(--ui-purple-h));
+  --ui-purple-500: oklch(63.0% calc(var(--ui-purple-c) * var(--ui-cm-500)) var(--ui-purple-h));
+  --ui-purple-600: oklch(53.0% calc(var(--ui-purple-c) * var(--ui-cm-600)) var(--ui-purple-h));
+  --ui-purple-700: oklch(45.5% calc(var(--ui-purple-c) * var(--ui-cm-700)) var(--ui-purple-h));
+  --ui-purple-900: oklch(33.0% calc(var(--ui-purple-c) * var(--ui-cm-900)) var(--ui-purple-h));
 }
 
 

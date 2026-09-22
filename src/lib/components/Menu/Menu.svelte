@@ -104,7 +104,7 @@
   {...rest}
 >
   {#snippet children({ close })}
-    <div bind:this={surfaceEl} class="ui-menu__list" {onkeydown}>
+    <div bind:this={surfaceEl} class="ui-menu__list" role="none" {onkeydown}>
       {@render children?.({ close })}
     </div>
   {/snippet}

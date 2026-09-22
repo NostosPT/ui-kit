@@ -128,6 +128,7 @@
     bind:this={gridEl}
     class="ui-calendar__grid"
     role="grid"
+    tabindex="-1"
     aria-label={monthLabel}
     {onkeydown}
   >

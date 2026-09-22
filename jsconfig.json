@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "checkJs": false,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "isolatedModules": true
+  },
+  "include": ["src/**/*.js", "src/**/*.svelte", ".storybook/**/*.js", ".storybook/**/*.svelte"]
+}

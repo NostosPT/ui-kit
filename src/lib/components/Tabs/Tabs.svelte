@@ -100,6 +100,8 @@
 </script>
 
 <div class="ui-tabs {klass}" data-variant={variant} data-size={size} {...rest}>
+  <!-- Focus roves across the tabs themselves, so the tablist is not focusable. -->
+  <!-- svelte-ignore a11y_interactive_supports_focus -->
   <div
     bind:this={listEl}
     class="ui-tabs__list"

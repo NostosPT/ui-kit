@@ -25,7 +25,8 @@
     ...rest
   } = $props();
 
-  const inputId = id ?? uid("cb");
+  const fallbackId = uid("cb");
+  const inputId = $derived(id ?? fallbackId);
   let el = $state(null);
 
   // `indeterminate` has no HTML attribute — it only exists as a DOM property.

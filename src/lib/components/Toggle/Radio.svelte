@@ -18,7 +18,8 @@
     ...rest
   } = $props();
 
-  const inputId = id ?? uid("radio");
+  const fallbackId = uid("radio");
+  const inputId = $derived(id ?? fallbackId);
 </script>
 
 <div
@@ -35,7 +36,6 @@
     {value}
     {disabled}
     bind:group
-    aria-invalid={invalid || undefined}
     {onchange}
     {...rest}
   />

@@ -27,9 +27,10 @@
     ...rest
   } = $props();
 
-  const fieldId = id ?? uid("field");
-  const hintId = `${fieldId}-hint`;
-  const errorId = `${fieldId}-error`;
+  const fallbackId = uid("field");
+  const fieldId = $derived(id ?? fallbackId);
+  const hintId = $derived(`${fieldId}-hint`);
+  const errorId = $derived(`${fieldId}-error`);
 
   const invalid = $derived(Boolean(error));
   // Error supersedes hint in the description, rather than stacking, so screen

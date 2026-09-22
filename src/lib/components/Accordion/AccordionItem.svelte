@@ -22,7 +22,8 @@
     ...rest
   } = $props();
 
-  const itemId = id ?? uid("acc");
+  const fallbackId = uid("acc");
+  const itemId = $derived(id ?? fallbackId);
   const ctx = getAccordionContext();
   const open = $derived(ctx?.isOpen(itemId) ?? false);
 </script>

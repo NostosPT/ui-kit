@@ -30,7 +30,8 @@
     ...rest
   } = $props();
 
-  const inputId = id ?? uid("drop");
+  const fallbackId = uid("drop");
+  const inputId = $derived(id ?? fallbackId);
   let depth = $state(0);
   let inputEl = $state(null);
 

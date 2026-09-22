@@ -22,7 +22,8 @@
     ...rest
   } = $props();
 
-  const inputId = id ?? uid("switch");
+  const fallbackId = uid("switch");
+  const inputId = $derived(id ?? fallbackId);
 </script>
 
 <div

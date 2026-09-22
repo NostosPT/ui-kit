@@ -104,3 +104,40 @@
   --ui-info-700: oklch(50.0% calc(var(--ui-info-c) * var(--ui-cm-700)) var(--ui-info-h));
   --ui-info-900: oklch(34.0% calc(var(--ui-info-c) * var(--ui-cm-900)) var(--ui-info-h));
 }
+
+/* ============================================================================
+   AUTOMATIC CONTRAST FOREGROUND
+   ----------------------------------------------------------------------------
+   The whole point of a hue-driven kit is that someone can set
+   `--ui-accent-h: 75` (amber) and not have it break. White-on-amber does
+   break — it lands around 2.4:1.
+
+   These two values are meant to be dropped into a relative-colour function:
+
+       color: oklch(from var(--some-fill)
+                    var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
+
+   Inside `oklch(from …)` the keyword `l` resolves to the *fill's* lightness.
+   Dividing the threshold by it and multiplying by infinity produces ±infinity,
+   which clamp() collapses to a hard 0 or 1 — a branch, in pure CSS. So a dark
+   fill gets a near-white label and a light fill gets a dark, hue-matched one,
+   with no per-tone overrides anywhere in the kit.
+   ========================================================================= */
+
+:root {
+  /* Fills lighter than this get dark text. ~0.68 matches where white text
+     stops clearing 4.5:1 for typical UI chroma. */
+  --ui-contrast-threshold: 0.68;
+  --ui-auto-switch: clamp(0, (var(--ui-contrast-threshold) / l - 1) * infinity, 1);
+  --ui-auto-fg-l: calc(0.24 + var(--ui-auto-switch) * 0.75);
+  --ui-auto-fg-c: calc(c * 0.45 * (1 - var(--ui-auto-switch)));
+}
+
+/* Relative colour syntax is the mechanism; without it we fall back to the
+   plain on-solid token and the consumer picks their own accent foreground. */
+@supports not (color: oklch(from red l c h)) {
+  :root {
+    --ui-auto-fg-l: initial;
+    --ui-auto-fg-c: initial;
+  }
+}

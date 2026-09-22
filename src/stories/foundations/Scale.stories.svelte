@@ -11,22 +11,28 @@
   });
 
   const TYPE = [
-    ["5xl", "44px", "Display"],
-    ["4xl", "34px", "Page title"],
+    ["5xl", "48px", "Display"],
+    ["4xl", "36px", "Page title"],
     ["3xl", "28px", "Price"],
     ["2xl", "22px", "Section title"],
     ["xl", "18px", "Card title"],
     ["lg", "16px", "Subtitle"],
-    ["base", "14px", "Body"],
-    ["md", "13px", "Control label"],
-    ["sm", "12px", "Meta"],
-    ["xs", "11px", "Badge"],
-    ["2xs", "10px", "Micro"]
+    ["base", "15px", "Large control"],
+    ["md", "14px", "Body / control label"],
+    ["sm", "13px", "Meta"],
+    ["xs", "12px", "Badge"],
+    ["2xs", "11px", "Micro"]
   ];
 
   const SPACE = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 20, 24, 32];
   const RADIUS = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "full"];
   const SHADOW = ["xs", "sm", "md", "lg", "xl"];
+  const CONTROL = [
+    ["xs", "28px", "10px", "8px", "14px"],
+    ["sm", "34px", "12px", "10px", "16px"],
+    ["md", "40px", "16px", "12px", "18px"],
+    ["lg", "48px", "20px", "14px", "20px"]
+  ];
 </script>
 
 <Story
@@ -36,7 +42,7 @@
     docs: {
       description: {
         story:
-          "A dense scale with 11, 12, 13 and 14px all present, because product UI genuinely needs them: 13 for control labels, 12 for metadata, 11 for badges. Larger sizes carry negative tracking so headings optically match the tight body text around them."
+          "Product-UI sizing: 14px carries body text and control labels, 15px the large controls, 13px metadata, 12px badges. Larger sizes carry negative tracking so headings optically match the tight body text around them."
       }
     }
   }}
@@ -65,6 +71,39 @@
           Your order has been placed
         </span>
         <span class="type__use"></span>
+      </div>
+    {/each}
+  </div>
+</Story>
+
+<Story
+  name="Controls"
+  asChild
+  parameters={{
+    docs: {
+      description: {
+        story:
+          "The layer that keeps a Button, an Input, a Select, a Tab and a segment the same object at the same size. Height, inline padding, icon-to-label gap, corner radius and icon size are published per step and consumed by name, so none of the five can drift on its own. Radius is a constant ~0.29 of the height at every step — the ratio that makes a row of mixed controls read as one family."
+      }
+    }
+  }}
+>
+  <div class="controls">
+    {#each CONTROL as [step, h, px, radius, icon] (step)}
+      <div class="controls__row">
+        <code>{step}</code>
+        <span
+          class="controls__box"
+          style:height="var(--ui-control-h-{step})"
+          style:padding-inline="var(--ui-control-px-{step})"
+          style:border-radius="var(--ui-control-radius-{step})"
+          style:gap="var(--ui-control-gap-{step})"
+          style:font-size="var(--ui-text-{step === 'lg' ? 'base' : step === 'md' ? 'md' : step === 'sm' ? 'sm' : 'xs'})"
+        >
+          <Icon name="folder" size={Number(icon.replace("px", ""))} />
+          Documents
+        </span>
+        <span class="controls__spec">h {h} · px {px} · r {radius} · icon {icon}</span>
       </div>
     {/each}
   </div>
@@ -190,6 +229,40 @@
     align-items: center;
     gap: 16px;
   }
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ui-space-6);
+    align-items: flex-start;
+  }
+  .controls__row {
+    display: flex;
+    align-items: center;
+    gap: var(--ui-space-8);
+  }
+  .controls__row > code {
+    width: 24px;
+    font-size: var(--ui-text-xs);
+    color: var(--ui-fg-faint);
+  }
+  .controls__box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ui-border-default);
+    background: var(--ui-bg-surface);
+    box-shadow: var(--ui-shadow-xs);
+    font-weight: var(--ui-weight-semibold);
+    letter-spacing: var(--ui-tracking-snug);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .controls__spec {
+    font-size: var(--ui-text-xs);
+    color: var(--ui-fg-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
   .space__bar {
     height: 14px;
     background: var(--ui-accent-soft);

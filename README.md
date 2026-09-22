@@ -60,7 +60,7 @@ npm run check   # svelte-check
 | --- | --- | --- |
 | Palette inputs | `src/lib/styles/tokens.css` | Hue + chroma per ramp |
 | Ramps | `src/lib/styles/tokens.css` | 50–950 steps, generated |
-| Scales | `src/lib/styles/scale.css` | Spacing, type, radius, elevation, motion |
+| Scales | `src/lib/styles/scale.css` | Spacing, type, radius, elevation, motion, control scale |
 | Semantic | `src/lib/styles/semantic.css` | `bg-surface`, `fg-muted`, `accent-solid`… |
 | Base | `src/lib/styles/base.css` | Small reset, scoped to `.ui-root` |
 | Components | `src/lib/components/**` | Consume semantic tokens only |
@@ -78,6 +78,33 @@ declared**, not where it is used. If the ramps lived only on `:root` they would
 permanently bake in `:root`'s hue, and overriding `--ui-accent-h` further down
 the tree would silently do nothing. Re-declaring them per scope is what lets a
 subtree carry its own accent.
+
+### One control scale, four numbers per step
+
+A size name has to mean the same thing to every control, or a form ends up with
+a 36px button next to a 42px field. So height, inline padding, icon-to-label
+gap and corner radius are published per step and consumed by name:
+
+| Step | Height | Padding | Radius | Icon |
+| --- | --- | --- | --- | --- |
+| `xs` | 28px | 10px | 8px | 14px |
+| `sm` | 34px | 12px | 10px | 16px |
+| `md` | 40px | 16px | 12px | 18px |
+| `lg` | 48px | 20px | 14px | 20px |
+
+Button, InputFrame, Tabs, SegmentedControl, Pagination and the Calendar's
+month stepper all resolve these rather than picking spacing steps of their
+own, so none of them can drift alone.
+
+Radius is the number that is easiest to get wrong. It is not a fixed step — it
+tracks the height at a constant **~0.29**, which is why `--ui-control-radius-*`
+are their own `calc()`s rather than picks off the radius ladder. A 40px control
+with an 8px corner is the single detail that makes an otherwise correct kit
+look like a different product.
+
+A SegmentedControl is the one control that resolves a step *down*: the track is
+the control, so an `md` track holds `sm`-height segments plus its own 3px of
+padding and lands back on 40px.
 
 ### Contrast is a property of the scale, not of each colour
 

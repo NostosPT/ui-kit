@@ -47,14 +47,19 @@
   $effect(() => {
     if (!open || !anchorEl || !floatEl) return;
 
+    // anchorEl itself is `display: contents` so it never has a layout box —
+    // getBoundingClientRect() on it always returns a zero rect at (0, 0).
+    // Measure the trigger's actual rendered element instead.
+    const anchorTarget = anchorEl.firstElementChild ?? anchorEl;
+
     const update = () => {
-      const rect = anchorEl.getBoundingClientRect();
+      const rect = anchorTarget.getBoundingClientRect();
       const box = floatEl.getBoundingClientRect();
       const next = anchorPosition(rect, box, { placement, offset, matchWidth });
       pos = { ...next, ready: true };
     };
 
-    return trackAnchor(anchorEl, floatEl, update);
+    return trackAnchor(anchorTarget, floatEl, update);
   });
 
   $effect(() => {

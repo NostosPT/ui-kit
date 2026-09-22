@@ -38,7 +38,7 @@
   {/snippet}
 </Story>
 
-<Story name="Sizes" parameters={{ layout: "padded" }}>
+<Story name="Sizes" parameters={{ layout: "padded" }} asChild>
   <Showcase width="380px">
     <Spec label="sm"><Input size="sm" placeholder="Search files" icon="search" /></Spec>
     <Spec label="md"><Input size="md" placeholder="Search files" icon="search" /></Spec>
@@ -46,7 +46,7 @@
   </Showcase>
 </Story>
 
-<Story name="States" parameters={{ layout: "padded" }}>
+<Story name="States" parameters={{ layout: "padded" }} asChild>
   <Showcase width="380px">
     <Spec label="default"><Input placeholder="Placeholder" /></Spec>
     <Spec label="filled"><Input value="kuchkarov@pixsellz.io" /></Spec>
@@ -68,7 +68,7 @@
       }
     }
   }}
->
+ asChild>
   <Showcase width="420px">
     <Spec label="button">
       <Input placeholder="info@pixsellz.io">
@@ -100,23 +100,9 @@
       </Input>
     </Spec>
   </Showcase>
-
-  <style>
-    .flush {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      padding-inline-end: 4px;
-    }
-    .unit {
-      font-size: var(--ui-text-md);
-      color: var(--ui-fg-subtle);
-      font-weight: var(--ui-weight-medium);
-    }
-  </style>
 </Story>
 
-<Story name="With Field" parameters={{ layout: "padded" }}>
+<Story name="With Field" parameters={{ layout: "padded" }} asChild>
   <Showcase width="380px" gap={22}>
     <Field label="Work email" hint="We'll email them instructions and a magic link to sign in.">
       {#snippet control({ id, describedBy })}
@@ -138,7 +124,7 @@
   </Showcase>
 </Story>
 
-<Story name="Textarea" parameters={{ layout: "padded" }}>
+<Story name="Textarea" parameters={{ layout: "padded" }} asChild>
   <Showcase width="420px">
     <Spec label="default" align="start"><Textarea placeholder="Write a message…" /></Spec>
     <Spec label="autogrow" align="start">
@@ -147,3 +133,18 @@
     <Spec label="invalid" align="start"><Textarea value="Too short" invalid rows={2} /></Spec>
   </Showcase>
 </Story>
+
+<style>
+  .flush {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding-inline-end: 4px;
+  }
+  .unit {
+    font-size: var(--ui-text-md);
+    color: var(--ui-fg-subtle);
+    font-weight: var(--ui-weight-medium);
+  }
+  
+</style>

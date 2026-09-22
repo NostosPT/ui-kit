@@ -55,7 +55,7 @@
   {/snippet}
 </Story>
 
-<Story name="Variants" parameters={{ layout: "padded" }}>
+<Story name="Variants" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     {#each VARIANTS as variant}
       <Spec label={variant}>
@@ -67,7 +67,7 @@
   </Showcase>
 </Story>
 
-<Story name="Sizes" parameters={{ layout: "padded" }}>
+<Story name="Sizes" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     {#each SIZES as size}
       <Spec label={size}>
@@ -80,7 +80,7 @@
   </Showcase>
 </Story>
 
-<Story name="With icons" parameters={{ layout: "padded" }}>
+<Story name="With icons" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     <Spec label="leading">
       <Button icon="user-plus">Sign Up</Button>
@@ -101,7 +101,7 @@
   </Showcase>
 </Story>
 
-<Story name="States" parameters={{ layout: "padded" }}>
+<Story name="States" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     <Spec label="default"><Button>Place order</Button></Spec>
     <Spec label="loading">
@@ -132,24 +132,25 @@
       }
     }
   }}
->
+ asChild>
   <div class="footer">
     <Row gap={8}>
       <Button variant="ghost" tone="neutral">Cancel</Button>
       <Button>Done</Button>
     </Row>
   </div>
-
-  <style>
-    .footer {
-      display: flex;
-      justify-content: flex-end;
-      padding: 14px 16px;
-      background: var(--ui-bg-surface);
-      border: 1px solid var(--ui-border-default);
-      border-radius: var(--ui-radius-xl);
-      box-shadow: var(--ui-shadow-sm);
-      max-width: 520px;
-    }
-  </style>
 </Story>
+
+<style>
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 14px 16px;
+    background: var(--ui-bg-surface);
+    border: 1px solid var(--ui-border-default);
+    border-radius: var(--ui-radius-xl);
+    box-shadow: var(--ui-shadow-sm);
+    max-width: 520px;
+  }
+  
+</style>

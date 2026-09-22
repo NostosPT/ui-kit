@@ -38,7 +38,7 @@
   {/snippet}
 </Story>
 
-<Story name="Sizes" parameters={{ layout: "padded" }}>
+<Story name="Sizes" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     <Spec label="initials">
       {#each SIZES as size}<Avatar {size} name="Kristin Watson" />{/each}
@@ -49,7 +49,7 @@
   </Showcase>
 </Story>
 
-<Story name="Presence" parameters={{ layout: "padded" }}>
+<Story name="Presence" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     <Spec label="states">
       <Avatar size="lg" name="Jenny Wilson" presence="online" />
@@ -76,7 +76,7 @@
       }
     }
   }}
->
+ asChild>
   <Showcase>
     <Spec label="spectrum">
       {#each PEOPLE as p}<Avatar name={p.name} />{/each}
@@ -87,7 +87,7 @@
   </Showcase>
 </Story>
 
-<Story name="Group" parameters={{ layout: "padded" }}>
+<Story name="Group" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     <Spec label="default"><AvatarGroup items={PEOPLE} /></Spec>
     <Spec label="max 3"><AvatarGroup items={PEOPLE} max={3} /></Spec>

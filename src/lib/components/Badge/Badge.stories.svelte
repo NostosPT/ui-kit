@@ -39,7 +39,7 @@
   {/snippet}
 </Story>
 
-<Story name="Variants" parameters={{ layout: "padded" }}>
+<Story name="Variants" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     <Spec label="soft">
       {#each TONES as tone}<Badge {tone}>Label</Badge>{/each}
@@ -56,7 +56,7 @@
   </Showcase>
 </Story>
 
-<Story name="Statuses" parameters={{ layout: "padded" }}>
+<Story name="Statuses" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     <Spec label="order">
       <Badge tone="success" icon="check-circle">Paid</Badge>
@@ -81,7 +81,7 @@
   </Showcase>
 </Story>
 
-<Story name="Sizes" parameters={{ layout: "padded" }}>
+<Story name="Sizes" parameters={{ layout: "padded" }} asChild>
   <Showcase>
     <Spec label="sm"><Badge size="sm" icon="check-circle">Paid</Badge></Spec>
     <Spec label="md"><Badge size="md" icon="check-circle">Paid</Badge></Spec>

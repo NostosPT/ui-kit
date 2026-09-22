@@ -48,9 +48,9 @@ in `scale.css` and consumed by name — never re-derived per component.
 
 | Step | Height | Padding | Gap | Radius | Icon | Label |
 | --- | --- | --- | --- | --- | --- | --- |
-| `xs` | 28px | 10px | 6px | 12px | 14px | 12px |
-| `sm` | 34px | 12px | 8px | 14px | 16px | 13px |
-| `md` | 40px | 16px | 10px | 14px | 18px | 14px |
+| `xs` | 28px | 10px | 6px | 8px | 14px | 12px |
+| `sm` | 34px | 12px | 8px | 10px | 16px | 13px |
+| `md` | 40px | 16px | 10px | 12px | 18px | 14px |
 | `lg` | 48px | 20px | 12px | 14px | 20px | 15px |
 
 Measured ratios against control height, for reference when adding a step:
@@ -60,22 +60,14 @@ Measured ratios against control height, for reference when adding a step:
 | Inline padding | **0.40** |
 | Icon-to-label gap | **0.23** |
 | Label size | **0.36** |
-| Corner radius | *not a ratio — see below* |
+| Corner radius | **0.28 – 0.30** |
 
-### Corner radius is a constant, not a ratio
+### Corner radius steps proportionally across the control scale
 
-This is the single number the kit had most wrong, and it is worth stating
-plainly because it is counter-intuitive. Measuring four buttons at four heights
-across three source images:
-
-```
-h30 → r12      h37 → r14      h40 → r14      h46 → r14
-```
-
-The corner does **not** scale with the control. A proportional corner makes
-small controls look square and large ones look like pills, and the reference is
-neither. So `--ui-control-radius-*` is 14px at `sm`/`md`/`lg`, stepping down to
-12px only at `xs`, where 14 on a 28px box starts to read as a pill.
+Corner radii scale harmoniously across sizes: 8px at `xs`, 10px at `sm`, 12px
+at `md`, and 14px at `lg`. This maintains the distinctive soft-rounded
+geometric character of the reference without collapsing into a pill at small
+heights or looking boxy on large action buttons.
 
 ### The segmented control is the one exception
 
@@ -93,7 +85,7 @@ away from a Button:
 
 | Token | Value | Used by |
 | --- | --- | --- |
-| `--ui-control-weight` | 700 | Button, Tabs, SegmentedControl, Pagination |
+| `--ui-control-weight` | 600 | Button, Tabs, SegmentedControl, Pagination |
 | `--ui-label-weight` | 600 | field labels, column headers, row keys, menu items |
 | `--ui-heading-weight` | 700 | card, modal and section titles |
 | `--ui-numeric-weight` | 700 | prices, metrics, totals |
@@ -108,7 +100,7 @@ and one sub-row that must sit a step below the row above it.
 ## 4. Colour has rules, and they are not "use the accent"
 
 The accent is the loudest thing on the page, so the language spends it
-carefully. Three rules, all visible in the reference and all easy to break:
+carefully. Several foundational rules govern how color and depth are applied:
 
 **The accent is a fill or a link, never an outline label.** Every secondary
 action in the reference — Copy link, Login, Documents, Export, Cancel, Forward
@@ -124,10 +116,29 @@ makes a toolbar look heavier and flatter than the source. Solid, soft and link
 buttons opt out — there the icon and label are the same ink — as do icon-only
 buttons, which have no label to contrast against.
 
-**A coloured fill casts a coloured shadow.** A blue button dropping a grey
-shadow is the tell that separates a kit from a designed product. Solid buttons
-derive their elevation from their own fill with relative colour syntax, so it
-stays right at every accent hue.
+**Solid surfaces use subtle gradients and a crisp top inner highlight.** Rather
+than a flat, dead color block, solid surfaces (primary buttons, active toggles,
+solid badges) carry a gentle top-to-bottom luminance gradient (`oklch(from ...
+calc(l + 0.035) c h) 0%, ... 100%`) coupled with a 1px semi-transparent top
+inner highlight (`inset 0 1px 0 hsl(0 0% 100% / 0.22)`). This adds tactile
+physicality and polish without slipping into skeuomorphism.
+
+**A coloured fill casts a radiant coloured shadow.** A blue button dropping a
+grey shadow is the tell that separates a kit from a designed product. Solid
+buttons and active controls derive a dual-layer radiant elevation from their
+own fill via relative colour syntax, so it stays vibrant and balanced across
+every accent hue.
+
+**Secondary and outline surfaces carry crisp, soft elevation.** White and
+surface-level controls (outline buttons, form inputs, segmented indicators)
+float off the canvas with a calibrated subtle shadow (`var(--ui-shadow-sm)`)
+and neutral border (`--ui-border-default` or `--ui-border-subtle`), ensuring
+crisp separation against background panels.
+
+**Embedded badges inside secondary controls are outlined.** When a counter or
+badge is embedded inside an outline button or control (e.g. `Like 2`), it
+renders in an outline style (`variant="outline"`) rather than soft or solid,
+keeping visual hierarchy anchored to the primary action.
 
 Beyond that, the rule inherited from `README.md` still governs everything: **no
 component may reference a colour.** Components speak in semantic tokens
@@ -142,7 +153,7 @@ chroma. That is what makes a re-skin four numbers rather than a fork.
 | Page-level panel, card, table, list, toast, popover | `--ui-radius-2xl` (16px) | `sm` bordered, `lg`+ floating |
 | Modal | `--ui-radius-2xl` | `xl` |
 | Nested panel inside a card | `--ui-radius-xl` (12px) | `xs` or none |
-| Controls | `--ui-control-radius-*` | `xs` |
+| Controls | `--ui-control-radius-*` | `xs` – `sm` |
 
 Card gutters are 24px at `md`. The earlier 12/16 made a card look like a table
 row with rounded corners: content that close to a 16px corner reads as

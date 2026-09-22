@@ -9,6 +9,13 @@
    Lightness steps stay fixed (that's what keeps contrast predictable); only
    hue and chroma move. The chroma multipliers taper toward both ends of the
    ramp so tints stay tasteful instead of muddy at 50 and neon at 950.
+
+   The 600 step sits at 53% for a measured reason. Sampling the hue wheel
+   shows a dead band roughly between 56% and 67% lightness where a fill clears
+   4.5:1 against neither white nor dark text — cyan at 60% tops out around
+   3.5:1 either way. Since every solid fill in the kit lands on 600, that step
+   has to sit below the band. At 53% the worst hue (cyan) still reaches 4.65:1
+   with white.
    ========================================================================= */
 
 :root {
@@ -71,13 +78,13 @@
   --ui-accent-100: oklch(94.6% calc(var(--ui-accent-c) * var(--ui-cm-100)) var(--ui-accent-h));
   --ui-accent-200: oklch(90.0% calc(var(--ui-accent-c) * var(--ui-cm-200)) var(--ui-accent-h));
   --ui-accent-300: oklch(83.0% calc(var(--ui-accent-c) * var(--ui-cm-300)) var(--ui-accent-h));
-  --ui-accent-400: oklch(73.5% calc(var(--ui-accent-c) * var(--ui-cm-400)) var(--ui-accent-h));
-  --ui-accent-500: oklch(64.5% calc(var(--ui-accent-c) * var(--ui-cm-500)) var(--ui-accent-h));
-  --ui-accent-600: oklch(57.0% calc(var(--ui-accent-c) * var(--ui-cm-600)) var(--ui-accent-h));
-  --ui-accent-700: oklch(50.0% calc(var(--ui-accent-c) * var(--ui-cm-700)) var(--ui-accent-h));
-  --ui-accent-800: oklch(43.5% calc(var(--ui-accent-c) * var(--ui-cm-800)) var(--ui-accent-h));
-  --ui-accent-900: oklch(37.5% calc(var(--ui-accent-c) * var(--ui-cm-900)) var(--ui-accent-h));
-  --ui-accent-950: oklch(27.0% calc(var(--ui-accent-c) * var(--ui-cm-950)) var(--ui-accent-h));
+  --ui-accent-400: oklch(73.0% calc(var(--ui-accent-c) * var(--ui-cm-400)) var(--ui-accent-h));
+  --ui-accent-500: oklch(63.0% calc(var(--ui-accent-c) * var(--ui-cm-500)) var(--ui-accent-h));
+  --ui-accent-600: oklch(53.0% calc(var(--ui-accent-c) * var(--ui-cm-600)) var(--ui-accent-h));
+  --ui-accent-700: oklch(45.5% calc(var(--ui-accent-c) * var(--ui-cm-700)) var(--ui-accent-h));
+  --ui-accent-800: oklch(39.0% calc(var(--ui-accent-c) * var(--ui-cm-800)) var(--ui-accent-h));
+  --ui-accent-900: oklch(33.0% calc(var(--ui-accent-c) * var(--ui-cm-900)) var(--ui-accent-h));
+  --ui-accent-950: oklch(24.0% calc(var(--ui-accent-c) * var(--ui-cm-950)) var(--ui-accent-h));
 
   /* --- neutral ramp ------------------------------------------------------ */
   --ui-neutral-0:   oklch(100%  0 0);
@@ -94,37 +101,37 @@
   --ui-neutral-950: oklch(18.0% calc(var(--ui-neutral-c) * var(--ui-cm-950)) var(--ui-neutral-h));
 
   /* --- status ramps (abbreviated: only the steps the kit actually uses) --- */
-  --ui-success-50:  oklch(97.4% calc(var(--ui-success-c) * var(--ui-cm-50))  var(--ui-success-h));
-  --ui-success-100: oklch(94.2% calc(var(--ui-success-c) * var(--ui-cm-100)) var(--ui-success-h));
-  --ui-success-200: oklch(89.0% calc(var(--ui-success-c) * var(--ui-cm-200)) var(--ui-success-h));
-  --ui-success-500: oklch(66.0% calc(var(--ui-success-c) * var(--ui-cm-500)) var(--ui-success-h));
-  --ui-success-600: oklch(58.5% calc(var(--ui-success-c) * var(--ui-cm-600)) var(--ui-success-h));
-  --ui-success-700: oklch(48.0% calc(var(--ui-success-c) * var(--ui-cm-700)) var(--ui-success-h));
+  --ui-success-50:  oklch(97.6% calc(var(--ui-success-c) * var(--ui-cm-50))  var(--ui-success-h));
+  --ui-success-100: oklch(94.6% calc(var(--ui-success-c) * var(--ui-cm-100)) var(--ui-success-h));
+  --ui-success-200: oklch(90.0% calc(var(--ui-success-c) * var(--ui-cm-200)) var(--ui-success-h));
+  --ui-success-500: oklch(63.0% calc(var(--ui-success-c) * var(--ui-cm-500)) var(--ui-success-h));
+  --ui-success-600: oklch(53.0% calc(var(--ui-success-c) * var(--ui-cm-600)) var(--ui-success-h));
+  --ui-success-700: oklch(45.5% calc(var(--ui-success-c) * var(--ui-cm-700)) var(--ui-success-h));
   --ui-success-900: oklch(33.0% calc(var(--ui-success-c) * var(--ui-cm-900)) var(--ui-success-h));
 
   --ui-warning-50:  oklch(97.6% calc(var(--ui-warning-c) * var(--ui-cm-50))  var(--ui-warning-h));
-  --ui-warning-100: oklch(94.4% calc(var(--ui-warning-c) * var(--ui-cm-100)) var(--ui-warning-h));
-  --ui-warning-200: oklch(89.4% calc(var(--ui-warning-c) * var(--ui-cm-200)) var(--ui-warning-h));
-  --ui-warning-500: oklch(75.0% calc(var(--ui-warning-c) * var(--ui-cm-500)) var(--ui-warning-h));
-  --ui-warning-600: oklch(67.0% calc(var(--ui-warning-c) * var(--ui-cm-600)) var(--ui-warning-h));
-  --ui-warning-700: oklch(53.0% calc(var(--ui-warning-c) * var(--ui-cm-700)) var(--ui-warning-h));
-  --ui-warning-900: oklch(35.0% calc(var(--ui-warning-c) * var(--ui-cm-900)) var(--ui-warning-h));
+  --ui-warning-100: oklch(94.6% calc(var(--ui-warning-c) * var(--ui-cm-100)) var(--ui-warning-h));
+  --ui-warning-200: oklch(90.0% calc(var(--ui-warning-c) * var(--ui-cm-200)) var(--ui-warning-h));
+  --ui-warning-500: oklch(63.0% calc(var(--ui-warning-c) * var(--ui-cm-500)) var(--ui-warning-h));
+  --ui-warning-600: oklch(53.0% calc(var(--ui-warning-c) * var(--ui-cm-600)) var(--ui-warning-h));
+  --ui-warning-700: oklch(45.5% calc(var(--ui-warning-c) * var(--ui-cm-700)) var(--ui-warning-h));
+  --ui-warning-900: oklch(33.0% calc(var(--ui-warning-c) * var(--ui-cm-900)) var(--ui-warning-h));
 
-  --ui-danger-50:  oklch(97.2% calc(var(--ui-danger-c) * var(--ui-cm-50))  var(--ui-danger-h));
-  --ui-danger-100: oklch(94.0% calc(var(--ui-danger-c) * var(--ui-cm-100)) var(--ui-danger-h));
-  --ui-danger-200: oklch(89.0% calc(var(--ui-danger-c) * var(--ui-cm-200)) var(--ui-danger-h));
-  --ui-danger-500: oklch(64.0% calc(var(--ui-danger-c) * var(--ui-cm-500)) var(--ui-danger-h));
-  --ui-danger-600: oklch(57.0% calc(var(--ui-danger-c) * var(--ui-cm-600)) var(--ui-danger-h));
-  --ui-danger-700: oklch(49.0% calc(var(--ui-danger-c) * var(--ui-cm-700)) var(--ui-danger-h));
-  --ui-danger-900: oklch(34.0% calc(var(--ui-danger-c) * var(--ui-cm-900)) var(--ui-danger-h));
+  --ui-danger-50:  oklch(97.6% calc(var(--ui-danger-c) * var(--ui-cm-50))  var(--ui-danger-h));
+  --ui-danger-100: oklch(94.6% calc(var(--ui-danger-c) * var(--ui-cm-100)) var(--ui-danger-h));
+  --ui-danger-200: oklch(90.0% calc(var(--ui-danger-c) * var(--ui-cm-200)) var(--ui-danger-h));
+  --ui-danger-500: oklch(63.0% calc(var(--ui-danger-c) * var(--ui-cm-500)) var(--ui-danger-h));
+  --ui-danger-600: oklch(53.0% calc(var(--ui-danger-c) * var(--ui-cm-600)) var(--ui-danger-h));
+  --ui-danger-700: oklch(45.5% calc(var(--ui-danger-c) * var(--ui-cm-700)) var(--ui-danger-h));
+  --ui-danger-900: oklch(33.0% calc(var(--ui-danger-c) * var(--ui-cm-900)) var(--ui-danger-h));
 
-  --ui-info-50:  oklch(97.4% calc(var(--ui-info-c) * var(--ui-cm-50))  var(--ui-info-h));
-  --ui-info-100: oklch(94.2% calc(var(--ui-info-c) * var(--ui-cm-100)) var(--ui-info-h));
-  --ui-info-200: oklch(89.2% calc(var(--ui-info-c) * var(--ui-cm-200)) var(--ui-info-h));
-  --ui-info-500: oklch(65.0% calc(var(--ui-info-c) * var(--ui-cm-500)) var(--ui-info-h));
-  --ui-info-600: oklch(57.5% calc(var(--ui-info-c) * var(--ui-cm-600)) var(--ui-info-h));
-  --ui-info-700: oklch(50.0% calc(var(--ui-info-c) * var(--ui-cm-700)) var(--ui-info-h));
-  --ui-info-900: oklch(34.0% calc(var(--ui-info-c) * var(--ui-cm-900)) var(--ui-info-h));
+  --ui-info-50:  oklch(97.6% calc(var(--ui-info-c) * var(--ui-cm-50))  var(--ui-info-h));
+  --ui-info-100: oklch(94.6% calc(var(--ui-info-c) * var(--ui-cm-100)) var(--ui-info-h));
+  --ui-info-200: oklch(90.0% calc(var(--ui-info-c) * var(--ui-cm-200)) var(--ui-info-h));
+  --ui-info-500: oklch(63.0% calc(var(--ui-info-c) * var(--ui-cm-500)) var(--ui-info-h));
+  --ui-info-600: oklch(53.0% calc(var(--ui-info-c) * var(--ui-cm-600)) var(--ui-info-h));
+  --ui-info-700: oklch(45.5% calc(var(--ui-info-c) * var(--ui-cm-700)) var(--ui-info-h));
+  --ui-info-900: oklch(33.0% calc(var(--ui-info-c) * var(--ui-cm-900)) var(--ui-info-h));
 }
 
 

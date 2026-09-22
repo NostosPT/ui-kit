@@ -65,7 +65,7 @@
   --ui-accent-soft-hover: var(--ui-accent-100);
   --ui-accent-border: var(--ui-accent-200);
   --ui-accent-text: var(--ui-accent-700);
-  --ui-accent-ring: oklch(57% var(--ui-accent-c) var(--ui-accent-h) / 0.28);
+  --ui-accent-ring: oklch(53% var(--ui-accent-c) var(--ui-accent-h) / 0.28);
 
   /* --- status ------------------------------------------------------------ */
   --ui-success-solid: var(--ui-success-600);
@@ -135,14 +135,17 @@
   --ui-border-strong: oklch(42% calc(var(--ui-neutral-c) * 1) var(--ui-neutral-h));
   --ui-border-inverse: var(--ui-neutral-300);
 
-  --ui-accent-solid: var(--ui-accent-500);
-  --ui-accent-solid-hover: var(--ui-accent-400);
-  --ui-accent-solid-active: var(--ui-accent-300);
+  /* Same steps as light: 500 now falls inside the contrast dead band
+     described in tokens.css, and holding the fill constant across themes
+     keeps a primary button recognisably the same control. */
+  --ui-accent-solid: var(--ui-accent-600);
+  --ui-accent-solid-hover: var(--ui-accent-700);
+  --ui-accent-solid-active: var(--ui-accent-800);
   --ui-accent-soft: oklch(28% calc(var(--ui-accent-c) * 0.3) var(--ui-accent-h));
   --ui-accent-soft-hover: oklch(33% calc(var(--ui-accent-c) * 0.36) var(--ui-accent-h));
   --ui-accent-border: oklch(40% calc(var(--ui-accent-c) * 0.45) var(--ui-accent-h));
   --ui-accent-text: oklch(82% calc(var(--ui-accent-c) * 0.55) var(--ui-accent-h));
-  --ui-accent-ring: oklch(64% var(--ui-accent-c) var(--ui-accent-h) / 0.36);
+  --ui-accent-ring: oklch(63% var(--ui-accent-c) var(--ui-accent-h) / 0.36);
 
   --ui-success-soft: oklch(28% calc(var(--ui-success-c) * 0.3) var(--ui-success-h));
   --ui-success-border: oklch(40% calc(var(--ui-success-c) * 0.45) var(--ui-success-h));

@@ -27,6 +27,7 @@
     description = undefined,
     disabled = false,
     align = "center",
+    variant = "card",
     class: klass = "",
     media,
     titleSlot,
@@ -49,6 +50,7 @@
 <label
   class="ui-option {klass}"
   for={inputId}
+  data-variant={variant}
   data-selected={selected || undefined}
   data-disabled={disabled || undefined}
   data-align={align}
@@ -180,11 +182,28 @@
     background: var(--ui-accent-solid);
     color: oklch(from var(--ui-accent-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
   }
-  /* The radio's dot is drawn as an inset ring rather than a child element, so
-     the markup stays the same for both control types. */
+  /* The radio's dot is drawn as an inset ring matching the reference:
+     blue border ring, white gap, solid blue inner dot. */
   .ui-option[data-selected]:has(.ui-option__input[type="radio"]) .ui-option__control {
-    box-shadow: inset 0 0 0 4px var(--ui-bg-surface);
-    background: var(--ui-accent-solid);
+    border-color: var(--ui-accent-solid);
+    border-width: 2px;
+    background: var(--ui-bg-surface);
+    box-shadow: inset 0 0 0 3px var(--ui-bg-surface), inset 0 0 0 8px var(--ui-accent-solid);
+  }
+
+  /* Row variant for embedding multiple choices inside a card/panel or list */
+  .ui-option[data-variant="row"] {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: var(--ui-space-5) var(--ui-space-6);
+  }
+  .ui-option[data-variant="row"][data-selected] {
+    border-color: transparent;
+    background: transparent;
+  }
+  .ui-option[data-variant="row"]:hover:not([data-disabled]) {
+    background: var(--ui-bg-hover);
   }
 
   .ui-option__media {

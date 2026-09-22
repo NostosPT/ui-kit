@@ -92,10 +92,10 @@
      centre would shift by a pixel as the border width changes. */
   .ui-radio__dot::after {
     content: "";
-    width: calc(var(--radio-size) * 0.4);
-    height: calc(var(--radio-size) * 0.4);
+    width: calc(var(--radio-size) * 0.45);
+    height: calc(var(--radio-size) * 0.45);
     border-radius: var(--ui-radius-full);
-    background: var(--ui-bg-surface);
+    background: var(--ui-accent-solid);
     transform: scale(0);
     transition: transform var(--ui-duration-fast) var(--ui-ease-spring);
   }
@@ -104,8 +104,9 @@
     border-color: var(--ui-accent-solid);
   }
   .ui-radio__input:checked + .ui-radio__dot {
-    background: var(--ui-accent-solid);
+    background: var(--ui-bg-surface);
     border-color: var(--ui-accent-solid);
+    border-width: 2px;
   }
   .ui-radio__input:checked + .ui-radio__dot::after {
     transform: scale(1);

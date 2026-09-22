@@ -1,0 +1,154 @@
+/* ============================================================================
+   SEMANTIC TOKENS
+   ----------------------------------------------------------------------------
+   The only layer components are allowed to reference. A component never says
+   "neutral-200" — it says "border-default". That indirection is what lets the
+   dark theme below be a pure remap, and what lets a consumer override one
+   surface without auditing every component.
+   ========================================================================= */
+
+[data-ui-theme="light"],
+:root {
+  color-scheme: light;
+
+  /* --- surfaces ---------------------------------------------------------- */
+  --ui-bg-canvas: var(--ui-neutral-100);
+  --ui-bg-surface: var(--ui-neutral-0);
+  --ui-bg-raised: var(--ui-neutral-0);
+  --ui-bg-sunken: var(--ui-neutral-50);
+  --ui-bg-subtle: var(--ui-neutral-50);
+  --ui-bg-muted: var(--ui-neutral-100);
+  --ui-bg-emphasis: var(--ui-neutral-200);
+  --ui-bg-inverse: var(--ui-neutral-900);
+  --ui-bg-overlay: hsl(var(--ui-shadow-color) / 0.4);
+
+  /* Interaction washes. Kept separate from surfaces so hover on a white card
+     and hover on a grey toolbar can differ without new component variants. */
+  --ui-bg-hover: var(--ui-neutral-50);
+  --ui-bg-active: var(--ui-neutral-100);
+  --ui-bg-selected: var(--ui-accent-50);
+
+  /* --- foreground -------------------------------------------------------- */
+  --ui-fg-default: var(--ui-neutral-900);
+  --ui-fg-muted: var(--ui-neutral-600);
+  --ui-fg-subtle: var(--ui-neutral-500);
+  --ui-fg-faint: var(--ui-neutral-400);
+  --ui-fg-inverse: var(--ui-neutral-0);
+  --ui-fg-on-accent: var(--ui-neutral-0);
+  --ui-fg-on-solid: var(--ui-neutral-0);
+
+  /* --- borders ----------------------------------------------------------- */
+  --ui-border-subtle: var(--ui-neutral-100);
+  --ui-border-default: var(--ui-neutral-200);
+  --ui-border-strong: var(--ui-neutral-300);
+  --ui-border-inverse: var(--ui-neutral-700);
+
+  /* --- accent ------------------------------------------------------------ */
+  --ui-accent-solid: var(--ui-accent-600);
+  --ui-accent-solid-hover: var(--ui-accent-700);
+  --ui-accent-solid-active: var(--ui-accent-800);
+  --ui-accent-soft: var(--ui-accent-50);
+  --ui-accent-soft-hover: var(--ui-accent-100);
+  --ui-accent-border: var(--ui-accent-200);
+  --ui-accent-text: var(--ui-accent-700);
+  --ui-accent-ring: oklch(57% var(--ui-accent-c) var(--ui-accent-h) / 0.28);
+
+  /* --- status ------------------------------------------------------------ */
+  --ui-success-solid: var(--ui-success-600);
+  --ui-success-soft: var(--ui-success-50);
+  --ui-success-border: var(--ui-success-200);
+  --ui-success-text: var(--ui-success-700);
+  --ui-success-dot: var(--ui-success-500);
+
+  --ui-warning-solid: var(--ui-warning-600);
+  --ui-warning-soft: var(--ui-warning-50);
+  --ui-warning-border: var(--ui-warning-200);
+  --ui-warning-text: var(--ui-warning-700);
+  --ui-warning-dot: var(--ui-warning-500);
+
+  --ui-danger-solid: var(--ui-danger-600);
+  --ui-danger-soft: var(--ui-danger-50);
+  --ui-danger-border: var(--ui-danger-200);
+  --ui-danger-text: var(--ui-danger-700);
+  --ui-danger-dot: var(--ui-danger-500);
+
+  --ui-info-solid: var(--ui-info-600);
+  --ui-info-soft: var(--ui-info-50);
+  --ui-info-border: var(--ui-info-200);
+  --ui-info-text: var(--ui-info-700);
+  --ui-info-dot: var(--ui-info-500);
+
+  --ui-neutral-soft: var(--ui-neutral-100);
+  --ui-neutral-text: var(--ui-neutral-700);
+  --ui-neutral-dot: var(--ui-neutral-400);
+}
+
+/* ---------------------------------------------------------------------------
+   DARK
+   Not an inversion — a remap. Dark surfaces step *up* in lightness as they
+   come forward (canvas 950 → surface 900 → raised 800), which is how real
+   elevation reads without light leaking from a shadow that can't be seen.
+   Soft status fills switch from tint-of-white to a low-lightness wash so the
+   badge text keeps its contrast ratio.
+   ------------------------------------------------------------------------ */
+[data-ui-theme="dark"] {
+  color-scheme: dark;
+
+  --ui-bg-canvas: oklch(16.5% calc(var(--ui-neutral-c) * 0.5) var(--ui-neutral-h));
+  --ui-bg-surface: oklch(21.0% calc(var(--ui-neutral-c) * 0.6) var(--ui-neutral-h));
+  --ui-bg-raised: oklch(25.0% calc(var(--ui-neutral-c) * 0.7) var(--ui-neutral-h));
+  --ui-bg-sunken: oklch(13.5% calc(var(--ui-neutral-c) * 0.5) var(--ui-neutral-h));
+  --ui-bg-subtle: oklch(25.0% calc(var(--ui-neutral-c) * 0.7) var(--ui-neutral-h));
+  --ui-bg-muted: oklch(29.0% calc(var(--ui-neutral-c) * 0.8) var(--ui-neutral-h));
+  --ui-bg-emphasis: oklch(34.0% calc(var(--ui-neutral-c) * 0.9) var(--ui-neutral-h));
+  --ui-bg-inverse: var(--ui-neutral-100);
+  --ui-bg-overlay: oklch(10% 0 0 / 0.6);
+
+  --ui-bg-hover: oklch(26.5% calc(var(--ui-neutral-c) * 0.8) var(--ui-neutral-h));
+  --ui-bg-active: oklch(30.5% calc(var(--ui-neutral-c) * 0.9) var(--ui-neutral-h));
+  --ui-bg-selected: oklch(30% calc(var(--ui-accent-c) * 0.28) var(--ui-accent-h));
+
+  --ui-fg-default: oklch(96% calc(var(--ui-neutral-c) * 0.3) var(--ui-neutral-h));
+  --ui-fg-muted: oklch(76% calc(var(--ui-neutral-c) * 0.6) var(--ui-neutral-h));
+  --ui-fg-subtle: oklch(66% calc(var(--ui-neutral-c) * 0.7) var(--ui-neutral-h));
+  --ui-fg-faint: oklch(54% calc(var(--ui-neutral-c) * 0.8) var(--ui-neutral-h));
+  --ui-fg-inverse: var(--ui-neutral-900);
+  --ui-fg-on-accent: oklch(99% 0 0);
+  --ui-fg-on-solid: oklch(99% 0 0);
+
+  --ui-border-subtle: oklch(27% calc(var(--ui-neutral-c) * 0.8) var(--ui-neutral-h));
+  --ui-border-default: oklch(33% calc(var(--ui-neutral-c) * 0.9) var(--ui-neutral-h));
+  --ui-border-strong: oklch(42% calc(var(--ui-neutral-c) * 1) var(--ui-neutral-h));
+  --ui-border-inverse: var(--ui-neutral-300);
+
+  --ui-accent-solid: var(--ui-accent-500);
+  --ui-accent-solid-hover: var(--ui-accent-400);
+  --ui-accent-solid-active: var(--ui-accent-300);
+  --ui-accent-soft: oklch(28% calc(var(--ui-accent-c) * 0.3) var(--ui-accent-h));
+  --ui-accent-soft-hover: oklch(33% calc(var(--ui-accent-c) * 0.36) var(--ui-accent-h));
+  --ui-accent-border: oklch(40% calc(var(--ui-accent-c) * 0.45) var(--ui-accent-h));
+  --ui-accent-text: oklch(82% calc(var(--ui-accent-c) * 0.55) var(--ui-accent-h));
+  --ui-accent-ring: oklch(64% var(--ui-accent-c) var(--ui-accent-h) / 0.36);
+
+  --ui-success-soft: oklch(28% calc(var(--ui-success-c) * 0.3) var(--ui-success-h));
+  --ui-success-border: oklch(40% calc(var(--ui-success-c) * 0.45) var(--ui-success-h));
+  --ui-success-text: oklch(84% calc(var(--ui-success-c) * 0.5) var(--ui-success-h));
+
+  --ui-warning-soft: oklch(28% calc(var(--ui-warning-c) * 0.3) var(--ui-warning-h));
+  --ui-warning-border: oklch(40% calc(var(--ui-warning-c) * 0.45) var(--ui-warning-h));
+  --ui-warning-text: oklch(86% calc(var(--ui-warning-c) * 0.5) var(--ui-warning-h));
+
+  --ui-danger-soft: oklch(28% calc(var(--ui-danger-c) * 0.3) var(--ui-danger-h));
+  --ui-danger-border: oklch(40% calc(var(--ui-danger-c) * 0.45) var(--ui-danger-h));
+  --ui-danger-text: oklch(82% calc(var(--ui-danger-c) * 0.5) var(--ui-danger-h));
+
+  --ui-info-soft: oklch(28% calc(var(--ui-info-c) * 0.3) var(--ui-info-h));
+  --ui-info-border: oklch(40% calc(var(--ui-info-c) * 0.45) var(--ui-info-h));
+  --ui-info-text: oklch(83% calc(var(--ui-info-c) * 0.5) var(--ui-info-h));
+
+  --ui-neutral-soft: oklch(30% calc(var(--ui-neutral-c) * 0.9) var(--ui-neutral-h));
+  --ui-neutral-text: oklch(80% calc(var(--ui-neutral-c) * 0.7) var(--ui-neutral-h));
+  --ui-neutral-dot: oklch(60% calc(var(--ui-neutral-c) * 0.8) var(--ui-neutral-h));
+
+  --ui-shadow-color: 250 40% 3%;
+}

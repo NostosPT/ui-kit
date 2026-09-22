@@ -47,7 +47,7 @@
     <Card>
       <CardBody padding="md">
         <div class="stack">
-          <Button variant="link" tone="neutral" icon="chevron-left">Back</Button>
+          <div><Button variant="link" tone="neutral" icon="chevron-left">Back</Button></div>
 
           <div>
             <p class="eyebrow">

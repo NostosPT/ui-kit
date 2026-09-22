@@ -1,0 +1,117 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Introduction" />
+
+# Nostos UI
+
+A Svelte 5 component kit for dense product interfaces — tables, forms, side
+panels, checkout flows. It is built around one constraint:
+
+> **No component may reference a colour.**
+
+Components speak only in semantic tokens (`--ui-bg-surface`, `--ui-border-default`,
+`--ui-accent-solid`). Those map to ramps, and the ramps are generated from a hue
+and a chroma. Re-skinning the kit is a handful of numbers, not a fork.
+
+```css
+.ui-root {
+  --ui-accent-h: 150;   /* the whole kit is now green */
+  --ui-accent-c: 0.15;
+  --ui-radius-scale: 1.6;  /* …and softer */
+}
+```
+
+Open **Foundations → Theming** to drag those values around and watch the
+components follow.
+
+---
+
+## Getting started
+
+```bash
+npm install @nostos/ui
+```
+
+```js
+// once, anywhere in your app
+import "@nostos/ui/styles.css";
+```
+
+```svelte
+<script>
+  import { Button, Input, Field } from "@nostos/ui";
+</script>
+
+<div class="ui-root">
+  <Field label="Work email">
+    {#snippet control({ id, describedBy })}
+      <Input {id} aria-describedby={describedBy} placeholder="info@pixsellz.io" />
+    {/snippet}
+  </Field>
+  <Button icon="send">Send invite</Button>
+</div>
+```
+
+`class="ui-root"` scopes the base styles and opens a theme scope. Add
+`data-ui-theme="dark"` to the same element — or any ancestor — to flip the
+scheme. Both can live on `<html>` if you want the whole document themed.
+
+---
+
+## How it is layered
+
+| Layer | File | What lives there |
+| --- | --- | --- |
+| Palette inputs | `tokens.css` | Four numbers per ramp: hue and chroma |
+| Ramps | `tokens.css` | 50–950 steps, generated in OKLCH |
+| Non-colour scales | `scale.css` | Spacing, type, radius, elevation, motion |
+| Semantic tokens | `semantic.css` | `bg-surface`, `fg-muted`, `accent-solid`… |
+| Base | `base.css` | A small reset, scoped to `.ui-root` |
+| Components | `components/*` | Consume **semantic tokens only** |
+
+The indirection in the middle is what does the work. Because a component asks
+for `--ui-border-default` rather than `--ui-neutral-200`, the dark theme is a
+pure remap of the semantic layer, and a consumer can restyle one surface
+without auditing forty components.
+
+---
+
+## Three decisions worth knowing about
+
+**Variant and tone are separate axes.** A button's `variant` controls how much
+surface it occupies; its `tone` says what it means. Every combination is valid,
+so a quiet destructive action (`outline` + `danger`) needs no new variant.
+
+**Every text-like control renders into one `InputFrame`.** Input, Select,
+Listbox, TagInput, PhoneInput, CurrencyInput, NumberInput and DatePicker all
+share the same border, focus ring, height and invalid styling — they physically
+cannot drift apart.
+
+**Foreground colour on a fill is derived, not declared.** A solid button
+computes its label colour from its own background using relative colour syntax,
+so an amber or lime accent flips to a dark label automatically instead of
+shipping white-on-yellow. See the note at the bottom of `tokens.css`.
+
+---
+
+## Accessibility
+
+- Focus is always visible, and uses a ring that hugs the control's radius.
+- Checkbox, Radio and Switch keep a real focusable `<input>`; the painted box is
+  a sibling. Label clicks, form submission and the indeterminate property stay
+  native.
+- Tabs, Menu, Listbox, SegmentedControl and Calendar each implement the full
+  keyboard contract for their ARIA pattern — arrows, Home/End, type-ahead,
+  Escape.
+- Modal is built on `<dialog>` + `showModal()`, so the focus trap, top layer and
+  inert background come from the platform.
+- Every animation collapses under `prefers-reduced-motion`.
+
+---
+
+## Browser support
+
+The colour system uses `oklch()` and relative colour syntax
+(`oklch(from … l c h)`). That is Chrome 119+, Safari 16.4+ and Firefox 128+.
+There is an `@supports` fallback for the derived foreground; without relative
+colour syntax you set `--ui-fg-on-solid` yourself.

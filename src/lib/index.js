@@ -71,6 +71,13 @@ export { default as Sparkline } from "./components/Sparkline/Sparkline.svelte";
 export { default as EmptyState } from "./components/EmptyState/EmptyState.svelte";
 
 // --- navigation -------------------------------------------------------------
+export { default as Sidebar } from "./components/Sidebar/Sidebar.svelte";
+export { default as SidebarHeader } from "./components/Sidebar/SidebarHeader.svelte";
+export { default as SidebarSearch } from "./components/Sidebar/SidebarSearch.svelte";
+export { default as SidebarNav } from "./components/Sidebar/SidebarNav.svelte";
+export { default as SidebarSection } from "./components/Sidebar/SidebarSection.svelte";
+export { default as SidebarItem } from "./components/Sidebar/SidebarItem.svelte";
+export { default as SidebarFooter } from "./components/Sidebar/SidebarFooter.svelte";
 export { default as Tabs } from "./components/Tabs/Tabs.svelte";
 export { default as TabPanel } from "./components/Tabs/TabPanel.svelte";
 export { default as Menu } from "./components/Menu/Menu.svelte";

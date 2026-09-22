@@ -34,7 +34,7 @@
 
   let inputEl = $state(null);
 
-  const iconSize = $derived(size === "lg" ? 18 : 16);
+  const iconSize = $derived({ sm: 16, md: 18, lg: 20 }[size] ?? 18);
   const showClear = $derived(
     clearable && !disabled && !readonly && String(value ?? "").length > 0
   );
@@ -54,7 +54,7 @@
 {#snippet frameEnd()}
   {#if showClear}
     <button class="ui-input__clear" type="button" onclick={clear} aria-label="Clear">
-      <Icon name="x" size={14} />
+      <Icon name="x" size={15} />
     </button>
   {/if}
   {#if trailingIcon}<Icon name={trailingIcon} size={iconSize} />{/if}
@@ -131,8 +131,8 @@
   .ui-input__clear {
     display: grid;
     place-items: center;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: var(--ui-radius-full);
     color: var(--ui-fg-faint);
     background: transparent;

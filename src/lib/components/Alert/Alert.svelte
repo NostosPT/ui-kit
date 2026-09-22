@@ -162,11 +162,11 @@
   .ui-alert__close {
     display: grid;
     place-items: center;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     flex: none;
     margin: -2px -4px 0 0;
-    border-radius: var(--ui-radius-sm);
+    border-radius: var(--ui-radius-md);
     color: currentColor;
     opacity: 0.6;
     transition: opacity var(--ui-duration-fast) var(--ui-ease-out);

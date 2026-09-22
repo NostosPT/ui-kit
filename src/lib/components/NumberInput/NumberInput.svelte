@@ -89,7 +89,7 @@
     onclick={() => nudge(direction)}
     tabindex="-1"
   >
-    <Icon name={icon} size={size === "sm" ? 13 : 15} />
+    <Icon name={icon} size={size === "lg" ? 20 : 18} />
   </button>
 {/snippet}
 
@@ -151,7 +151,7 @@
   }
 
   .ui-number__input {
-    width: var(--number-w, 56px);
+    width: var(--number-w, 60px);
     height: var(--frame-h);
     min-width: 0;
     border: none;
@@ -186,13 +186,13 @@
 
   :global(.ui-number[data-layout="separated"]) .ui-number__step {
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-md);
+    border-radius: var(--frame-radius);
     background: var(--ui-bg-surface);
     box-shadow: var(--ui-shadow-xs);
   }
   :global(.ui-number[data-layout="separated"]) .ui-number__input {
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-md);
+    border-radius: var(--frame-radius);
     background: var(--ui-bg-surface);
     box-shadow: var(--ui-shadow-xs);
   }

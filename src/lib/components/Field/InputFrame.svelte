@@ -62,26 +62,28 @@
       background-color var(--ui-duration-fast) var(--ui-ease-out);
   }
 
+  /* Same four numbers a Button of the same size resolves, from the same
+     tokens — a field and the button next to it are the same object. */
   .ui-frame[data-size="sm"] {
     --frame-h: var(--ui-control-h-sm);
-    --frame-px: var(--ui-space-5);
+    --frame-px: var(--ui-control-px-sm);
     --frame-fs: var(--ui-text-sm);
-    --frame-radius: var(--ui-radius-md);
-    --frame-gap: var(--ui-space-3);
+    --frame-radius: var(--ui-control-radius-sm);
+    --frame-gap: var(--ui-control-gap-sm);
   }
   .ui-frame[data-size="md"] {
     --frame-h: var(--ui-control-h-md);
-    --frame-px: var(--ui-space-6);
+    --frame-px: var(--ui-control-px-md);
     --frame-fs: var(--ui-text-md);
-    --frame-radius: var(--ui-radius-md);
-    --frame-gap: var(--ui-space-4);
+    --frame-radius: var(--ui-control-radius-md);
+    --frame-gap: var(--ui-control-gap-md);
   }
   .ui-frame[data-size="lg"] {
     --frame-h: var(--ui-control-h-lg);
-    --frame-px: var(--ui-space-7);
+    --frame-px: var(--ui-control-px-lg);
     --frame-fs: var(--ui-text-base);
-    --frame-radius: var(--ui-radius-lg);
-    --frame-gap: var(--ui-space-4);
+    --frame-radius: var(--ui-control-radius-lg);
+    --frame-gap: var(--ui-control-gap-lg);
   }
 
   .ui-frame:hover:not([data-disabled]):not(:focus-within) {

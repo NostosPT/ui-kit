@@ -75,9 +75,9 @@
     gap: var(--check-gap);
     position: relative;
   }
-  .ui-check[data-size="sm"] { --check-size: 14px; --check-gap: var(--ui-space-4); --check-fs: var(--ui-text-sm); }
-  .ui-check[data-size="md"] { --check-size: 16px; --check-gap: var(--ui-space-5); --check-fs: var(--ui-text-md); }
-  .ui-check[data-size="lg"] { --check-size: 20px; --check-gap: var(--ui-space-5); --check-fs: var(--ui-text-base); }
+  .ui-check[data-size="sm"] { --check-size: 16px; --check-gap: var(--ui-space-4); --check-fs: var(--ui-text-sm); }
+  .ui-check[data-size="md"] { --check-size: 20px; --check-gap: var(--ui-space-5); --check-fs: var(--ui-text-md); }
+  .ui-check[data-size="lg"] { --check-size: 22px; --check-gap: var(--ui-space-5); --check-fs: var(--ui-text-base); }
 
   .ui-check__input {
     position: absolute;

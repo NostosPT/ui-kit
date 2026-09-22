@@ -55,7 +55,7 @@
     height: var(--badge-h);
     padding-inline: var(--badge-px);
     border: 1px solid transparent;
-    border-radius: var(--ui-radius-sm);
+    border-radius: var(--ui-radius-md);
     font-size: var(--badge-fs);
     font-weight: var(--ui-weight-medium);
     letter-spacing: var(--ui-tracking-snug);
@@ -68,19 +68,19 @@
   }
 
   .ui-badge[data-size="sm"] {
-    --badge-h: 18px;
+    --badge-h: 20px;
     --badge-px: var(--ui-space-4);
     --badge-fs: var(--ui-text-2xs);
     --badge-gap: var(--ui-space-2);
   }
   .ui-badge[data-size="md"] {
-    --badge-h: 22px;
+    --badge-h: 26px;
     --badge-px: var(--ui-space-5);
     --badge-fs: var(--ui-text-xs);
     --badge-gap: var(--ui-space-3);
   }
   .ui-badge[data-size="lg"] {
-    --badge-h: 26px;
+    --badge-h: 30px;
     --badge-px: var(--ui-space-6);
     --badge-fs: var(--ui-text-sm);
     --badge-gap: var(--ui-space-3);
@@ -145,8 +145,8 @@
   }
 
   .ui-badge__dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: var(--ui-radius-full);
     background: var(--badge-dot);
     flex: none;

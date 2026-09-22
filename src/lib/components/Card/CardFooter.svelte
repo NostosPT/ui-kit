@@ -26,11 +26,11 @@
   .ui-card-footer {
     display: flex;
     align-items: center;
-    gap: var(--ui-space-4);
-    padding: var(--ui-space-6) var(--ui-space-8);
+    gap: var(--ui-space-6);
+    padding: var(--ui-space-8) var(--ui-space-12);
   }
   .ui-card-footer[data-compact] {
-    padding: var(--ui-space-5) var(--ui-space-7);
+    padding: var(--ui-space-6) var(--ui-space-8);
   }
   .ui-card-footer[data-divided] {
     border-top: 1px solid var(--ui-border-subtle);

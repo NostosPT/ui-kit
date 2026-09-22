@@ -113,10 +113,10 @@
   .ui-accordion-item__icon {
     display: grid;
     place-items: center;
-    width: 34px;
-    height: 34px;
+    width: var(--ui-control-h-md);
+    height: var(--ui-control-h-md);
     flex: none;
-    border-radius: var(--ui-radius-lg);
+    border-radius: var(--ui-control-radius-md);
     background: var(--ui-accent-soft);
     color: var(--ui-accent-text);
   }

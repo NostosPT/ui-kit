@@ -138,10 +138,10 @@
   .ui-dropzone__icon {
     display: grid;
     place-items: center;
-    width: 36px;
-    height: 36px;
+    width: var(--ui-control-h-md);
+    height: var(--ui-control-h-md);
     margin-bottom: var(--ui-space-2);
-    border-radius: var(--ui-radius-lg);
+    border-radius: var(--ui-control-radius-md);
     background: var(--ui-bg-surface);
     border: 1px solid var(--ui-border-default);
     box-shadow: var(--ui-shadow-xs);

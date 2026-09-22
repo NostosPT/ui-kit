@@ -69,9 +69,9 @@
     justify-content: space-between;
   }
 
-  .ui-switch[data-size="sm"] { --track-w: 28px; --track-h: 16px; --sw-fs: var(--ui-text-sm); }
-  .ui-switch[data-size="md"] { --track-w: 36px; --track-h: 20px; --sw-fs: var(--ui-text-md); }
-  .ui-switch[data-size="lg"] { --track-w: 44px; --track-h: 24px; --sw-fs: var(--ui-text-base); }
+  .ui-switch[data-size="sm"] { --track-w: 32px; --track-h: 18px; --sw-fs: var(--ui-text-sm); }
+  .ui-switch[data-size="md"] { --track-w: 42px; --track-h: 24px; --sw-fs: var(--ui-text-md); }
+  .ui-switch[data-size="lg"] { --track-w: 50px; --track-h: 28px; --sw-fs: var(--ui-text-base); }
 
   .ui-switch__input {
     position: absolute;

@@ -58,9 +58,9 @@
     gap: var(--radio-gap);
     position: relative;
   }
-  .ui-radio[data-size="sm"] { --radio-size: 14px; --radio-gap: var(--ui-space-4); --radio-fs: var(--ui-text-sm); }
-  .ui-radio[data-size="md"] { --radio-size: 16px; --radio-gap: var(--ui-space-5); --radio-fs: var(--ui-text-md); }
-  .ui-radio[data-size="lg"] { --radio-size: 20px; --radio-gap: var(--ui-space-5); --radio-fs: var(--ui-text-base); }
+  .ui-radio[data-size="sm"] { --radio-size: 16px; --radio-gap: var(--ui-space-4); --radio-fs: var(--ui-text-sm); }
+  .ui-radio[data-size="md"] { --radio-size: 20px; --radio-gap: var(--ui-space-5); --radio-fs: var(--ui-text-md); }
+  .ui-radio[data-size="lg"] { --radio-size: 22px; --radio-gap: var(--ui-space-5); --radio-fs: var(--ui-text-base); }
 
   .ui-radio__input {
     position: absolute;

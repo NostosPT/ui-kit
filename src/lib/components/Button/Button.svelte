@@ -32,7 +32,7 @@
   } = $props();
 
   const iconSize = $derived(
-    { xs: 12, sm: 14, md: 16, lg: 18 }[size] ?? 16
+    { xs: 14, sm: 16, md: 18, lg: 20 }[size] ?? 18
   );
   const inert = $derived(disabled || loading);
   const tag = $derived(href && !inert ? "a" : "button");
@@ -89,7 +89,10 @@
     border: 1px solid transparent;
     border-radius: var(--btn-radius);
     font-size: var(--btn-fs);
-    font-weight: var(--ui-weight-medium);
+    /* Semibold, not medium. At 14px on a 40px fill a 500 label goes thin and
+       the button reads as a tinted rectangle with text lying on it rather
+       than as one object. */
+    font-weight: var(--ui-weight-semibold);
     letter-spacing: var(--ui-tracking-snug);
     line-height: 1;
     white-space: nowrap;
@@ -104,34 +107,39 @@
       transform var(--ui-duration-instant) var(--ui-ease-out);
   }
 
-  /* --- sizes ------------------------------------------------------------ */
+  /* --- sizes ------------------------------------------------------------
+     Height, padding, gap and radius all come from the shared control scale
+     rather than from spacing steps picked per component. That is what keeps a
+     Button, an Input and a Select the same object at the same size — and it
+     is the thing the reference gets right and a hand-tuned kit gets wrong the
+     moment one of the three is edited on its own. */
   .ui-btn[data-size="xs"] {
     --btn-h: var(--ui-control-h-xs);
-    --btn-px: var(--ui-space-4);
+    --btn-px: var(--ui-control-px-xs);
     --btn-fs: var(--ui-text-xs);
-    --btn-gap: var(--ui-space-2);
-    --btn-radius: var(--ui-radius-sm);
+    --btn-gap: var(--ui-control-gap-xs);
+    --btn-radius: var(--ui-control-radius-xs);
   }
   .ui-btn[data-size="sm"] {
     --btn-h: var(--ui-control-h-sm);
-    --btn-px: var(--ui-space-5);
+    --btn-px: var(--ui-control-px-sm);
     --btn-fs: var(--ui-text-sm);
-    --btn-gap: var(--ui-space-3);
-    --btn-radius: var(--ui-radius-md);
+    --btn-gap: var(--ui-control-gap-sm);
+    --btn-radius: var(--ui-control-radius-sm);
   }
   .ui-btn[data-size="md"] {
     --btn-h: var(--ui-control-h-md);
-    --btn-px: var(--ui-space-7);
+    --btn-px: var(--ui-control-px-md);
     --btn-fs: var(--ui-text-md);
-    --btn-gap: var(--ui-space-3);
-    --btn-radius: var(--ui-radius-md);
+    --btn-gap: var(--ui-control-gap-md);
+    --btn-radius: var(--ui-control-radius-md);
   }
   .ui-btn[data-size="lg"] {
     --btn-h: var(--ui-control-h-lg);
-    --btn-px: var(--ui-space-10);
+    --btn-px: var(--ui-control-px-lg);
     --btn-fs: var(--ui-text-base);
-    --btn-gap: var(--ui-space-4);
-    --btn-radius: var(--ui-radius-lg);
+    --btn-gap: var(--ui-control-gap-lg);
+    --btn-radius: var(--ui-control-radius-lg);
   }
 
   .ui-btn[data-icon-only] {
@@ -187,9 +195,14 @@
     /* Derived from the fill itself, so an amber or lime accent flips to a
        dark label automatically instead of shipping white-on-yellow. */
     color: oklch(from var(--btn-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
-    /* A one-pixel inner highlight is what stops a flat fill from looking
-       like a coloured rectangle. It only reads on the solid variant. */
-    box-shadow: var(--ui-shadow-xs), var(--ui-shadow-inset);
+    /* Shadow tinted from the fill, not the neutral grey ladder: a blue
+       button casting a grey shadow is the tell that separates a kit from the
+       reference. The one-pixel inner highlight stops the flat fill from
+       looking like a coloured rectangle. */
+    box-shadow:
+      0 1px 2px oklch(from var(--btn-solid) l c h / 0.24),
+      0 2px 6px -1px oklch(from var(--btn-solid) l c h / 0.2),
+      var(--ui-shadow-inset);
   }
   .ui-btn[data-variant="solid"]:hover:not([aria-disabled="true"]) {
     background: var(--btn-solid-hover);
@@ -220,8 +233,14 @@
     background: var(--ui-bg-active);
   }
   /* A toned outline button keeps the white surface but borrows the tone for
-     its text and border — the "Following" / destructive-secondary pattern. */
-  .ui-btn[data-variant="outline"]:not([data-tone="neutral"]) {
+     its text and border — the "Following" / destructive-secondary pattern.
+     Accent is deliberately excluded: in this design language the brand colour
+     on a white surface reads as a link, so every secondary action in the
+     reference — Copy link, Login, Documents, Export, Cancel, Forward — carries
+     a near-black label and a neutral border, and the accent appears only as a
+     fill. A blue-on-white outline button is the single change that makes a
+     row of buttons stop looking like the reference. */
+  .ui-btn[data-variant="outline"]:not([data-tone="neutral"]):not([data-tone="accent"]) {
     color: var(--btn-text);
     border-color: var(--btn-border);
   }

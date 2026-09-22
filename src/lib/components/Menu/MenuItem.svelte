@@ -57,7 +57,7 @@
   {#if icon}<Icon name={icon} size={15} />{/if}
   <span class="ui-menu-item__label">{@render children?.()}</span>
   {#if shortcut}<span class="ui-menu-item__shortcut">{shortcut}</span>{/if}
-  {#if selected}<Icon name="check" size={14} />{/if}
+  {#if selected}<Icon name="check" size={16} />{/if}
 </svelte:element>
 
 <style>
@@ -66,9 +66,9 @@
     align-items: center;
     gap: var(--ui-space-5);
     width: 100%;
-    min-height: 32px;
-    padding: var(--ui-space-3) var(--ui-space-5);
-    border-radius: var(--ui-radius-md);
+    min-height: var(--ui-control-h-md);
+    padding: var(--ui-space-3) var(--ui-space-6);
+    border-radius: var(--ui-control-radius-xs);
     font-size: var(--ui-text-md);
     letter-spacing: var(--ui-tracking-snug);
     color: var(--ui-fg-default);

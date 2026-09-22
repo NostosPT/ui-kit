@@ -65,7 +65,7 @@
   .ui-field {
     display: flex;
     flex-direction: column;
-    gap: var(--ui-space-3);
+    gap: var(--ui-space-4);
     min-width: 0;
   }
   .ui-field[data-orientation="horizontal"] {
@@ -83,7 +83,10 @@
     align-items: baseline;
     gap: var(--ui-space-2);
     font-size: var(--ui-text-md);
-    font-weight: var(--ui-weight-medium);
+    /* Semibold. In the reference the label is the anchor of the field, set a
+       clear step above the value and the hint; a 500 label at the same size
+       as the input text makes the two read as one run of prose. */
+    font-weight: var(--ui-weight-semibold);
     color: var(--ui-fg-default);
     letter-spacing: var(--ui-tracking-snug);
   }
@@ -99,7 +102,7 @@
   .ui-field__control {
     display: flex;
     flex-direction: column;
-    gap: var(--ui-space-3);
+    gap: var(--ui-space-4);
     min-width: 0;
     flex: 1;
   }

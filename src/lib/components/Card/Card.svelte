@@ -7,7 +7,7 @@
   let {
     elevation = "sm",
     bordered = true,
-    radius = "xl",
+    radius = "2xl",
     padding = "none",
     interactive = false,
     as = "div",
@@ -53,9 +53,9 @@
   .ui-card[data-elevation="lg"] { box-shadow: var(--ui-shadow-lg); }
   .ui-card[data-elevation="xl"] { box-shadow: var(--ui-shadow-xl); }
 
-  .ui-card[data-padding="sm"] { padding: var(--ui-space-6); }
-  .ui-card[data-padding="md"] { padding: var(--ui-space-8); }
-  .ui-card[data-padding="lg"] { padding: var(--ui-space-12); }
+  .ui-card[data-padding="sm"] { padding: var(--ui-space-8); }
+  .ui-card[data-padding="md"] { padding: var(--ui-space-12); }
+  .ui-card[data-padding="lg"] { padding: var(--ui-space-16); }
 
   .ui-card[data-interactive] {
     cursor: pointer;

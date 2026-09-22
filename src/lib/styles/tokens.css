@@ -43,7 +43,29 @@
   --ui-cm-800: 0.84;
   --ui-cm-900: 0.72;
   --ui-cm-950: 0.55;
+}
 
+/* ---------------------------------------------------------------------------
+   WHY THIS SELECTOR LIST, AND NOT JUST :root
+   ---------------------------------------------------------------------------
+   A custom property whose value contains var() has those references resolved
+   at the element where it is DECLARED, not where it is used. So if the ramps
+   below lived only on :root, they would permanently bake in :root's hue, and
+
+       <div class="ui-root" style="--ui-accent-h: 80">
+
+   would set the input and change nothing — the ramp it reads was already
+   computed against 262.
+
+   Re-declaring the ramps on every element that can open a theme scope makes
+   each scope recompute them against its own inputs. That is what allows a
+   nested subtree to carry a different accent from the page around it.
+   ------------------------------------------------------------------------ */
+
+:root,
+.ui-root,
+[data-ui-theme],
+[data-ui-scope] {
   /* --- accent ramp ------------------------------------------------------- */
   --ui-accent-50:  oklch(97.6% calc(var(--ui-accent-c) * var(--ui-cm-50))  var(--ui-accent-h));
   --ui-accent-100: oklch(94.6% calc(var(--ui-accent-c) * var(--ui-cm-100)) var(--ui-accent-h));
@@ -104,6 +126,7 @@
   --ui-info-700: oklch(50.0% calc(var(--ui-info-c) * var(--ui-cm-700)) var(--ui-info-h));
   --ui-info-900: oklch(34.0% calc(var(--ui-info-c) * var(--ui-cm-900)) var(--ui-info-h));
 }
+
 
 /* ============================================================================
    AUTOMATIC CONTRAST FOREGROUND

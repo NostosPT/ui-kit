@@ -170,10 +170,10 @@
      is the single number this kit had most wrong: a proportional corner makes
      small controls look square and large ones look like pills, and neither
      matches. Only xs steps down, because 14 on a 28px control is a pill. */
-  --ui-control-radius-xs: calc(12px * var(--ui-radius-scale));
-  --ui-control-radius-sm: calc(14px * var(--ui-radius-scale));
-  --ui-control-radius-md: calc(14px * var(--ui-radius-scale));
-  --ui-control-radius-lg: calc(14px * var(--ui-radius-scale));
+  --ui-control-radius-xs: calc(8px * var(--ui-radius-scale));
+  --ui-control-radius-sm: calc(10px * var(--ui-radius-scale));
+  --ui-control-radius-md: calc(12px * var(--ui-radius-scale));
+  --ui-control-radius-lg: calc(12px * var(--ui-radius-scale));
 
   --ui-shadow-xs: 0 1px 2px hsl(var(--ui-shadow-color) / 0.05);
   --ui-shadow-sm: 0 1px 2px hsl(var(--ui-shadow-color) / 0.06),

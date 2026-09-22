@@ -215,14 +215,10 @@
     /* Derived from the fill itself, so an amber or lime accent flips to a
        dark label automatically instead of shipping white-on-yellow. */
     color: oklch(from var(--btn-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
-    /* Shadow tinted from the fill, not the neutral grey ladder: a blue
-       button casting a grey shadow is the tell that separates a kit from the
-       reference. The one-pixel inner highlight stops the flat fill from
-       looking like a coloured rectangle. */
+    /* Shadow tinted from the fill, not the neutral grey ladder */
     box-shadow:
       0 1px 2px oklch(from var(--btn-solid) l c h / 0.24),
-      0 2px 6px -1px oklch(from var(--btn-solid) l c h / 0.2),
-      var(--ui-shadow-inset);
+      0 2px 6px -1px oklch(from var(--btn-solid) l c h / 0.28);
   }
   .ui-btn[data-variant="solid"]:hover:not([aria-disabled="true"]) {
     background: var(--btn-solid-hover);
@@ -239,28 +235,24 @@
     background: var(--btn-soft-hover);
   }
 
-  .ui-btn[data-variant="outline"] {
+  .ui-btn[data-variant="outline"],
+  .ui-btn[data-variant="secondary"] {
     background: var(--ui-bg-surface);
     border-color: var(--ui-border-default);
     color: var(--ui-fg-default);
     box-shadow: var(--ui-shadow-xs);
   }
-  .ui-btn[data-variant="outline"]:hover:not([aria-disabled="true"]) {
+  .ui-btn[data-variant="outline"]:hover:not([aria-disabled="true"]),
+  .ui-btn[data-variant="secondary"]:hover:not([aria-disabled="true"]) {
     background: var(--ui-bg-hover);
     border-color: var(--ui-border-strong);
   }
-  .ui-btn[data-variant="outline"]:active:not([aria-disabled="true"]) {
+  .ui-btn[data-variant="outline"]:active:not([aria-disabled="true"]),
+  .ui-btn[data-variant="secondary"]:active:not([aria-disabled="true"]) {
     background: var(--ui-bg-active);
   }
-  /* A toned outline button keeps the white surface but borrows the tone for
-     its text and border — the "Following" / destructive-secondary pattern.
-     Accent is deliberately excluded: in this design language the brand colour
-     on a white surface reads as a link, so every secondary action in the
-     reference — Copy link, Login, Documents, Export, Cancel, Forward — carries
-     a near-black label and a neutral border, and the accent appears only as a
-     fill. A blue-on-white outline button is the single change that makes a
-     row of buttons stop looking like the reference. */
-  .ui-btn[data-variant="outline"]:not([data-tone="neutral"]):not([data-tone="accent"]) {
+  .ui-btn[data-variant="outline"]:not([data-tone="neutral"]):not([data-tone="accent"]),
+  .ui-btn[data-variant="secondary"]:not([data-tone="neutral"]):not([data-tone="accent"]) {
     color: var(--btn-text);
     border-color: var(--btn-border);
   }
@@ -331,7 +323,8 @@
     background: oklch(from var(--btn-solid) l c h / 0.25);
     color: currentColor;
   }
-  .ui-btn[data-variant="outline"] .ui-btn__badge {
+  .ui-btn[data-variant="outline"] .ui-btn__badge,
+  .ui-btn[data-variant="secondary"] .ui-btn__badge {
     background: var(--ui-bg-sunken);
     color: var(--ui-fg-muted);
   }

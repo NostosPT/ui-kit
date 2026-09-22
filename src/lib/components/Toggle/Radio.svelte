@@ -78,7 +78,7 @@
     place-items: center;
     width: var(--radio-size);
     height: var(--radio-size);
-    border: 1.5px solid var(--ui-border-strong);
+    border: 1.5px solid var(--ui-border-default);
     border-radius: var(--ui-radius-full);
     background: var(--ui-bg-surface);
     box-shadow: var(--ui-shadow-xs);
@@ -88,14 +88,13 @@
       background-color var(--ui-duration-fast) var(--ui-ease-out),
       box-shadow var(--ui-duration-fast) var(--ui-ease-out);
   }
-  /* The mark is an inner dot that scales in — a filled circle with a white
-     centre would shift by a pixel as the border width changes. */
+  /* The mark is an inner dot that scales in — white dot inside solid accent circle */
   .ui-radio__dot::after {
     content: "";
-    width: calc(var(--radio-size) * 0.45);
-    height: calc(var(--radio-size) * 0.45);
+    width: calc(var(--radio-size) * 0.38);
+    height: calc(var(--radio-size) * 0.38);
     border-radius: var(--ui-radius-full);
-    background: var(--ui-accent-solid);
+    background: var(--ui-neutral-0);
     transform: scale(0);
     transition: transform var(--ui-duration-fast) var(--ui-ease-spring);
   }
@@ -104,9 +103,9 @@
     border-color: var(--ui-accent-solid);
   }
   .ui-radio__input:checked + .ui-radio__dot {
-    background: var(--ui-bg-surface);
+    background: var(--ui-accent-solid);
     border-color: var(--ui-accent-solid);
-    border-width: 2px;
+    border-width: 1.5px;
   }
   .ui-radio__input:checked + .ui-radio__dot::after {
     transform: scale(1);
@@ -133,7 +132,9 @@
   .ui-radio[data-disabled] .ui-radio__text { cursor: not-allowed; opacity: 0.6; }
   .ui-radio__label {
     font-size: var(--radio-fs);
+    font-weight: var(--ui-weight-medium);
     line-height: var(--ui-leading-snug);
+    color: var(--ui-fg-default);
   }
   .ui-radio__desc {
     font-size: var(--ui-text-sm);

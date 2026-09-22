@@ -97,8 +97,8 @@
     place-items: center;
     width: var(--check-size);
     height: var(--check-size);
-    border: 1.5px solid var(--ui-border-strong);
-    border-radius: calc(var(--check-size) * 0.3);
+    border: 1.5px solid var(--ui-border-default);
+    border-radius: 5px;
     background: var(--ui-bg-surface);
     color: transparent;
     box-shadow: var(--ui-shadow-xs);
@@ -118,7 +118,7 @@
   .ui-check__input:indeterminate + .ui-check__box {
     background: var(--ui-accent-solid);
     border-color: var(--ui-accent-solid);
-    color: oklch(from var(--ui-accent-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
+    color: #ffffff;
   }
   .ui-check__input:focus-visible + .ui-check__box {
     border-color: var(--ui-accent-solid);
@@ -149,6 +149,7 @@
   }
   .ui-check__label {
     font-size: var(--check-fs);
+    font-weight: var(--ui-weight-medium);
     line-height: var(--ui-leading-snug);
     color: var(--ui-fg-default);
   }

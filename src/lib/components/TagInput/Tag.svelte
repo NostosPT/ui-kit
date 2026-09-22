@@ -6,18 +6,38 @@
     label = undefined,
     size = "md",
     tone = "neutral",
+    variant = "surface",
     removable = false,
     disabled = false,
+    icon = undefined,
+    avatar = undefined,
+    image = undefined,
     class: klass = "",
     leading,
     children,
     onremove,
     ...rest
   } = $props();
+
+  const avatarSrc = $derived(typeof avatar === "string" ? avatar : avatar?.src ?? (typeof image === "string" ? image : undefined));
+  const iconSize = $derived(size === "sm" ? 11 : size === "lg" ? 15 : 13);
 </script>
 
-<span class="ui-tag {klass}" data-size={size} data-tone={tone} data-disabled={disabled || undefined} {...rest}>
-  {#if leading}<span class="ui-tag__leading">{@render leading()}</span>{/if}
+<span
+  class="ui-tag {klass}"
+  data-size={size}
+  data-tone={tone}
+  data-variant={variant}
+  data-disabled={disabled || undefined}
+  {...rest}
+>
+  {#if leading}
+    <span class="ui-tag__leading">{@render leading()}</span>
+  {:else if avatarSrc}
+    <img class="ui-tag__avatar" src={avatarSrc} alt="" />
+  {:else if icon}
+    <Icon name={icon} size={iconSize} />
+  {/if}
   <span class="ui-tag__label">{label}{@render children?.()}</span>
   {#if removable}
     <button
@@ -62,6 +82,20 @@
     border-color: var(--ui-accent-border);
     color: var(--ui-accent-text);
   }
+  .ui-tag[data-variant="solid"][data-tone="accent"] {
+    background: var(--ui-accent-solid);
+    border-color: transparent;
+    color: #ffffff;
+  }
+  .ui-tag[data-variant="solid"][data-tone="accent"] .ui-tag__remove {
+    color: #ffffff;
+    opacity: 0.8;
+  }
+  .ui-tag[data-variant="solid"][data-tone="accent"] .ui-tag__remove:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    opacity: 1;
+  }
   .ui-tag[data-tone="muted"] {
     background: var(--ui-bg-muted);
     border-color: transparent;
@@ -76,6 +110,13 @@
     align-items: center;
     /* Pull an avatar flush with the chip's rounded edge. */
     margin-inline-start: calc(var(--tag-px) * -0.5);
+  }
+  .ui-tag__avatar {
+    width: calc(var(--tag-h) - 8px);
+    height: calc(var(--tag-h) - 8px);
+    border-radius: var(--ui-radius-full);
+    object-fit: cover;
+    margin-inline-start: -2px;
   }
   .ui-tag__label {
     overflow: hidden;

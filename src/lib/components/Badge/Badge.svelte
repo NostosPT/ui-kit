@@ -17,17 +17,23 @@
     variant = "soft",
     size = "md",
     icon = undefined,
+    image = undefined,
+    avatar = undefined,
+    removable = false,
     dot = false,
     pill = true,
     toneText = undefined,
     class: klass = "",
+    imageSnippet,
     children,
+    onremove,
     ...rest
   } = $props();
 
-  const iconSize = $derived(size === "sm" ? 11 : 13);
+  const iconSize = $derived(size === "sm" ? 11 : size === "lg" ? 15 : 13);
   const showDot = $derived(dot || variant === "dot");
   const isTonedText = $derived(toneText ?? (variant === "dot" && tone !== "neutral"));
+  const avatarSrc = $derived(typeof avatar === "string" ? avatar : avatar?.src ?? (typeof image === "string" ? image : undefined));
 </script>
 
 <span
@@ -37,11 +43,31 @@
   data-size={size}
   data-pill={pill || undefined}
   data-tone-text={isTonedText || undefined}
+  data-removable={removable || undefined}
   {...rest}
 >
   {#if showDot}<span class="ui-badge__dot"></span>{/if}
-  {#if icon}<Icon name={icon} size={iconSize} />{/if}
+  {#if avatarSrc}
+    <img class="ui-badge__avatar" src={avatarSrc} alt="" />
+  {:else if imageSnippet}
+    {@render imageSnippet()}
+  {:else if icon}
+    <Icon name={icon} size={iconSize} />
+  {/if}
   <span class="ui-badge__label">{@render children?.()}</span>
+  {#if removable}
+    <button
+      type="button"
+      class="ui-badge__remove"
+      aria-label="Remove"
+      onclick={(e) => {
+        e.stopPropagation();
+        onremove?.();
+      }}
+    >
+      <Icon name="x" size={Math.max(10, iconSize - 2)} strokeWidth={2.5} />
+    </button>
+  {/if}
 </span>
 
 <style>
@@ -136,14 +162,29 @@
     background: var(--badge-soft);
     color: var(--badge-text);
   }
+  .ui-badge[data-variant="soft"][data-tone="accent"] {
+    background: var(--ui-accent-soft);
+    border-color: var(--ui-accent-border);
+    color: var(--ui-accent-text);
+  }
   .ui-badge[data-variant="outline"] {
     background: var(--ui-bg-surface);
     border-color: var(--badge-border);
     color: var(--badge-text);
   }
+  .ui-badge[data-variant="surface"] {
+    background: var(--ui-bg-surface);
+    border-color: var(--ui-border-default);
+    color: var(--ui-fg-default);
+    box-shadow: var(--ui-shadow-xs);
+  }
   .ui-badge[data-variant="solid"] {
     background: var(--badge-solid);
     color: oklch(from var(--badge-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
+  }
+  .ui-badge[data-variant="solid"][data-tone="accent"] {
+    background: var(--ui-accent-solid);
+    color: #ffffff;
   }
   /* The dot variant carries no chrome at all — it is a coloured marker plus
      ordinary body text, for use inside table cells and dense lists. */
@@ -164,6 +205,31 @@
     border-radius: var(--ui-radius-full);
     background: var(--badge-dot);
     flex: none;
+  }
+  .ui-badge__avatar {
+    width: calc(var(--badge-h) - 6px);
+    height: calc(var(--badge-h) - 6px);
+    border-radius: var(--ui-radius-full);
+    object-fit: cover;
+    margin-inline-start: -3px;
+  }
+  .ui-badge__remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-inline-end: -2px;
+    margin-inline-start: 2px;
+    color: currentColor;
+    opacity: 0.75;
+    cursor: pointer;
+    border-radius: var(--ui-radius-full);
+    transition: opacity var(--ui-duration-fast) var(--ui-ease-out);
+  }
+  .ui-badge__remove:hover {
+    opacity: 1;
   }
   .ui-badge__label {
     /* Nudges the cap-height back onto the optical centre of the pill. */

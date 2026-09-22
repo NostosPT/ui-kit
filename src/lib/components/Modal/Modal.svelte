@@ -143,7 +143,7 @@
   .ui-modal__title {
     margin: 0;
     font-size: var(--ui-text-lg);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-heading-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: var(--ui-leading-snug);
   }

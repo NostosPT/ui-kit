@@ -109,7 +109,7 @@
 <style>
   .ui-dropzone {
     position: relative;
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     transition:
       border-color var(--ui-duration-fast) var(--ui-ease-out),
       background-color var(--ui-duration-fast) var(--ui-ease-out);
@@ -149,7 +149,7 @@
   }
   .ui-dropzone__title {
     font-size: var(--ui-text-md);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     color: var(--ui-fg-default);
   }
   .ui-dropzone__hint {

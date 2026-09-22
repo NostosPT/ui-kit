@@ -159,7 +159,7 @@
     outline: none;
     font-size: var(--frame-fs);
     font-variant-numeric: tabular-nums;
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     color: inherit;
     padding-inline: var(--ui-space-2);
   }

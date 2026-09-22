@@ -46,7 +46,7 @@
   }
   .ui-table-scroll[data-bordered] {
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     background: var(--ui-bg-surface);
   }
 

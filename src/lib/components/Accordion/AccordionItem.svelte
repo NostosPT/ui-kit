@@ -76,7 +76,7 @@
   }
   :global(.ui-accordion[data-variant="separated"]) .ui-accordion-item {
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     background: var(--ui-bg-surface);
     box-shadow: var(--ui-shadow-xs);
     overflow: hidden;
@@ -130,7 +130,7 @@
   }
   .ui-accordion-item__title {
     font-size: var(--ui-text-md);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-snug);
   }
   .ui-accordion-item__subtitle {
@@ -139,7 +139,7 @@
   }
   .ui-accordion-item__value {
     font-size: var(--ui-text-md);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-numeric-weight);
     font-variant-numeric: tabular-nums;
     flex: none;
   }

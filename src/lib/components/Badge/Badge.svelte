@@ -57,7 +57,7 @@
     border: 1px solid transparent;
     border-radius: var(--ui-radius-md);
     font-size: var(--badge-fs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: 1;
     white-space: nowrap;

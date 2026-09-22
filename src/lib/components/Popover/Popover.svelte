@@ -126,7 +126,7 @@
     max-width: min(92vw, 420px);
     background: var(--ui-bg-raised);
     border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     box-shadow: var(--ui-shadow-lg);
     color: var(--ui-fg-default);
     /* Hidden until the first measurement lands, otherwise the surface paints

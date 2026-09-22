@@ -132,7 +132,7 @@
     border: 1px solid transparent;
     border-radius: var(--pg-radius);
     font-size: var(--pg-fs);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-control-weight);
     font-variant-numeric: tabular-nums;
     color: var(--ui-fg-muted);
     transition:

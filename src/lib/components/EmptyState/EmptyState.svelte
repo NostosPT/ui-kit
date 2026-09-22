@@ -41,7 +41,7 @@
 
   .ui-empty[data-bordered] {
     border: 1px dashed var(--ui-border-strong);
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     background: var(--ui-bg-sunken);
   }
 
@@ -51,14 +51,14 @@
     width: 44px;
     height: 44px;
     margin-bottom: var(--ui-space-4);
-    border-radius: var(--ui-radius-xl);
+    border-radius: var(--ui-radius-2xl);
     background: var(--ui-bg-muted);
     color: var(--ui-fg-subtle);
   }
   .ui-empty__title {
     margin: 0;
     font-size: var(--ui-text-base);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-heading-weight);
     letter-spacing: var(--ui-tracking-snug);
   }
   .ui-empty__desc {

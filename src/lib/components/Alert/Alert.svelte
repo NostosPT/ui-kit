@@ -63,9 +63,9 @@
     display: flex;
     align-items: flex-start;
     gap: var(--ui-space-5);
-    padding: var(--ui-space-6) var(--ui-space-7);
+    padding: var(--ui-space-7) var(--ui-space-8);
     border: 1px solid transparent;
-    border-radius: var(--ui-radius-lg);
+    border-radius: var(--ui-radius-2xl);
     font-size: var(--ui-text-md);
     line-height: var(--ui-leading-snug);
   }
@@ -144,7 +144,7 @@
   }
   .ui-alert__title {
     margin: 0;
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-snug);
   }
   .ui-alert__text {

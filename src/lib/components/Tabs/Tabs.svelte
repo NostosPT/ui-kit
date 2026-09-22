@@ -182,7 +182,7 @@
     height: var(--tab-h);
     padding-inline: var(--tab-px);
     font-size: var(--tab-fs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-control-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: 1;
     color: var(--ui-fg-muted);

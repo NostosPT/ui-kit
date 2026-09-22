@@ -82,7 +82,7 @@
     padding-inline: var(--frame-px);
     color: var(--ui-fg-muted);
     font-size: var(--frame-fs);
-    font-weight: var(--ui-weight-medium);
+    font-weight: var(--ui-label-weight);
     white-space: nowrap;
     border-radius: inherit;
     cursor: pointer;

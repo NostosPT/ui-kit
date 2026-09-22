@@ -20,6 +20,8 @@ export { default as Kbd } from "./components/Kbd/Kbd.svelte";
 export { default as Spinner } from "./components/Spinner/Spinner.svelte";
 export { default as Divider } from "./components/Divider/Divider.svelte";
 export { default as Skeleton } from "./components/Skeleton/Skeleton.svelte";
+export { default as Trend } from "./components/Trend/Trend.svelte";
+export { default as Price } from "./components/Price/Price.svelte";
 
 // --- surfaces ---------------------------------------------------------------
 export { default as Card } from "./components/Card/Card.svelte";
@@ -48,6 +50,8 @@ export { default as TagInput } from "./components/TagInput/TagInput.svelte";
 export { default as PhoneInput } from "./components/PhoneInput/PhoneInput.svelte";
 export { default as CurrencyInput } from "./components/CurrencyInput/CurrencyInput.svelte";
 export { default as Dropzone } from "./components/Dropzone/Dropzone.svelte";
+export { default as PinInput } from "./components/PinInput/PinInput.svelte";
+export { default as OptionCard } from "./components/OptionCard/OptionCard.svelte";
 export { default as Calendar } from "./components/Calendar/Calendar.svelte";
 export { default as DatePicker } from "./components/Calendar/DatePicker.svelte";
 
@@ -60,6 +64,10 @@ export { default as TableRow } from "./components/Table/TableRow.svelte";
 export { default as TableCell } from "./components/Table/TableCell.svelte";
 export { default as TableHeaderCell } from "./components/Table/TableHeaderCell.svelte";
 export { default as Progress } from "./components/Progress/Progress.svelte";
+export { default as DataList } from "./components/DataList/DataList.svelte";
+export { default as DataListRow } from "./components/DataList/DataListRow.svelte";
+export { default as Stat } from "./components/Stat/Stat.svelte";
+export { default as Sparkline } from "./components/Sparkline/Sparkline.svelte";
 export { default as EmptyState } from "./components/EmptyState/EmptyState.svelte";
 
 // --- navigation -------------------------------------------------------------

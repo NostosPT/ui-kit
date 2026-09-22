@@ -70,6 +70,7 @@
     padding: var(--ui-space-3) var(--ui-space-6);
     border-radius: var(--ui-control-radius-xs);
     font-size: var(--ui-text-md);
+    font-weight: var(--ui-label-weight);
     letter-spacing: var(--ui-tracking-snug);
     color: var(--ui-fg-default);
     text-align: start;

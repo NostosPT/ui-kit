@@ -58,13 +58,21 @@
   --ui-weight-semibold: 600;
   --ui-weight-bold: 700;
 
-  /* The weight every pressable label carries. Measured, not guessed: in the
-     reference a button label's stem is 0.154 of its cap height, which is the
-     Bold cut — Medium sits at 0.118 and SemiBold at 0.135. It is published as
-     its own token because a Button, a Tab, a segment and a pagination page all
-     have to agree, and because a consumer who switches to a heavier typeface
-     needs exactly one number to turn down. */
-  --ui-control-weight: var(--ui-weight-bold);
+  /* --- weight by role ----------------------------------------------------
+     The reference speaks a heavy UI language: anything that is an action, a
+     label, a heading or a number is set well above body weight, and only
+     running prose stays at 400. Publishing that as four role tokens rather
+     than letting each component pick off the ladder is what stops a Tab from
+     drifting away from a Button, and gives a consumer one place to soften the
+     whole kit for a heavier typeface.
+
+     The control weight is measured, not guessed: a button label's stem in the
+     reference is 0.154 of its cap height, which is the Bold cut — Medium sits
+     at 0.118 and SemiBold at 0.135. */
+  --ui-control-weight: var(--ui-weight-bold);   /* buttons, tabs, segments   */
+  --ui-label-weight: var(--ui-weight-semibold); /* field + column + row keys */
+  --ui-heading-weight: var(--ui-weight-bold);   /* card, modal, section      */
+  --ui-numeric-weight: var(--ui-weight-bold);   /* prices, metrics, totals   */
 
   /* Optical tightening — larger text needs negative tracking to match the
      density of the small UI text around it. */

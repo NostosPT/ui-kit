@@ -169,7 +169,7 @@
     padding-inline: var(--seg-px);
     border-radius: calc(var(--seg-radius) - var(--seg-pad));
     font-size: var(--seg-fs);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-control-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: 1;
     color: var(--ui-fg-muted);

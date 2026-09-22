@@ -101,7 +101,7 @@
     z-index: var(--ui-z-tooltip);
     max-width: 260px;
     padding: var(--ui-space-3) var(--ui-space-5);
-    border-radius: var(--ui-radius-md);
+    border-radius: var(--ui-radius-lg);
     background: var(--ui-bg-inverse);
     color: var(--ui-fg-inverse);
     font-size: var(--ui-text-sm);

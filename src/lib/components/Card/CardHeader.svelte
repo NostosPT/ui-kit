@@ -56,7 +56,7 @@
   .ui-card-header__title {
     margin: 0;
     font-size: var(--ui-text-base);
-    font-weight: var(--ui-weight-semibold);
+    font-weight: var(--ui-heading-weight);
     letter-spacing: var(--ui-tracking-snug);
     line-height: var(--ui-leading-snug);
   }

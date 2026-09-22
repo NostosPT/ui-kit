@@ -107,7 +107,7 @@ export const parameters = {
       ]
     }
   },
-  backgrounds: { disable: true },
+  backgrounds: { disabled: true },
   // Storybook's hover highlight draws over specimens and muddies visual diffing.
   highlight: { disable: true },
   docs: { codePanel: true }

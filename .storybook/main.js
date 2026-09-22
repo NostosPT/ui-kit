@@ -4,7 +4,8 @@ export default {
   addons: [
     "@storybook/addon-docs",
     "@storybook/addon-themes",
-    "@storybook/addon-svelte-csf"
+    "@storybook/addon-svelte-csf",
+    "@storybook/addon-mcp"
   ],
   framework: { name: "@storybook/svelte-vite", options: {} },
   staticDirs: ["./public"]

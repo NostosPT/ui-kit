@@ -1,0 +1,73 @@
+/* ============================================================================
+   BASE
+   A deliberately small reset. It normalises the things that would otherwise
+   force every component to re-state them (box-sizing, form font inheritance,
+   button chrome) and nothing else — this kit has to sit inside host apps that
+   already have opinions.
+   ========================================================================= */
+
+.ui-root,
+.ui-root *,
+.ui-root *::before,
+.ui-root *::after {
+  box-sizing: border-box;
+}
+
+.ui-root {
+  font-family: var(--ui-font-sans);
+  font-size: var(--ui-text-base);
+  line-height: var(--ui-leading-normal);
+  color: var(--ui-fg-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01";
+  font-variant-numeric: tabular-nums;
+}
+
+.ui-root button,
+.ui-root input,
+.ui-root select,
+.ui-root textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  margin: 0;
+}
+
+.ui-root button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.ui-root :focus-visible {
+  outline: 2px solid var(--ui-accent-solid);
+  outline-offset: 2px;
+}
+
+/* Shared focus treatment for controls that own a border. Using box-shadow
+   rather than outline lets the ring hug the border radius exactly and sit
+   underneath sibling elements in a joined group. */
+.ui-focus-ring:focus-visible {
+  outline: none;
+  border-color: var(--ui-accent-solid);
+  box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring);
+}
+
+.ui-root [hidden] {
+  display: none !important;
+}
+
+/* Visually hidden but still announced. */
+.ui-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

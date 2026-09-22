@@ -110,13 +110,21 @@
     background: var(--ui-bg-surface);
     border-color: var(--ui-border-default);
     color: var(--ui-fg-default);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
   }
   .ui-alert[data-variant="outline"] .ui-alert__icon {
     color: var(--alert-solid);
   }
   .ui-alert[data-variant="solid"] {
-    background: var(--alert-solid);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--alert-solid) calc(l + 0.035) c h) 0%,
+      var(--alert-solid) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--alert-solid) calc(l - 0.2) c h / 0.25),
+      0 3px 8px -1px oklch(from var(--alert-solid) calc(l - 0.25) c h / 0.35);
     color: oklch(from var(--alert-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
   }
   /* A left accent bar reads as "this belongs to the thing above it" — useful

@@ -115,7 +115,7 @@
     border: 1px solid var(--ui-border-default);
     border-radius: var(--ui-radius-2xl);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     cursor: pointer;
     min-width: 0;
     transition:
@@ -132,6 +132,7 @@
   .ui-option[data-selected] {
     border-color: var(--ui-accent-solid);
     background: var(--ui-bg-selected);
+    box-shadow: 0 0 0 1px var(--ui-accent-solid), var(--ui-shadow-sm);
   }
   .ui-option[data-disabled] {
     opacity: 0.55;
@@ -179,8 +180,15 @@
 
   .ui-option[data-selected] .ui-option__control {
     border-color: var(--ui-accent-solid);
-    background: var(--ui-accent-solid);
-    color: oklch(from var(--ui-accent-solid) var(--ui-auto-fg-l) var(--ui-auto-fg-c) h);
+    background: linear-gradient(
+      180deg,
+      oklch(from var(--ui-accent-solid) calc(l + 0.035) c h) 0%,
+      var(--ui-accent-solid) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.22),
+      0 1px 2px oklch(from var(--ui-accent-solid) calc(l - 0.2) c h / 0.25);
+    color: var(--ui-fg-on-solid);
   }
   /* The radio's dot is drawn as an inset ring matching the reference:
      blue border ring, white gap, solid blue inner dot. */

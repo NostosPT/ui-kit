@@ -144,7 +144,7 @@
   .ui-pagination__nav {
     border-color: var(--ui-border-default);
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     color: var(--ui-fg-default);
   }
   .ui-pagination__nav:hover:not(:disabled) {

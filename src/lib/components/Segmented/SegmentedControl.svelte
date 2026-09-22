@@ -133,6 +133,14 @@
      the height scale and the track's padding makes up the difference, so an
      md segmented control is exactly as tall as an md Button beside it
      (34 + 3 + 3 = 40) instead of being a third shorter. */
+  .ui-segmented[data-size="xs"] {
+    --seg-h: 22px;
+    --seg-px: var(--ui-control-px-xs);
+    --seg-fs: var(--ui-text-xs);
+    --seg-pad: 3px;
+    --seg-gap: 2px;
+    --seg-radius: var(--ui-control-radius-xs);
+  }
   .ui-segmented[data-size="sm"] {
     --seg-h: var(--ui-control-h-xs);
     --seg-px: var(--ui-control-px-xs);
@@ -201,7 +209,7 @@
     transform: translateX(var(--seg-x));
     border-radius: calc(var(--seg-radius) - var(--seg-pad));
     background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
+    box-shadow: var(--ui-shadow-sm);
     /* No transition until the first measurement lands, or the indicator
        visibly slides in from the left edge on mount. */
     opacity: 0;

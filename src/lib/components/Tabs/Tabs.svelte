@@ -229,15 +229,15 @@
      white chip riding under the active label. */
   .ui-tabs[data-variant="pill"] .ui-tabs__list {
     background: var(--ui-bg-muted);
-    border-radius: var(--ui-radius-lg);
+    border-radius: var(--ui-control-radius-md);
     padding: 3px;
   }
   .ui-tabs[data-variant="pill"] .ui-tabs__indicator {
     top: 3px;
     height: calc(var(--tab-h) - 0px);
     background: var(--ui-bg-surface);
-    border-radius: var(--ui-radius-md);
-    box-shadow: var(--ui-shadow-xs);
+    border-radius: calc(var(--ui-control-radius-md) - 3px);
+    box-shadow: var(--ui-shadow-sm);
   }
   .ui-tabs[data-variant="pill"] { --tab-h: var(--ui-control-h-sm); }
   .ui-tabs[data-variant="pill"][data-size="lg"] { --tab-h: var(--ui-control-h-md); }

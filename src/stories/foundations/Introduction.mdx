@@ -92,6 +92,14 @@ computes its label colour from its own background using relative colour syntax,
 so an amber or lime accent flips to a dark label automatically instead of
 shipping white-on-yellow. See the note at the bottom of `tokens.css`.
 
+**Contrast is a property of the scale.** Solid fills all land on the `600`
+step, at 53% lightness — a measured number. Across the hue wheel there is a
+dead band roughly between 56% and 67% lightness where a fill clears 4.5:1
+against *neither* white nor dark text (cyan at 60% tops out near 3.5:1 either
+way), so the solid step sits below it. The result: every tone, at every accent
+hue, in both themes, measures at least 4.65:1 against its label. Contrast is no
+longer something you re-check each time someone picks a new brand colour.
+
 ---
 
 ## Accessibility

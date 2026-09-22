@@ -79,6 +79,18 @@ permanently bake in `:root`'s hue, and overriding `--ui-accent-h` further down
 the tree would silently do nothing. Re-declaring them per scope is what lets a
 subtree carry its own accent.
 
+### Contrast is a property of the scale, not of each colour
+
+Solid fills all land on the `600` step, which sits at **53% lightness**. That
+number is measured, not chosen by eye. Sampling the hue wheel shows a dead band
+roughly between 56% and 67% lightness where a fill clears 4.5:1 against
+*neither* white nor dark text — cyan at 60% tops out near 3.5:1 either way. So
+the solid step has to sit below the band.
+
+With the step where it is, every tone at every accent hue, in both themes,
+measures at least **4.65:1** against its derived label colour. Contrast stops
+being something to re-check per palette.
+
 ### Derived foregrounds
 
 Solid fills compute their own label colour with relative colour syntax, so a

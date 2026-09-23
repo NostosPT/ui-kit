@@ -13,7 +13,7 @@
   import Row from "../../../stories/util/Row.svelte";
 
   const { Story } = defineMeta({
-    title: "Data display/Metrics",
+    title: "Data Display/Metrics",
     component: Stat,
     parameters: {
       layout: "padded",

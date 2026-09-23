@@ -4,7 +4,6 @@
   import Spinner from "../Spinner/Spinner.svelte";
   import Divider from "../Divider/Divider.svelte";
   import Skeleton from "../Skeleton/Skeleton.svelte";
-  import Progress from "../Progress/Progress.svelte";
   import Button from "../Button/Button.svelte";
   import Showcase from "../../../stories/util/Showcase.svelte";
   import Spec from "../../../stories/util/Spec.svelte";
@@ -72,16 +71,5 @@
       <Skeleton variant="circle" width="32px" />
       <div style="flex:1"><Skeleton lines={2} /></div>
     </Spec>
-  </Showcase>
-</Story>
-
-<Story name="Progress" asChild>
-  <Showcase width="320px">
-    <Spec label="value" align="stretch"><Progress value={42} label="Uploading" showValue /></Spec>
-    <Spec label="tones" align="stretch">
-      <Progress value={80} tone="success" />
-    </Spec>
-    <Spec label="sizes" align="stretch"><Progress value={60} size="lg" /></Spec>
-    <Spec label="indeterminate" align="stretch"><Progress /></Spec>
   </Showcase>
 </Story>

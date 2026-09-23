@@ -129,8 +129,8 @@
             {id}
             options={categoryOptions}
             bind:value={categories}
-            badgeTone="accent"
-            badgeVariant="solid"
+            tagTone="accent"
+            tagVariant="solid"
           />
         {/snippet}
       </Field>
@@ -142,8 +142,8 @@
             {id}
             options={tagOptions}
             bind:value={tags}
-            badgeTone="accent"
-            badgeVariant="soft"
+            tagTone="accent"
+            tagVariant="soft"
           />
         {/snippet}
       </Field>
@@ -192,8 +192,8 @@
             bind:value={selectedTeammates}
             placeholder="Select user(s)..."
             max={3}
-            badgeVariant="surface"
-            badgePill={false}
+            tagVariant="surface"
+            tagPill={false}
           />
         {/snippet}
       </Field>

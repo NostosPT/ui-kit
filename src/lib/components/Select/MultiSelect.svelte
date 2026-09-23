@@ -2,11 +2,11 @@
   import Popover from "../Popover/Popover.svelte";
   import InputFrame from "../Field/InputFrame.svelte";
   import Icon from "../Icon/Icon.svelte";
-  import Badge from "../Badge/Badge.svelte";
+  import Tag from "../TagInput/Tag.svelte";
   import { uid } from "../../internal/utils.js";
 
   /**
-   * Multi-select dropdown with dismissible badges (solid, soft, avatar badges)
+   * Multi-select dropdown with dismissible tags (solid, soft, avatar chips)
    * and popover option list with checkmarks.
    */
   let {
@@ -14,10 +14,14 @@
     options = [],
     placeholder = "Select…",
     size = "md",
+    tagSize = undefined,
+    tagTone = undefined,
+    tagVariant = undefined,
+    tagPill = undefined,
     badgeSize = undefined,
-    badgeTone = "accent",
-    badgeVariant = "solid",
-    badgePill = true,
+    badgeTone = undefined,
+    badgeVariant = undefined,
+    badgePill = undefined,
     reorderable = true,
     max = undefined,
     invalid = false,
@@ -37,8 +41,11 @@
   let draggedIndex = $state(null);
   let dragOverIndex = $state(null);
 
-  const effectiveBadgeSize = $derived(
-    badgeSize ?? (size === "xs" ? "sm" : size === "sm" ? "sm" : "md")
+  const resolvedTone = $derived(tagTone ?? badgeTone ?? "accent");
+  const resolvedVariant = $derived(tagVariant ?? badgeVariant ?? "solid");
+  const resolvedPill = $derived(tagPill ?? badgePill ?? true);
+  const effectiveTagSize = $derived(
+    tagSize ?? badgeSize ?? (size === "xs" || size === "sm" ? "sm" : "md")
   );
 
   const items = $derived(
@@ -130,6 +137,7 @@
   {#snippet trigger({ toggle: toggleOpen, show })}
     <div
       class="ui-multiselect__wrap {klass}"
+      data-size={size}
       role="combobox"
       aria-expanded={open}
       aria-controls={listId}
@@ -148,6 +156,7 @@
               class="ui-multiselect__chip-item"
               data-dragging={draggedIndex === i || undefined}
               data-drag-over={dragOverIndex === i || undefined}
+              data-pill={resolvedPill || undefined}
               draggable={!disabled && reorderable && value.length > 1}
               ondragstart={(e) => ondragstart(e, i)}
               ondragover={(e) => ondragover(e, i)}
@@ -155,20 +164,19 @@
               ondrop={(e) => ondrop(e, i)}
               ondragend={ondragend}
               role="group"
-              aria-label={`Selected badge ${item.label}`}
+              aria-label={`Selected tag ${item.label}`}
             >
-              <Badge
-                size={effectiveBadgeSize}
-                tone={item.tone ?? badgeTone}
-                variant={item.variant ?? badgeVariant}
-                pill={item.pill ?? badgePill}
+              <Tag
+                size={effectiveTagSize}
+                tone={item.tone ?? resolvedTone}
+                variant={item.variant ?? resolvedVariant}
+                pill={item.pill ?? resolvedPill}
                 icon={item.icon}
                 avatar={item.avatar}
+                label={item.label}
                 removable={!disabled}
                 onremove={() => remove(item.value)}
-              >
-                {item.label}
-              </Badge>
+              />
             </span>
           {/each}
 
@@ -222,10 +230,29 @@
 
 <style>
   .ui-multiselect__wrap {
+    --ms-pad-y: 5px;
+    --ms-tag-h: 28px;
     display: block;
     width: 100%;
     cursor: text;
   }
+  .ui-multiselect__wrap[data-size="xs"] {
+    --ms-pad-y: 2px;
+    --ms-tag-h: 22px;
+  }
+  .ui-multiselect__wrap[data-size="sm"] {
+    --ms-pad-y: 5px;
+    --ms-tag-h: 22px;
+  }
+  .ui-multiselect__wrap[data-size="md"] {
+    --ms-pad-y: 5px;
+    --ms-tag-h: 28px;
+  }
+  .ui-multiselect__wrap[data-size="lg"] {
+    --ms-pad-y: 7px;
+    --ms-tag-h: 32px;
+  }
+
   .ui-multiselect__wrap:focus-within :global(.ui-multiselect__frame) {
     border-color: var(--ui-accent-solid);
     box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring);
@@ -234,7 +261,7 @@
   :global(.ui-multiselect__frame) {
     min-height: var(--frame-h);
     box-sizing: border-box;
-    padding-block: calc((var(--frame-h) - 28px) / 2 - 1px);
+    padding-block: var(--ms-pad-y);
   }
 
   .ui-multiselect__chips {
@@ -251,6 +278,7 @@
     display: inline-flex;
     align-items: center;
     cursor: grab;
+    user-select: none;
     transition:
       transform var(--ui-duration-fast) var(--ui-ease-out),
       opacity var(--ui-duration-fast) var(--ui-ease-out);
@@ -265,20 +293,24 @@
   .ui-multiselect__chip-item[data-drag-over] {
     outline: 2px dashed var(--ui-accent-solid);
     outline-offset: 2px;
+    border-radius: var(--ui-control-radius-xs);
+  }
+  .ui-multiselect__chip-item[data-drag-over][data-pill] {
     border-radius: var(--ui-radius-full);
   }
 
   .ui-multiselect__input {
     flex: 1;
-    min-width: 90px;
-    height: 28px;
+    min-width: 80px;
+    height: var(--ms-tag-h, 28px);
+    line-height: var(--ms-tag-h, 28px);
     border: none;
     background: none;
     outline: none;
     font-family: inherit;
     font-size: var(--frame-fs);
     color: var(--ui-fg-default);
-    padding: 0;
+    padding: 0 var(--ui-space-1);
   }
   .ui-multiselect__input::placeholder {
     color: var(--ui-fg-faint);

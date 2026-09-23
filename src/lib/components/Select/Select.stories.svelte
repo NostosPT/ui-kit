@@ -89,9 +89,9 @@
           <MultiSelect
             options={categories}
             bind:value={selectedCats}
-            badgeTone="accent"
-            badgeVariant="solid"
-            ariaLabel="Solid category badges"
+            tagTone="accent"
+            tagVariant="solid"
+            ariaLabel="Solid category chips"
           />
         </div>
       </Spec>
@@ -100,9 +100,9 @@
           <MultiSelect
             options={tags}
             bind:value={selectedTags}
-            badgeTone="accent"
-            badgeVariant="soft"
-            ariaLabel="Soft tag badges"
+            tagTone="accent"
+            tagVariant="soft"
+            ariaLabel="Soft tag chips"
           />
         </div>
       </Spec>

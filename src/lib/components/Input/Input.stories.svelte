@@ -126,6 +126,16 @@
 
 <Story name="Textarea" parameters={{ layout: "padded" }} asChild>
   <Showcase width="420px">
+    <Spec label="reference (in Field)" align="start">
+      <Field label="Message" info="Message field" hint="No more than 200 characters.">
+        {#snippet control({ id })}
+          <Textarea {id} placeholder="Your message..." maxLength={200} />
+        {/snippet}
+      </Field>
+    </Spec>
+    <Spec label="with count & hint" align="start">
+      <Textarea placeholder="Your message..." maxLength={200} showCount hint="No more than 200 characters." />
+    </Spec>
     <Spec label="default" align="start"><Textarea placeholder="Write a message…" /></Spec>
     <Spec label="autogrow" align="start">
       <Textarea value={"Grows with the content.\nUp to six rows, then scrolls."} autogrow maxRows={6} />

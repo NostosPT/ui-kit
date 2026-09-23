@@ -5,7 +5,7 @@
   import Radio from "../../lib/components/Toggle/Radio.svelte";
   import Switch from "../../lib/components/Toggle/Switch.svelte";
   import Input from "../../lib/components/Input/Input.svelte";
-  import TextBox from "../../lib/components/Input/TextBox.svelte";
+  import Textarea from "../../lib/components/Input/Textarea.svelte";
   import Field from "../../lib/components/Field/Field.svelte";
   import Dropdown from "../../lib/components/Select/Dropdown.svelte";
   import MultiSelect from "../../lib/components/Select/MultiSelect.svelte";
@@ -212,7 +212,7 @@
       <!-- 8. Message with Info and Character Hint -->
       <Field label="Message" info="Message field" hint="No more than 200 characters.">
         {#snippet control({ id })}
-          <TextBox
+          <Textarea
             {id}
             placeholder="Your message..."
             bind:value={message}

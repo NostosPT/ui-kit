@@ -128,6 +128,9 @@
   .ui-frame[data-multiline] {
     align-items: stretch;
   }
+  .ui-frame[data-multiline] .ui-frame__control {
+    align-items: stretch;
+  }
 
   .ui-frame[data-unstyled] {
     background: none;

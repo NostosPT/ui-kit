@@ -29,7 +29,7 @@
 
   let anchorEl = $state(null);
   let floatEl = $state(null);
-  let pos = $state({ x: 0, y: 0, side: "bottom", width: undefined, ready: false });
+  let pos = $state({ x: 0, y: 0, side: "bottom", align: "start", width: undefined, ready: false });
 
   export function close() {
     if (!open) return;
@@ -116,6 +116,7 @@
     {role}
     aria-label={ariaLabel}
     data-side={pos.side}
+    data-align={pos.align}
     data-ready={pos.ready || undefined}
     data-padded={padded || undefined}
     style:left="{pos.x}px"
@@ -140,7 +141,9 @@
     background: var(--ui-bg-raised);
     border: 1px solid var(--ui-border-default);
     border-radius: var(--ui-radius-2xl);
-    box-shadow: var(--ui-shadow-lg);
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.15),
+      var(--ui-shadow-lg);
     color: var(--ui-fg-default);
     /* Hidden until the first measurement lands, otherwise the surface paints
        at 0,0 for a frame before snapping to the anchor. */
@@ -151,22 +154,81 @@
   }
   .ui-popover[data-ready] {
     opacity: 1;
-    animation: ui-popover-in var(--ui-duration-fast) var(--ui-ease-out);
+    animation-duration: var(--ui-duration-fast);
+    animation-timing-function: var(--ui-ease-out);
+    animation-fill-mode: forwards;
   }
 
-  /* Grows away from the anchor, so the motion reads as the surface emerging
-     from the control that spawned it. */
-  .ui-popover[data-side="bottom"] { transform-origin: top center; }
-  .ui-popover[data-side="top"] { transform-origin: bottom center; }
-  .ui-popover[data-side="left"] { transform-origin: center right; }
-  .ui-popover[data-side="right"] { transform-origin: center left; }
+  /* Grows away from the anchor with directional transform origins and entrance slide */
+  .ui-popover[data-side="bottom"] {
+    transform-origin: top center;
+    animation-name: ui-popover-in-bottom;
+  }
+  .ui-popover[data-side="bottom"][data-align="start"] { transform-origin: top left; }
+  .ui-popover[data-side="bottom"][data-align="end"] { transform-origin: top right; }
 
-  @keyframes ui-popover-in {
+  .ui-popover[data-side="top"] {
+    transform-origin: bottom center;
+    animation-name: ui-popover-in-top;
+  }
+  .ui-popover[data-side="top"][data-align="start"] { transform-origin: bottom left; }
+  .ui-popover[data-side="top"][data-align="end"] { transform-origin: bottom right; }
+
+  .ui-popover[data-side="left"] {
+    transform-origin: center right;
+    animation-name: ui-popover-in-left;
+  }
+  .ui-popover[data-side="left"][data-align="start"] { transform-origin: top right; }
+  .ui-popover[data-side="left"][data-align="end"] { transform-origin: bottom right; }
+
+  .ui-popover[data-side="right"] {
+    transform-origin: center left;
+    animation-name: ui-popover-in-right;
+  }
+  .ui-popover[data-side="right"][data-align="start"] { transform-origin: top left; }
+  .ui-popover[data-side="right"][data-align="end"] { transform-origin: bottom left; }
+
+  @keyframes ui-popover-in-bottom {
     from {
       opacity: 0;
-      transform: scale(0.97);
+      transform: translateY(-4px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
+  @keyframes ui-popover-in-top {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes ui-popover-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(4px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+  @keyframes ui-popover-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(-4px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .ui-popover[data-ready] { animation: none; }
   }

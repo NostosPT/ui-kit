@@ -2,11 +2,7 @@
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import Alert from "./Alert.svelte";
   import Button from "../Button/Button.svelte";
-  import Modal from "../Modal/Modal.svelte";
-  import Tooltip from "../Tooltip/Tooltip.svelte";
-  import Popover from "../Popover/Popover.svelte";
   import Toaster from "../Toast/Toaster.svelte";
-  import EmptyState from "../EmptyState/EmptyState.svelte";
   import { toast } from "../Toast/toast.svelte.js";
   import Showcase from "../../../stories/util/Showcase.svelte";
   import Spec from "../../../stories/util/Spec.svelte";
@@ -25,7 +21,6 @@
     parameters: { layout: "padded" }
   });
 
-  let confirmOpen = $state(false);
   let dismissed = $state(false);
 </script>
 
@@ -98,82 +93,4 @@
     </Showcase>
     <Toaster />
   </div>
-</Story>
-
-<Story name="Modal" asChild>
-  <div style="min-height: 120px">
-    <Button onclick={() => (confirmOpen = true)}>Delete project</Button>
-
-    <Modal
-      bind:open={confirmOpen}
-      size="sm"
-      title="Delete this project?"
-      description="This removes the project and everything in it. This cannot be undone."
-    >
-      {#snippet footer({ close })}
-        <Button variant="ghost" tone="neutral" onclick={close}>Cancel</Button>
-        <Button tone="danger" icon="trash" onclick={close}>Delete project</Button>
-      {/snippet}
-    </Modal>
-  </div>
-</Story>
-
-<Story name="Tooltip" asChild>
-  <div style="padding: 60px 0">
-    <Showcase>
-      <Spec label="sides">
-        <Tooltip content="Top" placement="top-center"><Button variant="outline">Top</Button></Tooltip>
-        <Tooltip content="Bottom" placement="bottom-center"><Button variant="outline">Bottom</Button></Tooltip>
-        <Tooltip content="Left" placement="left-center"><Button variant="outline">Left</Button></Tooltip>
-        <Tooltip content="Right" placement="right-center"><Button variant="outline">Right</Button></Tooltip>
-      </Spec>
-      <Spec label="icons">
-        <Tooltip content="Download original"><Button variant="ghost" iconOnly icon="download" label="Download" /></Tooltip>
-        <Tooltip content="Copy share link"><Button variant="ghost" iconOnly icon="link" label="Copy link" /></Tooltip>
-        <Tooltip content="Move to trash"><Button variant="ghost" tone="danger" iconOnly icon="trash" label="Delete" /></Tooltip>
-      </Spec>
-      <Spec label="long">
-        <Tooltip content="Tax is calculated once a billing address is added to the account.">
-          <Button variant="ghost" iconOnly icon="info" label="About tax" />
-        </Tooltip>
-      </Spec>
-    </Showcase>
-  </div>
-</Story>
-
-<Story name="Popover" asChild>
-  <div style="padding: 20px 0 240px">
-    <Popover placement="bottom-start">
-      {#snippet trigger({ toggle, open })}
-        <Button variant="outline" icon="sliders" trailingIcon="chevron-down" onclick={toggle} aria-expanded={open}>
-          Filters
-        </Button>
-      {/snippet}
-      {#snippet children()}
-        <div style="padding: 8px 10px; width: 240px">
-          <p style="margin:0 0 6px; font-size: var(--ui-text-md); font-weight: 600">Filter orders</p>
-          <p style="margin:0; font-size: var(--ui-text-sm); color: var(--ui-fg-muted); line-height:1.5">
-            Any content works here — Popover only handles anchoring, outside-click and Escape.
-          </p>
-        </div>
-      {/snippet}
-    </Popover>
-  </div>
-</Story>
-
-<Story name="Empty state" asChild>
-  <Showcase width="480px">
-    <EmptyState
-      bordered
-      icon="folder"
-      title="No files yet"
-      description="Drop files here or browse your computer to get started."
-    >
-      {#snippet actions()}
-        <Button icon="upload">Upload files</Button>
-        <Button variant="outline">Import from URL</Button>
-      {/snippet}
-    </EmptyState>
-    <EmptyState size="sm" icon="search" title="No matching orders" description="Try a different search or clear your filters." />
-  </Showcase>
 </Story>

@@ -37,10 +37,10 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--ui-space-8);
-    padding: var(--ui-space-8) var(--ui-space-8) var(--ui-space-6);
+    padding: var(--ui-space-10) var(--ui-space-12) var(--ui-space-6);
   }
   .ui-card-header[data-compact] {
-    padding: var(--ui-space-6) var(--ui-space-7) var(--ui-space-5);
+    padding: var(--ui-space-6) var(--ui-space-8) var(--ui-space-5);
   }
   .ui-card-header[data-divided] {
     border-bottom: 1px solid var(--ui-border-subtle);

@@ -59,6 +59,7 @@
 
   .ui-card[data-interactive] {
     cursor: pointer;
+    outline: none;
     transition:
       border-color var(--ui-duration-fast) var(--ui-ease-out),
       box-shadow var(--ui-duration-fast) var(--ui-ease-out),
@@ -67,5 +68,15 @@
   .ui-card[data-interactive]:hover {
     border-color: var(--ui-border-strong);
     box-shadow: var(--ui-shadow-md);
+  }
+  .ui-card[data-interactive]:active {
+    transform: scale(0.996);
+    box-shadow: var(--ui-shadow-xs);
+  }
+  .ui-card[data-interactive]:focus-visible {
+    border-color: var(--ui-accent-solid);
+    box-shadow:
+      0 0 0 var(--ui-ring-width) var(--ui-accent-ring),
+      var(--ui-shadow-sm);
   }
 </style>

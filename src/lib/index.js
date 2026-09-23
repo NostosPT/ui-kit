@@ -2,7 +2,7 @@
  * Public surface of the kit.
  *
  * Import the stylesheet once, anywhere in your app:
- *   import "@nostos/ui/styles.css";
+ *   import "@nostospt/ui/styles.css";
  *
  * Then put `class="ui-root"` on a wrapping element — that's what scopes the
  * base styles and establishes the token context. Set `data-ui-theme="dark"`

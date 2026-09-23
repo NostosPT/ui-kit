@@ -20,16 +20,16 @@ numbers, not a fork.
 ## Install
 
 ```bash
-npm install @nostos/ui
+npm install @nostospt/ui
 ```
 
 ```js
-import "@nostos/ui/styles.css";
+import "@nostospt/ui/styles.css";
 ```
 
 ```svelte
 <script>
-  import { Button, Input, Field } from "@nostos/ui";
+  import { Button, Input, Field } from "@nostospt/ui";
 </script>
 
 <div class="ui-root">

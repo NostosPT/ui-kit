@@ -15,6 +15,7 @@
     value = $bindable(undefined),
     size = "md",
     variant = "solid",
+    pill = false,
     block = false,
     disabled = false,
     ariaLabel = undefined,
@@ -85,6 +86,7 @@
   aria-disabled={disabled || undefined}
   data-size={size}
   data-variant={variant}
+  data-pill={pill || undefined}
   data-block={block || undefined}
   style:--seg-x="{indicator.x}px"
   style:--seg-w="{indicator.w}px"
@@ -120,6 +122,15 @@
     background: var(--ui-bg-muted);
     border-radius: var(--seg-radius);
     isolation: isolate;
+  }
+  .ui-segmented[data-pill] {
+    border-radius: var(--ui-radius-full);
+  }
+  .ui-segmented[data-pill] .ui-segmented__indicator {
+    border-radius: var(--ui-radius-full);
+  }
+  .ui-segmented[data-pill] .ui-segmented__item {
+    border-radius: var(--ui-radius-full);
   }
   .ui-segmented[data-block] {
     display: flex;

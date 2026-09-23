@@ -75,9 +75,9 @@
     gap: var(--check-gap);
     position: relative;
   }
-  .ui-check[data-size="sm"] { --check-size: 16px; --check-gap: var(--ui-space-4); --check-fs: var(--ui-text-sm); }
-  .ui-check[data-size="md"] { --check-size: 20px; --check-gap: var(--ui-space-5); --check-fs: var(--ui-text-md); }
-  .ui-check[data-size="lg"] { --check-size: 22px; --check-gap: var(--ui-space-5); --check-fs: var(--ui-text-base); }
+  .ui-check[data-size="sm"] { --check-size: 16px; --check-gap: var(--ui-space-4); --check-fs: var(--ui-text-sm); --check-radius: var(--ui-radius-xs); }
+  .ui-check[data-size="md"] { --check-size: 20px; --check-gap: var(--ui-space-5); --check-fs: var(--ui-text-md); --check-radius: var(--ui-radius-sm); }
+  .ui-check[data-size="lg"] { --check-size: 22px; --check-gap: var(--ui-space-5); --check-fs: var(--ui-text-base); --check-radius: var(--ui-radius-sm); }
 
   .ui-check__input {
     position: absolute;
@@ -98,7 +98,7 @@
     width: var(--check-size);
     height: var(--check-size);
     border: 1.5px solid var(--ui-border-default);
-    border-radius: var(--ui-control-radius-xs);
+    border-radius: var(--check-radius, var(--ui-radius-sm));
     background: var(--ui-bg-surface);
     color: transparent;
     box-shadow: var(--ui-shadow-sm);

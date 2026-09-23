@@ -1,5 +1,5 @@
 <script>
-  import Textarea from "./Textarea.svelte";
+  import Textarea from "../Textarea/Textarea.svelte";
 
   /**
    * Multi-line text box component.

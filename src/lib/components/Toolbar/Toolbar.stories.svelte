@@ -17,7 +17,7 @@
     },
     argTypes: {
       variant: { control: "inline-radio", options: ["plain", "card", "floating"] },
-      size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+      size: { control: "inline-radio", options: ["xs", "sm", "md", "lg"] },
       wrap: { control: "boolean" }
     },
     parameters: {
@@ -25,12 +25,29 @@
       docs: {
         description: {
           component:
-            "Horizontal action bar with support for spacers, dividers, and grouped controls. Available in plain, card, and floating variants."
+            "Horizontal action bar with support for spacers, dividers, and grouped controls. Available in plain, card, and floating variants across the complete size scale from xs to lg."
         }
       }
     }
   });
 </script>
+
+<Story name="Playground">
+  {#snippet template(args)}
+    <div style="width: 580px">
+      <Toolbar {...args}>
+        <Button variant="outline" size={args.size} icon="plus">New item</Button>
+        <div class="ui-toolbar__divider"></div>
+        <ButtonGroup size={args.size}>
+          <Button variant="outline" iconOnly icon="pencil" label="Edit" />
+          <Button variant="outline" iconOnly icon="copy" label="Copy" />
+        </ButtonGroup>
+        <div class="ui-toolbar__spacer"></div>
+        <Button size={args.size} icon="download">Export</Button>
+      </Toolbar>
+    </div>
+  {/snippet}
+</Story>
 
 <Story name="Variants" asChild>
   <Showcase width="560px" gap={20}>
@@ -39,8 +56,8 @@
         <Button variant="outline" size="sm" icon="plus">New item</Button>
         <div class="ui-toolbar__divider"></div>
         <ButtonGroup size="sm">
-          <Button variant="outline" iconOnly icon="bold" label="Bold" />
-          <Button variant="outline" iconOnly icon="italic" label="Italic" />
+          <Button variant="outline" iconOnly icon="pencil" label="Edit" />
+          <Button variant="outline" iconOnly icon="copy" label="Copy" />
         </ButtonGroup>
         <div class="ui-toolbar__spacer"></div>
         <Button size="sm" icon="download">Export</Button>
@@ -49,8 +66,9 @@
 
     <Spec label="floating" align="stretch">
       <Toolbar variant="floating">
-        <Button variant="ghost" size="sm" iconOnly icon="scissors" label="Cut" />
+        <Button variant="ghost" size="sm" iconOnly icon="pencil" label="Edit" />
         <Button variant="ghost" size="sm" iconOnly icon="copy" label="Copy" />
+        <Button variant="ghost" size="sm" iconOnly icon="link" label="Link" />
         <div class="ui-toolbar__divider"></div>
         <Button variant="ghost" size="sm" iconOnly icon="trash" tone="danger" label="Delete" />
       </Toolbar>
@@ -64,5 +82,24 @@
         <Button size="sm">Action</Button>
       </Toolbar>
     </Spec>
+  </Showcase>
+</Story>
+
+<Story name="Sizes" asChild>
+  <Showcase width="600px" gap={20}>
+    {#each ["xs", "sm", "md", "lg"] as size}
+      <Spec label={size} align="stretch">
+        <Toolbar {size} variant="card">
+          <Button variant="outline" {size} icon="plus">Action</Button>
+          <div class="ui-toolbar__divider"></div>
+          <ButtonGroup {size}>
+            <Button variant="outline" iconOnly icon="pencil" label="Edit" />
+            <Button variant="outline" iconOnly icon="copy" label="Copy" />
+          </ButtonGroup>
+          <div class="ui-toolbar__spacer"></div>
+          <Button {size} icon="download">Save</Button>
+        </Toolbar>
+      </Spec>
+    {/each}
   </Showcase>
 </Story>

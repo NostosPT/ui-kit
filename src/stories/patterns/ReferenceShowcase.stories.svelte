@@ -319,6 +319,7 @@
         <SegmentedControl
           items={["15M", "30M", "1H", "4H", "1D"]}
           bind:value={timeRange}
+          pill
         />
       </div>
 
@@ -328,6 +329,7 @@
           bind:value={otpValue}
           length={6}
           separatorAfter={3}
+          focusIndex={4}
         />
       </div>
 
@@ -346,9 +348,12 @@
     grid-template-columns: minmax(320px, 420px) minmax(320px, 420px);
     gap: 48px 64px;
     align-items: start;
-    padding: 24px;
+    padding: 40px;
     max-width: 960px;
     margin: 0 auto;
+    background: var(--ui-bg-canvas);
+    border: 1px solid var(--ui-border-subtle);
+    border-radius: var(--ui-radius-2xl);
     font-family: var(--ui-font-sans);
   }
 

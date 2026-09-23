@@ -1,13 +1,11 @@
 <script module>
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import TagInput from "./TagInput.svelte";
-  import Tag from "./Tag.svelte";
   import NumberInput from "../NumberInput/NumberInput.svelte";
   import PhoneInput from "../PhoneInput/PhoneInput.svelte";
   import CurrencyInput from "../CurrencyInput/CurrencyInput.svelte";
   import Select from "../Select/Select.svelte";
   import Field from "../Field/Field.svelte";
-  import Avatar from "../Avatar/Avatar.svelte";
   import Showcase from "../../../stories/util/Showcase.svelte";
   import Spec from "../../../stories/util/Spec.svelte";
 
@@ -51,29 +49,6 @@
           <TagInput {id} aria-describedby={describedBy} bind:value={users} max={3} />
         {/snippet}
       </Field>
-    </Spec>
-  </Showcase>
-</Story>
-
-<Story name="Tags" asChild>
-  <Showcase>
-    <Spec label="sizes">
-      <Tag size="sm" label="Small" removable />
-      <Tag size="md" label="Medium" removable />
-      <Tag size="lg" label="Large" removable />
-    </Spec>
-    <Spec label="tones">
-      <Tag label="Neutral" removable />
-      <Tag tone="accent" label="Accent" removable />
-      <Tag tone="muted" label="Muted" removable />
-    </Spec>
-    <Spec label="with avatar">
-      <Tag label="Jack" removable>
-        {#snippet leading()}<Avatar size="xs" name="Jack Reed" />{/snippet}
-      </Tag>
-      <Tag label="Ann" removable>
-        {#snippet leading()}<Avatar size="xs" name="Ann Brown" />{/snippet}
-      </Tag>
     </Spec>
   </Showcase>
 </Story>

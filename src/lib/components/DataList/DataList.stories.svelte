@@ -9,7 +9,7 @@
   import Showcase from "../../../stories/util/Showcase.svelte";
 
   const { Story } = defineMeta({
-    title: "Data display/Summary",
+    title: "Data Display/Summary",
     component: DataList,
     parameters: {
       layout: "padded",

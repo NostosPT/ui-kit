@@ -17,6 +17,7 @@
     argTypes: {
       size: { control: "inline-radio", options: ["sm", "md", "lg"] },
       variant: { control: "inline-radio", options: ["solid", "accent", "ghost"] },
+      pill: { control: "boolean" },
       block: { control: "boolean" },
       disabled: { control: "boolean" }
     },
@@ -56,6 +57,9 @@
   <Showcase>
     <Spec label="solid">
       <SegmentedControl items={TIMEFRAMES} bind:value={tf} ariaLabel="Timeframe" />
+    </Spec>
+    <Spec label="pill">
+      <SegmentedControl items={TIMEFRAMES} bind:value={tf} pill ariaLabel="Pill timeframe" />
     </Spec>
     <Spec label="accent">
       <SegmentedControl items={BILLING} bind:value={billing} variant="accent" ariaLabel="Billing period" />

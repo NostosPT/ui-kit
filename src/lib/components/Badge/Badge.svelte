@@ -95,6 +95,13 @@
   .ui-badge[data-pill] {
     border-radius: var(--ui-radius-full);
   }
+  .ui-badge[draggable="true"] {
+    cursor: grab;
+    user-select: none;
+  }
+  .ui-badge[draggable="true"]:active {
+    cursor: grabbing;
+  }
 
   .ui-badge[data-size="sm"] {
     --badge-h: 22px;

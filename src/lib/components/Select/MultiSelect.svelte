@@ -14,9 +14,11 @@
     options = [],
     placeholder = "Select…",
     size = "md",
+    badgeSize = undefined,
     badgeTone = "accent",
     badgeVariant = "solid",
     badgePill = true,
+    reorderable = true,
     max = undefined,
     invalid = false,
     disabled = false,
@@ -32,6 +34,12 @@
   let open = $state(false);
   let query = $state("");
   let inputEl = $state(null);
+  let draggedIndex = $state(null);
+  let dragOverIndex = $state(null);
+
+  const effectiveBadgeSize = $derived(
+    badgeSize ?? (size === "xs" ? "sm" : size === "sm" ? "sm" : "md")
+  );
 
   const items = $derived(
     options.map((o) => (typeof o === "object" ? o : { value: o, label: String(o) }))
@@ -66,6 +74,47 @@
     onchange?.(value);
   }
 
+  function ondragstart(e, index) {
+    if (disabled || !reorderable) return;
+    draggedIndex = index;
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", String(index));
+  }
+
+  function ondragover(e, index) {
+    if (disabled || !reorderable || draggedIndex === null) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    dragOverIndex = index;
+  }
+
+  function ondragleave(index) {
+    if (dragOverIndex === index) {
+      dragOverIndex = null;
+    }
+  }
+
+  function ondrop(e, targetIndex) {
+    e.preventDefault();
+    if (disabled || !reorderable || draggedIndex === null || draggedIndex === targetIndex) {
+      draggedIndex = null;
+      dragOverIndex = null;
+      return;
+    }
+    const next = [...value];
+    const [moved] = next.splice(draggedIndex, 1);
+    next.splice(targetIndex, 0, moved);
+    value = next;
+    onchange?.(value);
+    draggedIndex = null;
+    dragOverIndex = null;
+  }
+
+  function ondragend() {
+    draggedIndex = null;
+    dragOverIndex = null;
+  }
+
   function onkeydown(e) {
     if (e.key === "Backspace" && !query && value.length) {
       remove(value[value.length - 1]);
@@ -94,19 +143,33 @@
     >
       <InputFrame {size} {invalid} {disabled} multiline class="ui-multiselect__frame" end={frameEnd}>
         <div class="ui-multiselect__chips">
-          {#each selectedItems as item (item.value)}
-            <Badge
-              size={size === "lg" ? "md" : "sm"}
-              tone={item.tone ?? badgeTone}
-              variant={item.variant ?? badgeVariant}
-              pill={item.pill ?? badgePill}
-              icon={item.icon}
-              avatar={item.avatar}
-              removable={!disabled}
-              onremove={() => remove(item.value)}
+          {#each selectedItems as item, i (item.value)}
+            <span
+              class="ui-multiselect__chip-item"
+              data-dragging={draggedIndex === i || undefined}
+              data-drag-over={dragOverIndex === i || undefined}
+              draggable={!disabled && reorderable && value.length > 1}
+              ondragstart={(e) => ondragstart(e, i)}
+              ondragover={(e) => ondragover(e, i)}
+              ondragleave={() => ondragleave(i)}
+              ondrop={(e) => ondrop(e, i)}
+              ondragend={ondragend}
+              role="group"
+              aria-label={`Selected badge ${item.label}`}
             >
-              {item.label}
-            </Badge>
+              <Badge
+                size={effectiveBadgeSize}
+                tone={item.tone ?? badgeTone}
+                variant={item.variant ?? badgeVariant}
+                pill={item.pill ?? badgePill}
+                icon={item.icon}
+                avatar={item.avatar}
+                removable={!disabled}
+                onremove={() => remove(item.value)}
+              >
+                {item.label}
+              </Badge>
+            </span>
           {/each}
 
           <input
@@ -170,7 +233,8 @@
 
   :global(.ui-multiselect__frame) {
     min-height: var(--frame-h);
-    padding-block: var(--ui-space-2);
+    box-sizing: border-box;
+    padding-block: calc((var(--frame-h) - 28px) / 2 - 1px);
   }
 
   .ui-multiselect__chips {
@@ -181,6 +245,27 @@
     flex: 1;
     min-width: 0;
     padding-inline-start: var(--frame-px);
+  }
+
+  .ui-multiselect__chip-item {
+    display: inline-flex;
+    align-items: center;
+    cursor: grab;
+    transition:
+      transform var(--ui-duration-fast) var(--ui-ease-out),
+      opacity var(--ui-duration-fast) var(--ui-ease-out);
+  }
+  .ui-multiselect__chip-item:active {
+    cursor: grabbing;
+  }
+  .ui-multiselect__chip-item[data-dragging] {
+    opacity: 0.4;
+    transform: scale(0.96);
+  }
+  .ui-multiselect__chip-item[data-drag-over] {
+    outline: 2px dashed var(--ui-accent-solid);
+    outline-offset: 2px;
+    border-radius: var(--ui-radius-full);
   }
 
   .ui-multiselect__input {
@@ -204,6 +289,8 @@
     flex-direction: column;
     max-height: 260px;
     background: var(--ui-bg-surface);
+    border-radius: var(--ui-radius-2xl);
+    overflow: hidden;
   }
   .ui-multiselect__list {
     list-style: none;

@@ -1,5 +1,6 @@
 <script>
   import Icon from "../Icon/Icon.svelte";
+  import Tooltip from "../Tooltip/Tooltip.svelte";
   import { uid } from "../../internal/utils.js";
 
   /**
@@ -47,14 +48,15 @@
         </label>
       {/if}
       {#if info}
-        <button
-          type="button"
-          class="ui-field__info"
-          aria-label={typeof info === "string" ? info : "Info"}
-          title={typeof info === "string" ? info : undefined}
-        >
-          <Icon name="info" size={14} />
-        </button>
+        <Tooltip content={typeof info === "string" ? info : undefined}>
+          <button
+            type="button"
+            class="ui-field__info"
+            aria-label={typeof info === "string" ? info : "Info"}
+          >
+            <Icon name="info" size={14} />
+          </button>
+        </Tooltip>
       {/if}
     </div>
   {/if}
@@ -102,13 +104,21 @@
     color: var(--ui-fg-subtle);
     background: transparent;
     border: none;
-    padding: 0;
+    padding: 2px;
     cursor: pointer;
     border-radius: var(--ui-radius-full);
-    transition: color var(--ui-duration-fast) var(--ui-ease-out);
+    outline: none;
+    transition:
+      color var(--ui-duration-fast) var(--ui-ease-out),
+      background-color var(--ui-duration-fast) var(--ui-ease-out);
   }
   .ui-field__info:hover {
     color: var(--ui-fg-default);
+    background: var(--ui-bg-muted);
+  }
+  .ui-field__info:focus-visible {
+    color: var(--ui-fg-default);
+    box-shadow: 0 0 0 2px var(--ui-accent-ring);
   }
 
   .ui-field__label {

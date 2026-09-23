@@ -1,5 +1,5 @@
 {
-  "name": "@nostos/ui",
+  "name": "@nostospt/ui",
   "version": "0.1.0",
   "description": "A theme-agnostic Svelte UI kit — clean, dense, product-grade components driven entirely by CSS custom properties.",
   "type": "module",

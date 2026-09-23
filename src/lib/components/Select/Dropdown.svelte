@@ -209,7 +209,7 @@
     align-items: center;
     gap: var(--ui-space-3);
     height: var(--frame-h);
-    padding-inline: var(--frame-px);
+    padding-inline: var(--frame-px) var(--ui-space-2);
     min-width: 0;
     font-size: var(--frame-fs);
     color: var(--ui-fg-default);
@@ -234,6 +234,7 @@
   .ui-dropdown__flag {
     font-size: 1.15em;
     line-height: 1;
+    transform: translateY(-0.5px);
     flex: none;
   }
 
@@ -242,6 +243,8 @@
     flex-direction: column;
     max-height: 288px;
     background: var(--ui-bg-surface);
+    border-radius: var(--ui-radius-2xl);
+    overflow: hidden;
   }
   .ui-dropdown__search {
     display: flex;

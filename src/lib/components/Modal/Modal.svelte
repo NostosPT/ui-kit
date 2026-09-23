@@ -111,7 +111,7 @@
 
   .ui-modal::backdrop {
     background: var(--ui-bg-overlay);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
     animation: ui-modal-fade var(--ui-duration-normal) var(--ui-ease-out);
   }
 
@@ -122,7 +122,9 @@
     background: var(--ui-bg-surface);
     border: 1px solid var(--ui-border-default);
     border-radius: var(--ui-radius-2xl);
-    box-shadow: var(--ui-shadow-xl);
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.15),
+      var(--ui-shadow-xl);
     overflow: hidden;
     animation: ui-modal-in var(--ui-duration-normal) var(--ui-ease-out);
   }
@@ -132,7 +134,7 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--ui-space-8);
-    padding: var(--ui-space-10) var(--ui-space-10) var(--ui-space-6);
+    padding: var(--ui-space-10) var(--ui-space-12) var(--ui-space-6);
   }
   .ui-modal__titles {
     display: flex;
@@ -160,17 +162,34 @@
     height: var(--ui-control-h-xs);
     flex: none;
     margin: -4px -6px 0 0;
+    border: 1px solid transparent;
     border-radius: var(--ui-control-radius-xs);
+    background: transparent;
     color: var(--ui-fg-subtle);
-    transition: background-color var(--ui-duration-fast) var(--ui-ease-out);
+    cursor: pointer;
+    outline: none;
+    transition:
+      background-color var(--ui-duration-fast) var(--ui-ease-out),
+      border-color var(--ui-duration-fast) var(--ui-ease-out),
+      color var(--ui-duration-fast) var(--ui-ease-out),
+      box-shadow var(--ui-duration-fast) var(--ui-ease-out),
+      transform var(--ui-duration-instant) var(--ui-ease-out);
   }
   .ui-modal__close:hover {
     background: var(--ui-bg-hover);
     color: var(--ui-fg-default);
   }
+  .ui-modal__close:active {
+    transform: translateY(0.5px);
+  }
+  .ui-modal__close:focus-visible {
+    border-color: var(--ui-accent-solid);
+    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring);
+    color: var(--ui-fg-default);
+  }
 
   .ui-modal__body {
-    padding: 0 var(--ui-space-10) var(--ui-space-10);
+    padding: 0 var(--ui-space-12) var(--ui-space-10);
     overflow-y: auto;
     font-size: var(--ui-text-md);
     line-height: var(--ui-leading-relaxed);
@@ -180,8 +199,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: var(--ui-space-4);
-    padding: var(--ui-space-7) var(--ui-space-10);
+    gap: var(--ui-space-3);
+    padding: var(--ui-space-7) var(--ui-space-12);
     border-top: 1px solid var(--ui-border-subtle);
     background: var(--ui-bg-sunken);
   }

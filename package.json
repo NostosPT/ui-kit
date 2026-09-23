@@ -7,10 +7,12 @@
   "svelte": "./src/lib/index.js",
   "exports": {
     ".": {
-      "svelte": "./src/lib/index.js"
+      "svelte": "./src/lib/index.js",
+      "import": "./src/lib/index.js",
+      "default": "./src/lib/index.js"
     },
     "./styles.css": "./src/lib/styles/index.css"
-  },
+  }
   "files": [
     "src/lib"
   ],

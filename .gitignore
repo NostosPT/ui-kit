@@ -4,3 +4,5 @@ storybook-static
 .DS_Store
 *.log
 .vite
+**/*.stories.svelte
+**/*.stories.js

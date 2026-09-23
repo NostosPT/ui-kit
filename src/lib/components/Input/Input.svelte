@@ -1,6 +1,7 @@
 <script>
   import InputFrame from "../Field/InputFrame.svelte";
   import Icon from "../Icon/Icon.svelte";
+  import Kbd from "../Kbd/Kbd.svelte";
 
   /**
    * Single-line text control. Everything visual comes from InputFrame; this
@@ -83,7 +84,7 @@
   {/if}
   {#if trailingIcon}<Icon name={trailingIcon} size={iconSize} />{/if}
   {#if shortcut}
-    <kbd class="ui-input__kbd">{shortcut}</kbd>
+    <Kbd size={size === "lg" ? "md" : "sm"}>{shortcut}</Kbd>
   {/if}
   {#if suffix}
     <span class="ui-input__suffix">{suffix}</span>
@@ -200,25 +201,21 @@
     color: var(--ui-fg-muted);
     border-radius: var(--ui-radius-full);
     cursor: pointer;
-    transition: color var(--ui-duration-fast) var(--ui-ease-out);
+    outline: none;
+    transition:
+      color var(--ui-duration-fast) var(--ui-ease-out),
+      background-color var(--ui-duration-fast) var(--ui-ease-out),
+      transform var(--ui-duration-instant) var(--ui-ease-out);
   }
   .ui-input__reveal:hover {
     color: var(--ui-fg-default);
+    background: var(--ui-bg-muted);
   }
-  .ui-input__kbd {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 22px;
-    padding-inline: 6px;
-    border: 1px solid var(--ui-border-default);
-    border-radius: var(--ui-radius-sm);
-    background: var(--ui-bg-surface);
-    box-shadow: var(--ui-shadow-xs);
-    font-family: inherit;
-    font-size: var(--ui-text-xs);
-    font-weight: var(--ui-weight-medium);
-    color: var(--ui-fg-muted);
-    margin-inline-end: 2px;
+  .ui-input__reveal:active {
+    transform: scale(0.92);
+  }
+  .ui-input__reveal:focus-visible {
+    color: var(--ui-fg-default);
+    box-shadow: 0 0 0 2px var(--ui-accent-ring);
   }
 </style>

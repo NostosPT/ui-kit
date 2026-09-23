@@ -38,7 +38,7 @@ export { default as Tooltip } from "./components/Tooltip/Tooltip.svelte";
 export { default as Field } from "./components/Field/Field.svelte";
 export { default as InputFrame } from "./components/Field/InputFrame.svelte";
 export { default as Input } from "./components/Input/Input.svelte";
-export { default as Textarea } from "./components/Input/Textarea.svelte";
+export { default as Textarea } from "./components/Textarea/Textarea.svelte";
 export { default as TextBox } from "./components/Input/TextBox.svelte";
 export { default as Select } from "./components/Select/Select.svelte";
 export { default as Dropdown } from "./components/Select/Dropdown.svelte";

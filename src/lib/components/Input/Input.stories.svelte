@@ -1,7 +1,6 @@
 <script module>
   import { defineMeta } from "@storybook/addon-svelte-csf";
   import Input from "./Input.svelte";
-  import Textarea from "./Textarea.svelte";
   import Field from "../Field/Field.svelte";
   import Button from "../Button/Button.svelte";
   import Showcase from "../../../stories/util/Showcase.svelte";
@@ -116,21 +115,11 @@
       {/snippet}
     </Field>
 
-    <Field label="Notes" optional>
+    <Field label="Postal code" optional>
       {#snippet control({ id })}
-        <Textarea {id} placeholder="Anything the team should know?" autogrow maxRows={6} />
+        <Input {id} placeholder="e.g. 10001" />
       {/snippet}
     </Field>
-  </Showcase>
-</Story>
-
-<Story name="Textarea" parameters={{ layout: "padded" }} asChild>
-  <Showcase width="420px">
-    <Spec label="default" align="start"><Textarea placeholder="Write a message…" /></Spec>
-    <Spec label="autogrow" align="start">
-      <Textarea value={"Grows with the content.\nUp to six rows, then scrolls."} autogrow maxRows={6} />
-    </Spec>
-    <Spec label="invalid" align="start"><Textarea value="Too short" invalid rows={2} /></Spec>
   </Showcase>
 </Story>
 

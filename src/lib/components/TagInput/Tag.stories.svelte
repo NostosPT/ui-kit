@@ -20,6 +20,7 @@
       size: { control: "inline-radio", options: ["sm", "md", "lg"] },
       tone: { control: "inline-radio", options: ["neutral", "accent", "muted"] },
       variant: { control: "inline-radio", options: ["surface", "solid"] },
+      pill: { control: "boolean" },
       removable: { control: "boolean" },
       disabled: { control: "boolean" }
     },
@@ -48,6 +49,12 @@
       <Tag tone="accent" label="Accent" removable />
       <Tag tone="muted" label="Muted" removable />
       <Tag tone="accent" variant="solid" label="Solid" removable />
+    </Spec>
+
+    <Spec label="pill shape">
+      <Tag label="Neutral" pill removable />
+      <Tag tone="accent" label="Accent" pill removable />
+      <Tag tone="accent" variant="solid" label="Solid" pill removable />
     </Spec>
 
     <Spec label="with avatar">

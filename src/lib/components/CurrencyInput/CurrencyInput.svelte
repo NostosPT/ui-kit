@@ -160,4 +160,8 @@
     appearance: none;
     cursor: pointer;
   }
+  .ui-currency__unit:has(.ui-currency__select:focus-visible) {
+    outline: 2px solid var(--ui-accent-solid);
+    outline-offset: -2px;
+  }
 </style>

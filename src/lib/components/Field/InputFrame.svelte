@@ -56,6 +56,8 @@
     border-radius: var(--frame-radius);
     box-shadow: var(--ui-shadow-sm);
     color: var(--ui-fg-default);
+    min-height: var(--frame-h);
+    box-sizing: border-box;
     transition:
       border-color var(--ui-duration-fast) var(--ui-ease-out),
       box-shadow var(--ui-duration-fast) var(--ui-ease-out),
@@ -124,7 +126,9 @@
   }
 
   .ui-frame[data-multiline] {
-    --frame-h: auto;
+    align-items: stretch;
+  }
+  .ui-frame[data-multiline] .ui-frame__control {
     align-items: stretch;
   }
 

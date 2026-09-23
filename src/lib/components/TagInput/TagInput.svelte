@@ -21,6 +21,7 @@
     separators = [",", "Enter", "Tab"],
     allowDuplicates = false,
     tone = "neutral",
+    reorderable = true,
     invalid = false,
     disabled = false,
     id = undefined,
@@ -30,6 +31,8 @@
   } = $props();
 
   let inputEl = $state(null);
+  let draggedIndex = $state(null);
+  let dragOverIndex = $state(null);
 
   const full = $derived(max != null && value.length >= max);
   const tagSize = $derived(size === "lg" ? "md" : size === "sm" ? "sm" : "md");
@@ -49,6 +52,47 @@
   function removeAt(index) {
     value = value.filter((_, i) => i !== index);
     onchange?.(value);
+  }
+
+  function ondragstart(e, index) {
+    if (disabled || !reorderable) return;
+    draggedIndex = index;
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", String(index));
+  }
+
+  function ondragover(e, index) {
+    if (disabled || !reorderable || draggedIndex === null) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    dragOverIndex = index;
+  }
+
+  function ondragleave(index) {
+    if (dragOverIndex === index) {
+      dragOverIndex = null;
+    }
+  }
+
+  function ondrop(e, targetIndex) {
+    e.preventDefault();
+    if (disabled || !reorderable || draggedIndex === null || draggedIndex === targetIndex) {
+      draggedIndex = null;
+      dragOverIndex = null;
+      return;
+    }
+    const next = [...value];
+    const [moved] = next.splice(draggedIndex, 1);
+    next.splice(targetIndex, 0, moved);
+    value = next;
+    onchange?.(value);
+    draggedIndex = null;
+    dragOverIndex = null;
+  }
+
+  function ondragend() {
+    draggedIndex = null;
+    dragOverIndex = null;
   }
 
   const label = (item) => (typeof item === "string" ? item : (item.label ?? item.value ?? ""));
@@ -89,14 +133,28 @@
 >
   <div class="ui-taginput__wrap">
     {#each value as item, i (label(item) + i)}
-      <Tag
-        size={tagSize}
-        {tone}
-        label={label(item)}
-        removable
-        {disabled}
-        onremove={() => removeAt(i)}
-      />
+      <span
+        class="ui-taginput__item"
+        data-dragging={draggedIndex === i || undefined}
+        data-drag-over={dragOverIndex === i || undefined}
+        draggable={!disabled && reorderable && value.length > 1}
+        ondragstart={(e) => ondragstart(e, i)}
+        ondragover={(e) => ondragover(e, i)}
+        ondragleave={() => ondragleave(i)}
+        ondrop={(e) => ondrop(e, i)}
+        ondragend={ondragend}
+        role="group"
+        aria-label={`Tag ${label(item)}`}
+      >
+        <Tag
+          size={tagSize}
+          {tone}
+          label={label(item)}
+          removable
+          {disabled}
+          onremove={() => removeAt(i)}
+        />
+      </span>
     {/each}
 
     <input
@@ -128,6 +186,26 @@
     width: 100%;
     min-height: calc(var(--frame-h) - var(--ui-space-4));
     padding-inline: var(--frame-px);
+  }
+  .ui-taginput__item {
+    display: inline-flex;
+    align-items: center;
+    cursor: grab;
+    transition:
+      transform var(--ui-duration-fast) var(--ui-ease-out),
+      opacity var(--ui-duration-fast) var(--ui-ease-out);
+  }
+  .ui-taginput__item:active {
+    cursor: grabbing;
+  }
+  .ui-taginput__item[data-dragging] {
+    opacity: 0.4;
+    transform: scale(0.96);
+  }
+  .ui-taginput__item[data-drag-over] {
+    outline: 2px dashed var(--ui-accent-solid);
+    outline-offset: 2px;
+    border-radius: var(--ui-radius-xs);
   }
   .ui-taginput__input {
     flex: 1;

@@ -5,7 +5,7 @@
   import Radio from "../../lib/components/Toggle/Radio.svelte";
   import Switch from "../../lib/components/Toggle/Switch.svelte";
   import Input from "../../lib/components/Input/Input.svelte";
-  import TextBox from "../../lib/components/Input/TextBox.svelte";
+  import Textarea from "../../lib/components/Textarea/Textarea.svelte";
   import Field from "../../lib/components/Field/Field.svelte";
   import Dropdown from "../../lib/components/Select/Dropdown.svelte";
   import MultiSelect from "../../lib/components/Select/MultiSelect.svelte";
@@ -129,8 +129,8 @@
             {id}
             options={categoryOptions}
             bind:value={categories}
-            badgeTone="accent"
-            badgeVariant="solid"
+            tagTone="accent"
+            tagVariant="solid"
           />
         {/snippet}
       </Field>
@@ -142,8 +142,8 @@
             {id}
             options={tagOptions}
             bind:value={tags}
-            badgeTone="accent"
-            badgeVariant="soft"
+            tagTone="accent"
+            tagVariant="soft"
           />
         {/snippet}
       </Field>
@@ -192,8 +192,8 @@
             bind:value={selectedTeammates}
             placeholder="Select user(s)..."
             max={3}
-            badgeVariant="surface"
-            badgePill={false}
+            tagVariant="surface"
+            tagPill={false}
           />
         {/snippet}
       </Field>
@@ -212,7 +212,7 @@
       <!-- 8. Message with Info and Character Hint -->
       <Field label="Message" info="Message field" hint="No more than 200 characters.">
         {#snippet control({ id })}
-          <TextBox
+          <Textarea
             {id}
             placeholder="Your message..."
             bind:value={message}
@@ -319,6 +319,7 @@
         <SegmentedControl
           items={["15M", "30M", "1H", "4H", "1D"]}
           bind:value={timeRange}
+          pill
         />
       </div>
 
@@ -328,6 +329,7 @@
           bind:value={otpValue}
           length={6}
           separatorAfter={3}
+          focusIndex={4}
         />
       </div>
 
@@ -346,9 +348,12 @@
     grid-template-columns: minmax(320px, 420px) minmax(320px, 420px);
     gap: 48px 64px;
     align-items: start;
-    padding: 24px;
+    padding: 40px;
     max-width: 960px;
     margin: 0 auto;
+    background: var(--ui-bg-canvas);
+    border: 1px solid var(--ui-border-subtle);
+    border-radius: var(--ui-radius-2xl);
     font-family: var(--ui-font-sans);
   }
 

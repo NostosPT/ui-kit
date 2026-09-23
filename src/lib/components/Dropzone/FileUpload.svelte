@@ -59,6 +59,16 @@
   function ondragleave() {
     isDragging = false;
   }
+
+  function onkeydown(e) {
+    if (disabled) return;
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      inputEl?.click();
+    }
+  }
+
+  const iconSize = $derived({ xs: 14, sm: 16, md: 18, lg: 20 }[size] ?? 18);
 </script>
 
 <div
@@ -67,11 +77,14 @@
   data-dragging={isDragging || undefined}
   data-disabled={disabled || undefined}
   data-invalid={invalid || undefined}
+  tabindex={disabled ? -1 : 0}
+  role="button"
+  aria-disabled={disabled || undefined}
   {ondrop}
   {ondragover}
   {ondragleave}
+  {onkeydown}
   onclick={() => !disabled && inputEl?.click()}
-  role="presentation"
   {...rest}
 >
   <input
@@ -89,7 +102,7 @@
   />
 
   <div class="ui-fileupload__start">
-    <Icon name={icon} size={18} />
+    <Icon name={icon} size={iconSize} />
     <span class="ui-fileupload__label" data-placeholder={files.length === 0 || undefined}>
       {displayLabel}
     </span>
@@ -97,7 +110,7 @@
 
   <div class="ui-fileupload__action">
     <Button
-      size="sm"
+      size={size === "lg" ? "md" : "sm"}
       variant="secondary"
       {disabled}
       onclick={(e) => {
@@ -124,16 +137,32 @@
     box-shadow: var(--ui-shadow-xs);
     cursor: pointer;
     user-select: none;
+    outline: none;
     transition:
       border-color var(--ui-duration-fast) var(--ui-ease-out),
       background-color var(--ui-duration-fast) var(--ui-ease-out),
       box-shadow var(--ui-duration-fast) var(--ui-ease-out);
   }
+  .ui-fileupload[data-size="xs"] {
+    height: var(--ui-control-h-xs);
+    border-radius: var(--ui-control-radius-xs);
+  }
   .ui-fileupload[data-size="sm"] {
     height: var(--ui-control-h-sm);
+    border-radius: var(--ui-control-radius-sm);
+  }
+  .ui-fileupload[data-size="md"] {
+    height: var(--ui-control-h-md);
+    border-radius: var(--ui-control-radius-md);
   }
   .ui-fileupload[data-size="lg"] {
     height: var(--ui-control-h-lg);
+    border-radius: var(--ui-control-radius-lg);
+  }
+
+  .ui-fileupload:focus-visible {
+    border-color: var(--ui-accent-solid);
+    box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring), var(--ui-shadow-xs);
   }
 
   .ui-fileupload__input {

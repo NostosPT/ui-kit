@@ -19,6 +19,7 @@
     disabled = false,
     invalid = false,
     autofocus = false,
+    focusIndex = undefined,
     id = undefined,
     ariaLabel = "OTP code",
     class: klass = "",
@@ -30,7 +31,11 @@
   let cells = $state([]);
 
   $effect(() => {
-    if (autofocus) cells[0]?.focus();
+    if (focusIndex != null && cells[focusIndex]) {
+      cells[focusIndex].focus();
+    } else if (autofocus) {
+      cells[0]?.focus();
+    }
   });
 
   const chars = $derived(
@@ -118,6 +123,7 @@
       aria-invalid={invalid || undefined}
       value={char}
       data-filled={char ? true : undefined}
+      data-focused={focusIndex === i || undefined}
       oninput={(e) => oninput(e, i)}
       onkeydown={(e) => onkeydown(e, i)}
       onpaste={(e) => onpaste(e, i)}
@@ -142,13 +148,13 @@
     --otp-radius: var(--ui-control-radius-sm);
   }
   .ui-otp[data-size="md"] {
-    --otp-size: 42px;
+    --otp-size: 44px;
     --otp-fs: var(--ui-text-lg);
     --otp-gap: 8px;
     --otp-radius: var(--ui-control-radius-md);
   }
   .ui-otp[data-size="lg"] {
-    --otp-size: 48px;
+    --otp-size: 50px;
     --otp-fs: var(--ui-text-xl);
     --otp-gap: 10px;
     --otp-radius: var(--ui-control-radius-lg);
@@ -176,7 +182,8 @@
   .ui-otp__cell:hover:not(:disabled):not(:focus) {
     border-color: var(--ui-border-strong);
   }
-  .ui-otp__cell:focus {
+  .ui-otp__cell:focus,
+  .ui-otp__cell[data-focused] {
     border-color: var(--ui-accent-solid);
     box-shadow: 0 0 0 var(--ui-ring-width) var(--ui-accent-ring), var(--ui-shadow-xs);
   }

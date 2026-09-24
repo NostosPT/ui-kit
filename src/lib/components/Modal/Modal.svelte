@@ -144,6 +144,7 @@
   }
   .ui-modal__title {
     margin: 0;
+    font-family: var(--ui-font-heading);
     font-size: var(--ui-text-lg);
     font-weight: var(--ui-heading-weight);
     letter-spacing: var(--ui-tracking-snug);

@@ -55,6 +55,7 @@
   }
   .ui-card-header__title {
     margin: 0;
+    font-family: var(--ui-font-heading);
     font-size: var(--ui-text-base);
     font-weight: var(--ui-heading-weight);
     letter-spacing: var(--ui-tracking-snug);

@@ -61,6 +61,58 @@
   </div>
 </Story>
 
+<Story
+  name="Typefaces"
+  asChild
+  parameters={{
+    docs: {
+      description: {
+        story:
+          "The Nostos typography pairing: Lora provides editorial character for headings, titles, and display statements, while Raleway provides clean, functional structure for UI, forms, navigation, and body text."
+      }
+    }
+  }}
+>
+  <div class="type">
+    <div class="type__row">
+      <code>--ui-font-heading</code>
+      <span class="type__px">Lora</span>
+      <span
+        class="type__sample"
+        style:font-family="var(--ui-font-heading)"
+        style:font-size="var(--ui-text-2xl)"
+      >
+        A photographic archive
+      </span>
+      <span class="type__use">Headings & display</span>
+    </div>
+    <div class="type__row">
+      <code>--ui-font-sans</code>
+      <span class="type__px">Raleway</span>
+      <span
+        class="type__sample"
+        style:font-family="var(--ui-font-sans)"
+        style:font-size="var(--ui-text-md)"
+      >
+        Functional navigation, form inputs, buttons and data tables
+      </span>
+      <span class="type__use">UI, controls & body</span>
+    </div>
+    <div class="type__row">
+      <code>--ui-font-mono</code>
+      <span class="type__px">SF Mono</span>
+      <span
+        class="type__sample"
+        style:font-family="var(--ui-font-mono)"
+        style:font-size="var(--ui-text-sm)"
+      >
+        N° 482 · --token-scale: 1.0;
+      </span>
+      <span class="type__use">Technical & code</span>
+    </div>
+  </div>
+</Story>
+
 <Story name="Weights" asChild>
   <div class="type">
     {#each [["normal", 400], ["medium", 500], ["semibold", 600], ["bold", 700]] as [name, w]}

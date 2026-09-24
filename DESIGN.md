@@ -173,11 +173,10 @@ prose do not.
 ### A note on the typeface
 
 The reference is not set in Inter. Stem-to-cap and the shape of the `g` put it
-in the geometric-grotesque family (Aeonik and its relatives). The kit ships
-Inter and **the Nostos brand specifies Raleway for UI and Lora for headings**
-(`docs/brand/TYPOGRAPHY.md`), which is a third answer again. That gap is a
-brand decision, not a proportions one — it is deliberately not resolved here,
-and `--ui-font-sans` is the single place to resolve it when it is.
+in the geometric-grotesque family (Aeonik and its relatives). Following the
+Nostos brand guidelines (`docs/brand/TYPOGRAPHY.md`), the kit specifies
+**Raleway** for UI, controls, and body text (`--ui-font-sans`), and **Lora**
+for headings and editorial display (`--ui-font-heading` / `--ui-font-serif`).
 
 ## 7. Motion
 

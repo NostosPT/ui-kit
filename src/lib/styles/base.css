@@ -20,8 +20,16 @@
   color: var(--ui-fg-default);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "cv11", "ss01";
   font-variant-numeric: tabular-nums;
+}
+
+.ui-root h1,
+.ui-root h2,
+.ui-root h3,
+.ui-root h4,
+.ui-root h5,
+.ui-root h6 {
+  font-family: var(--ui-font-heading);
 }
 
 .ui-root button,

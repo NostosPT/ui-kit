@@ -664,6 +664,7 @@
   }
   .team-heading {
     margin: 0;
+    font-family: var(--ui-font-heading);
     font-size: 24px;
     font-weight: var(--ui-heading-weight);
     letter-spacing: var(--ui-tracking-tight);

@@ -6,3 +6,5 @@ storybook-static
 .vite
 **/*.stories.svelte
 **/*.stories.js
+pnpm-lock.yaml
+pnpm-workspace.yaml

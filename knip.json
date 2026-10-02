@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": [
+    "src/stories/**/*.{stories.js,stories.svelte}",
+    ".storybook/**/*.{js,ts,svelte}"
+  ],
+  "project": [
+    "src/**/*.{js,ts,svelte}",
+    ".storybook/**/*.{js,ts,svelte}"
+  ]
+}

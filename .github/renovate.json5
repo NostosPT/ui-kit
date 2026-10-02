@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Renovate configuration for @nostospt/ui",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":dependencyDashboard"
+  ],
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "timezone": "Etc/UTC",
+  "schedule": ["before 5am on monday"],
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 2,
+  "packageRules": [
+    {
+      "description": "Group all Storybook dependencies together",
+      "matchPackagePatterns": ["*storybook*"],
+      "groupName": "storybook monorepo"
+    },
+    {
+      "description": "Group all Svelte ecosystem dependencies together",
+      "matchPackagePatterns": ["*svelte*"],
+      "groupName": "svelte ecosystem"
+    },
+    {
+      "description": "Group Vite dependencies together",
+      "matchPackagePatterns": ["*vite*"],
+      "groupName": "vite ecosystem"
+    },
+    {
+      "description": "Automerge non-major devDependencies when tests pass",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 5am on the first day of the month"]
+  }
+}
